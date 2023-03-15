@@ -1,5 +1,5 @@
-# mechanics-grove-scripts
-Scripts related to development of Mechanic's Grove: a Unity3D game
+# mechanics-grove
+Repository for development of Mechanic's Grove: a Unity3D game
 
 This project will be my final project for GD50: CS50’s Introduction to Game Development<br>
 <br>
