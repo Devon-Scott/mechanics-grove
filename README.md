@@ -15,3 +15,13 @@ games in that there will be enemies that come from some number of sources, and t
 to get to some number of end points. What will be relatively unique about this game is that the player 
 will be one character, the mechanic, that will need to physically move around the map to fight enemies and build towers
 </p>
+
+<p>
+Current assets used:
+- Free Low Poly Nature Forest : Pure Poly
+    - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
+- Starter Assets - Third Person Character Controller : Unity
+    - https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526
+- RPG Tiny Hero Duo PBR Polyart : Dungeon Mason
+    - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148
+</p>
