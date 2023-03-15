@@ -1,0 +1,67 @@
+- To-Do list for Mechanic's Grove
+
+- Basics:
+-     Install probuilder and progrids
+-     Learn how to import assets
+-     Learn how to use assets to build a level
+-     Learn how to modify assets using code
+
+- Learning:
+    - Implementation of buttons in menus
+    - Implementation of Controllers
+        - Third person controller and Camera
+        - Adding inputs to controller
+    - Linking of models and animation
+   
+
+- Structural:
+    - MainMenu button class
+    - GameMenu button class
+    - Enemy class 
+    - Tower class
+
+
+- Main Menu State
+-     Have blurry image of gameplay in background
+-     Make buttons for:
+-         Play
+-         Settings
+-         Leaderboard
+-         Exit
+-     If Play: switch to Gameplay Scene
+-     If Settings: push Settings Menu onto Stack
+-         Have settings object that persists indefinitely (preserve settings until program ends)
+-         Difficulty
+-         Music
+-         Audio
+- 
+- Gameplay state
+-     LevelMaker
+-         Make first level in editor, then future levels make with code
+-         No procedural level generation, fixed level design for each level
+-             Maybe procedural for trees and rocks and cosmetics
+-     Gameplay
+-         Fixed possible tower locations, or anywhere that's not path?
+-         Keeping settings object
+-             Render music if music enabled
+-             Render sound if sound enabled
+-             Difficulty: number of monsters and/or health of monsters and/or player health affected
+- 
+-         Spawn tower: springy deform animation before tower becomes active with matching sound effect
+-         Enemy pathfinding: series of empty game objects for enemies to walk towards? Split path and make them alternate between targets?
+-             Implementation of graph theory? 
+-             Levelmaker could pass it in to the enemy class and make the enemy choose a path
+-             LevelGraph object representing the nodes of the path: used for both level making and enemy pathfinding 
+- 
+-     Tower Menu
+-         When in a suitable build location, allow player to open tower build menu
+-         Push tower menu to stack
+-             Will this pause game action? That's probably fine
+- 
+-     Pause menu
+-         Push pause menu to stack
+-         Transparent view, like main menu, with Resume, Save, Settings, Exit buttons
+-         
+-         
+- Level end state
+-     Buttons for Play Again and Exit
