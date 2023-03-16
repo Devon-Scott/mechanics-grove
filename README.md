@@ -23,3 +23,5 @@ Current assets used:<br>
     - https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526<br>
 - RPG Tiny Hero Duo PBR Polyart : Dungeon Mason<br>
     - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148<br>
+- RPG Monster Duo PBR Polyart
+    - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
