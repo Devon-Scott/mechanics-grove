@@ -25,3 +25,5 @@ Current assets used:<br>
     - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148<br>
 - RPG Monster Duo PBR Polyart
     - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
+- Handpainted Turntable Platforms <br>
+    - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
