@@ -49,7 +49,10 @@ To-Do list for Mechanic's Grove
         - Build mode and combat mode for player
             - Build mode activates small circle showing build location, ready for build menu
             - Build mode can build blockades on path and towers off of path
+            - Carry hammer or other tools to indicate ready to build
             - Combat mode ready for inputs related to attack, defense, and getting hit
+            - Carry sword and shield ready for combat
+            - Add animations and hitboxes for sword attacks and defending states
         - Keeping settings object from main menu
             - Render music if music enabled
             - Render sound if sound enabled
@@ -65,8 +68,12 @@ To-Do list for Mechanic's Grove
 
     - Tower Menu
         - When in a suitable build location, allow player to open tower build menu
-        - When in a suitable build location, allow player to open tower build menu
+        - Also allow player to build blockades on the path
         - Push tower menu to player state stack, action continues in game state
+        - Towers in mind so far:
+            - Cannonball tower: launches bombs that deal splash damage and have particle effect
+            - Mage tower: zaps single targets for high damage
+            - Barracks: sends out mini soldiers to stand guard on the path
 
     - Pause menu
         - Push pause menu to stack
