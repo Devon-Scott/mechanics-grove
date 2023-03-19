@@ -10,7 +10,7 @@ The idea behind creating this repo is to be able to edit code or add ideas as so
 - Concepts related to overall engineering of the project
 <br>
 <p>
-I have a [to-do list](TODO.md) attached to this to document those exact topics that will evolve as I learn and do more in this project
+I have a <a href="TODO.md">to-do list</a> attached to this to document those exact topics that will evolve as I learn and do more in this project
 <p>
 This will hopefully turn into a "Third Person Tower Defense" game. The idea is similar to other tower defense
 games in that there will be enemies that come from some number of sources, and that will follow a path to try
