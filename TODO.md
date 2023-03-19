@@ -2,19 +2,21 @@ To-Do list for Mechanic's Grove
 
 - Basics:
     - <s>Install probuilder and progrids</s>
+    
+- Learning:
     - <s>Learn how to import assets</s>
-    - Learn how to modify animation controllers
+    - <s>Learn how to modify animation controllers
         - Note: use animation controller visual scripting and<br>
             code additional state transitions into StarterAssetInputs
-        - Tiny Hero Duo already comes with lots of useful animations 
+        - Tiny Hero Duo already comes with lots of useful animations </s>
+    - Learn how to attach hitboxes to objects meant for attacking
+        - Learn how objects register that they've been attacked
     - Learn how to use assets to build a level
     - Learn how to modify assets using code
-
-- Learning:
     - Implementation of buttons in menus
     - Implementation of Controllers
         - Third person controller and Camera
-        - Adding inputs to controller
+        - <s>Adding inputs to controller</s>
     - Linking of models and animation
    
 

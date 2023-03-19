@@ -1,0 +1,4 @@
+Animator component can directly reference its parameters:
+anim = GetComponent<Animator>
+anim.speed = 5;
+

@@ -148,7 +148,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369005096}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &369005098
 Camera:
   m_ObjectHideFlags: 0
@@ -236,7 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334bdb7579966f34cb4b552cfcc1f45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabs: []
+  mapPrefabs:
+  - {fileID: 8082612214144964267, guid: d5b8de414112a004a82d0437b5f7a780, type: 3}
   player: {fileID: 1063808276359902380, guid: c3f9459914198f4428f3d9138a441301, type: 3}
   SpawnPlate: {fileID: 6611424851185418485, guid: 3ebc37679901cad45ae2b12cbd12d46c, type: 3}
   graph: {fileID: 11400000, guid: c45748778c7895c47be8bcb159b77472, type: 2}

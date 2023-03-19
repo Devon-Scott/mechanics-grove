@@ -46,6 +46,9 @@ namespace StarterAssets
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
 
+        [Tooltip("Time required to pass before attacking again")]
+        public float AttackTimeout = 0.25f;
+
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         public bool Grounded = true;
@@ -90,6 +93,7 @@ namespace StarterAssets
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+        private float _attackTimeoutDelta;
 
         // animation IDs
         private int _animIDSpeed;
@@ -97,6 +101,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDAttack;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -159,6 +164,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Attack();
         }
 
         private void LateUpdate()
@@ -173,6 +179,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDAttack = Animator.StringToHash("Attack");
         }
 
         private void GroundedCheck()
@@ -345,6 +352,37 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
+
+        // Basic attack
+        // TODO: add a hitbox to the sword. Research hitboxes
+        private void Attack()
+        {
+            if (Grounded && _input.attack && _attackTimeoutDelta < 0.01f)
+            {
+                _attackTimeoutDelta = AttackTimeout;
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDAttack, true);
+                }
+            }
+
+            if (_attackTimeoutDelta > 0.01f){
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDAttack, true);
+                }
+                _attackTimeoutDelta -= Time.deltaTime;
+            }
+            else
+            {
+                _attackTimeoutDelta = 0;
+                _input.attack = false;
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDAttack, false);
+                }
             }
         }
 
