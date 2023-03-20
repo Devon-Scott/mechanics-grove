@@ -37,6 +37,7 @@ To-Do list for Mechanic's Grove
     - If Play: switch to Gameplay Scene
     - If Settings: push Settings Menu onto Stack
     - Have settings object that persists indefinitely (preserve settings until program ends)
+        - (Ensure object is only modifiable outside of gameplay state)
         - Difficulty
         - Music
         - Audio

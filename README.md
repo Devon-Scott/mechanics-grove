@@ -8,7 +8,6 @@ The idea behind creating this repo is to be able to edit code or add ideas as so
 - My learning process
 - Features I want to implement in the game
 - Concepts related to overall engineering of the project
-<br>
 <p>
 I have a <a href="TODO.md">to-do list</a> attached to this to document those exact topics that will evolve as I learn and do more in this project
 <p>
