@@ -44,12 +44,12 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Enemies will either move along the path or attack a player that comes too close
         if (!attack)
         {
             Move();
         } else {
-            //Attack();
+            Attack();
         }
     }
 
@@ -105,13 +105,14 @@ public class EnemyController : MonoBehaviour
 
     void Attack(){
         // Rotate to the target
-        // if (target != null){
-        //     Vector3 positionAxis = transform.position;
-        //     positionAxis.y = 0;
-        //     targetDirection = nextNode.Location - positionAxis;
-        //     Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        // }
-        // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+        if (target != null){
+            Vector3 positionAxis = transform.position;
+            positionAxis.y = 0;
+            targetDirection = target.gameObject.transform.position - positionAxis;
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
+            // Should probably detect if we're actually facing the plaer before we attack
+        }
         // Create hitbox at peak of attack animation
     }
 }
