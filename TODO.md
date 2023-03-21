@@ -18,6 +18,9 @@ To-Do list for Mechanic's Grove
         - Third person controller and Camera
         - <s>Adding inputs to controller</s>
     - Linking of models and animation
+    - Implementing combat system
+        - Cooldowns on enemy attacks
+        - Hitbox registration and knockback on affected objects
    
 
 - Structural:
