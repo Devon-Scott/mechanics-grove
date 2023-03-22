@@ -50,6 +50,8 @@ To-Do list for Mechanic's Grove
         - Make first level in editor, then future levels make with code
         - No procedural level generation, fixed level design for each level
         - Maybe procedural for trees and rocks and cosmetics
+        - Use ProBuilder to make prefabs of path tiles 
+        - Overlay path tiles on top of grid of ground tiles
     
     - Gameplay
         - Build mode and combat mode for player

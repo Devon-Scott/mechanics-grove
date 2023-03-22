@@ -28,3 +28,5 @@ Current assets used:<br>
     - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
 - Handpainted Turntable Platforms <br>
     - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
+FREE Fantasy Terrain Textures : 3D Haven
+    - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640

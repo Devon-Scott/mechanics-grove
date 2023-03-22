@@ -19,16 +19,22 @@ public class EnemyController : MonoBehaviour
     public float speed = 0.25f;
     public int health = 5;
     public float turnSpeed = 2.5f;
+    public int gravity = -15;
     public LayerMask attackLayers;
 
     private CharacterController controller;
     private Animator animator;
     private SphereCollider attackCollider;
     private Collider target;
+    
     private bool hasAnimator;
     private GraphNode nextNode;
+    private GraphNode previousNode;
     private Vector3 targetDirection;
 
+    private bool grounded = true;
+    private float verticalVelocity;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +43,7 @@ public class EnemyController : MonoBehaviour
         attackCollider = GetComponent<SphereCollider>();
         hasAnimator = TryGetComponent(out animator);
         nextNode = levelGraph.StartNode;
+        previousNode = null;
         targetDirection = nextNode.Location - transform.position;
         target = null;
     }
@@ -47,6 +54,7 @@ public class EnemyController : MonoBehaviour
         // Enemies will either move along the path or attack a player that comes too close
         if (!attack)
         {
+            DoGravity();
             Move();
         } else {
             Attack();
@@ -67,6 +75,7 @@ public class EnemyController : MonoBehaviour
             // Get the next node
             List<GraphNode> nextNodeList = nextNode.getChildren();
             int index = (int)Mathf.Floor(Random.Range(0, nextNodeList.Count));
+            previousNode = nextNode;
             nextNode = nextNodeList[index];
             // update the Target Direction
             targetDirection = nextNode.Location - positionAxis;
@@ -76,7 +85,9 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
 
         // Move towards the next node
-        controller.Move(transform.forward * speed * Time.deltaTime);
+        Vector3 direction = new Vector3(0, verticalVelocity, 0) + (transform.forward * speed);
+        controller.Move(direction * Time.deltaTime);
+        grounded = controller.isGrounded;
 
         if (hasAnimator){
             animator.SetFloat("speed", speed);
@@ -94,25 +105,52 @@ public class EnemyController : MonoBehaviour
     }
 
     void OnTriggerExit(Collider other){
-        if (other.gameObject.layer == LayerMask.NameToLayer("Character")){
+        if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+        {
             attack = false;
             target = null;
         } 
-        if (hasAnimator){
+        if (hasAnimator)
+        {
             animator.SetBool("attack", attack);
         }
     }
 
     void Attack(){
         // Rotate to the target
-        if (target != null){
+        if (target != null)
+        {
             Vector3 positionAxis = transform.position;
             positionAxis.y = 0;
             targetDirection = target.gameObject.transform.position - positionAxis;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
-            // Should probably detect if we're actually facing the plaer before we attack
+            // Should probably detect if we're actually facing the player before we attack
+            float angleToPlayer = Vector3.Angle(transform.forward, targetDirection);
+            print(angleToPlayer);
+            if (hasAnimator)
+            {
+                if (angleToPlayer < 20){
+                    animator.SetBool("correctAngle", true);
+                } 
+                else 
+                {
+                    animator.SetBool("correctAngle", false);
+                }
+            }
         }
         // Create hitbox at peak of attack animation
+    }
+
+    void DoGravity()
+    {
+        if (grounded)
+        {
+            verticalVelocity = Mathf.Clamp(verticalVelocity, -0.1f, Mathf.Infinity);
+        } 
+        else 
+        {
+            verticalVelocity = Mathf.Clamp(verticalVelocity + gravity * Time.deltaTime, gravity, Mathf.Infinity);
+        }
     }
 }
