@@ -2250,6 +2250,7 @@ GameObject:
   - component: {fileID: 465709102764913986}
   - component: {fileID: 465709102764913988}
   - component: {fileID: 465709102764913991}
+  - component: {fileID: 4087989390086075265}
   - component: {fileID: 465709102764913990}
   - component: {fileID: 465709102764913985}
   - component: {fileID: 465709102764913984}
@@ -2317,6 +2318,19 @@ CharacterController:
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.65, z: 0}
+--- !u!114 &4087989390086075265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465709102764914013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1650f38610323ee46b456358cc0c4243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!114 &465709102764913990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,6 +2364,7 @@ MonoBehaviour:
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
+  AttackTimeout: 0.25
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
@@ -2394,6 +2409,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  attack: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1

@@ -52,12 +52,14 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // Enemies will either move along the path or attack a player that comes too close
+        // Enemy prefab has a child collider that will tell Enemy if a target is in range
+        // using GetTarget and RemoveTarget
         if (!attack)
         {
             DoGravity();
             Move();
         } else {
-            Attack();
+            AttackState();
         }
     }
 
@@ -94,29 +96,27 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other){
-        if (other.gameObject.layer == LayerMask.NameToLayer("Character")){
-            attack = true;
-            target = other;
-        } 
-        if (hasAnimator){
-            animator.SetBool("attack", attack);
-        }
-    }
-
-    void OnTriggerExit(Collider other){
-        if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-        {
-            attack = false;
-            target = null;
-        } 
+    void GetTarget(Collider other)
+    {
+        target = other;
+        attack = true;
         if (hasAnimator)
         {
             animator.SetBool("attack", attack);
         }
     }
 
-    void Attack(){
+    void RemoveTarget()
+    {
+        target = null;
+        attack = false;
+        if (hasAnimator)
+        {
+            animator.SetBool("attack", attack);
+        }
+    }
+
+    void AttackState(){
         // Rotate to the target
         if (target != null)
         {
@@ -127,7 +127,6 @@ public class EnemyController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
             // Should probably detect if we're actually facing the player before we attack
             float angleToPlayer = Vector3.Angle(transform.forward, targetDirection);
-            print(angleToPlayer);
             if (hasAnimator)
             {
                 if (angleToPlayer < 20){
@@ -152,5 +151,10 @@ public class EnemyController : MonoBehaviour
         {
             verticalVelocity = Mathf.Clamp(verticalVelocity + gravity * Time.deltaTime, gravity, Mathf.Infinity);
         }
+    }
+
+    void RefreshAttack()
+    {
+        gameObject.BroadcastMessage("clearObjectCache");
     }
 }
