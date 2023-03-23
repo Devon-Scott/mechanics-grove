@@ -17,7 +17,7 @@ To-Do list for Mechanic's Grove
     - Implementation of Controllers
         - Third person controller and Camera
         - <s>Adding inputs to controller</s>
-    - Linking of models and animation
+    - <s>Linking of models and animation</s>
     - Implementing combat system
         - Cooldowns on enemy attacks
         - Hitbox registration and knockback on affected objects
@@ -28,6 +28,7 @@ To-Do list for Mechanic's Grove
     - GameMenu button class
     - Enemy class 
     - Tower class
+    - Player Class
 
 
 - Main Menu State
