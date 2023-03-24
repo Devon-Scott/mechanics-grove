@@ -2,3 +2,14 @@ Animator component can directly reference its parameters:
 anim = GetComponent<Animator>
 anim.speed = 5;
 
+Data structure for colliders will actually be a collection of scripts
+Something like tree<IHittable>
+
+IHittable would inherit from MonoBehaviour and have methods:
+GetHit(damage);
+OnDeath();
+DoKnockback();
+and Properties:
+health
+knockbackThreshold
+Collider -> reference to the collider object that can be hit

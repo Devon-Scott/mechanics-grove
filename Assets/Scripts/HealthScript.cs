@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class HealthScript : MonoBehaviour
 {
     public int health;
-    EnemyHitbox hitbox;
+    public int knockbackThreshold;
+
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        hitbox = FindObjectOfType<EnemyHitbox>();
-        hitbox.hit += HandleHit;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,8 +21,13 @@ public class Player : MonoBehaviour
         
     }
 
-    void HandleHit(int damage)
+    public void HandleHit(int damage)
     {
         print("Player hit for " + damage + " damage");
+        health -= damage;
+        if (health <= 0)
+        {
+            print("Object has died");
+        }
     }
 }

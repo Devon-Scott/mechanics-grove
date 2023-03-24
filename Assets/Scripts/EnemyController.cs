@@ -15,9 +15,9 @@ public class EnemyController : MonoBehaviour
     // Variables to control state
     public bool attack;
 
-    // Variables to control properties of enemy
+    public int damage;
+    // Variables to control properties of enemy movement
     public float speed = 0.25f;
-    public int health = 5;
     public float turnSpeed = 2.5f;
     public int gravity = -15;
     public LayerMask attackLayers;
@@ -26,6 +26,8 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private SphereCollider attackCollider;
     private Collider target;
+
+    private Hitbox hitbox;
     
     private bool hasAnimator;
     private GraphNode nextNode;
@@ -46,17 +48,19 @@ public class EnemyController : MonoBehaviour
         previousNode = null;
         targetDirection = nextNode.Location - transform.position;
         target = null;
+        hitbox = GetComponentInChildren<Hitbox>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Enemies will either move along the path or attack a player that comes too close
+        // Enemies will either move along the path or attack a player that comes too close,
+        // or they will be being knocked back by an attack
         // Enemy prefab has a child collider that will tell Enemy if a target is in range
         // using GetTarget and RemoveTarget
+        DoGravity();
         if (!attack)
         {
-            DoGravity();
             Move();
         } else {
             AttackState();
@@ -155,6 +159,7 @@ public class EnemyController : MonoBehaviour
 
     void RefreshAttack()
     {
-        gameObject.BroadcastMessage("clearObjectCache");
+        print("Sending message to toggle hitbox");
+        hitbox.toggleHitbox();
     }
 }

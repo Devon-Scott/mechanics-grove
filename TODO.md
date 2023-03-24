@@ -9,8 +9,8 @@ To-Do list for Mechanic's Grove
         - Note: use animation controller visual scripting and<br>
             code additional state transitions into StarterAssetInputs
         - Tiny Hero Duo already comes with lots of useful animations </s>
-    - Learn how to attach hitboxes to objects meant for attacking
-        - Learn how objects register that they've been attacked
+    - <s>Learn how to attach hitboxes to objects meant for attacking
+        - Learn how objects register that they've been attacked</s>
     - Learn how to use assets to build a level
     - Learn how to modify assets using code
     - Implementation of buttons in menus
@@ -29,7 +29,6 @@ To-Do list for Mechanic's Grove
     - Enemy class 
     - Tower class
     - Player Class
-
 
 - Main Menu State
     - Have blurry image of gameplay in background
