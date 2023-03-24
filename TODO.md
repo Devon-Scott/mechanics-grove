@@ -27,8 +27,26 @@ To-Do list for Mechanic's Grove
     - MainMenu button class
     - GameMenu button class
     - Enemy class 
-    - Tower class
     - Player Class
+        - Experiment with statemachine for controller
+            - Move State
+            - Attack State
+            - Knockback State
+        - Experiment with identifying owner of hitbox
+    - Tower Class
+    - Level Manager
+        - Contains list of LevelGraph objects
+        - LevelGraph contains:
+            - Spawn Point
+            - Path Nodes
+            - Enemy SpawnPoint
+            - End Point of Path
+    - Map Maker
+        - Instantiate path tiles from one node to next
+        - Have set to determine visited tiles to avoid repeated instantiation
+        - Method to determine size of map
+        - Fill empty tiles with ground, fill those with random decorations
+    - Enemy Spawner
 
 - Main Menu State
     - Have blurry image of gameplay in background
@@ -46,7 +64,7 @@ To-Do list for Mechanic's Grove
         - Audio
 
 - Gameplay state
-    - LevelMaker
+    - MapMaker
         - Make first level in editor, then future levels make with code
         - No procedural level generation, fixed level design for each level
         - Maybe procedural for trees and rocks and cosmetics

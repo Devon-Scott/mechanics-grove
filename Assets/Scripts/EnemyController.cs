@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour
     public LevelGraph levelGraph;
 
     // Variables to control state
-    public bool attack;
+    private bool attack;
+    private bool knockback;
 
     public int damage;
     // Variables to control properties of enemy movement
@@ -54,16 +55,19 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Enemies will either move along the path or attack a player that comes too close,
-        // or they will be being knocked back by an attack
+        // Enemies will move along the path, get back on the path, or attack a player 
+        // that comes too close, or they will be being knocked back by an attack
         // Enemy prefab has a child collider that will tell Enemy if a target is in range
         // using GetTarget and RemoveTarget
         DoGravity();
-        if (!attack)
+        if (grounded)
         {
-            Move();
-        } else {
-            AttackState();
+            if (!attack)
+            {
+                Move();
+            } else {
+                AttackState();
+            }
         }
     }
 

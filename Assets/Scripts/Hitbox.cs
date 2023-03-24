@@ -50,7 +50,7 @@ public class Hitbox : MonoBehaviour
                 {
                     hitTarget = other.gameObject.GetComponent<HealthScript>();
                 }
-                hitTarget.HandleHit(damage);
+                hitTarget.HandleHit(damage, other.transform.position - self.transform.position);
             }
         }
     }

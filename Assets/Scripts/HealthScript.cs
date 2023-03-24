@@ -21,10 +21,13 @@ public class HealthScript : MonoBehaviour
         
     }
 
-    public void HandleHit(int damage)
+    public void HandleHit(int damage, Vector3 impact)
     {
         print("Player hit for " + damage + " damage");
         health -= damage;
+        if (damage >= knockbackThreshold){
+            EnterKnockback(impact);
+        }
         if (health <= 0)
         {
             print("Object has died");

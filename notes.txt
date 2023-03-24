@@ -13,3 +13,5 @@ and Properties:
 health
 knockbackThreshold
 Collider -> reference to the collider object that can be hit
+
+LowPoly path is 21 x 21 meters
