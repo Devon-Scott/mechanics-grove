@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace MyUtils.StateMachine
 {
-    public class State<T> : MonoBehaviour
+    public abstract class State<T>
     {
         public virtual void Enter(T owner){}
-        public virtual void Execute(){}
-        public virtual void Exit(){}
+        public virtual void Update(T owner){}
+        public virtual void Exit(T owner){}
+        //public virtual void OnCollisionEnter(Collider other){}
     }
 
 }

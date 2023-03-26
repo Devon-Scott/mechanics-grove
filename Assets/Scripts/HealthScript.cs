@@ -33,4 +33,9 @@ public class HealthScript : MonoBehaviour
             print("Object has died");
         }
     }
+
+    void EnterKnockback(Vector3 impact)
+    {
+        print(impact.ToString());
+    }
 }

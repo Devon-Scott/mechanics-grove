@@ -3,39 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyUtils.StateMachine{
-    public class StateMachine<T>{
+    public class StateStack<T> : MonoBehaviour{
         T owner;
 
         public State<T> CurrentState{get; private set;}
-        public Stack<State<T>> StateStack {get; private set;}
+        public Stack<State<T>> Stack {get; private set;}
 
-        public StateMachine(T owner){
+        public StateStack(T owner){
             this.owner = owner;
-            StateStack = new Stack<State<T>>();
+            Stack = new Stack<State<T>>();
         }
 
         public void Push(State<T> state){
-            StateStack.Push(state);
+            Stack.Push(state);
             CurrentState = state;
             CurrentState.Enter(owner);
         }
 
         public void Pop(){
-            StateStack.Pop();
-            CurrentState.Exit();
-            CurrentState = StateStack.Peek();
+            Stack.Pop();
+            CurrentState.Exit(owner);
+            CurrentState = Stack.Peek();
         }
 
-        public void Execute(){
-            CurrentState?.Execute();
+        public void Update(){
+            CurrentState?.Update(owner);
         }
 
         public void ChangeState(State<T> state){
             if (CurrentState != null){
-                StateStack.Pop();
-                CurrentState.Exit();
+                Stack.Pop();
+                CurrentState.Exit(owner);
             }
-            StateStack.Push(state);
+            Stack.Push(state);
             CurrentState = state;
             CurrentState.Enter(owner);
         }
