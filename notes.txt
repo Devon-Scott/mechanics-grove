@@ -2,6 +2,9 @@ Animator component can directly reference its parameters:
 anim = GetComponent<Animator>
 anim.speed = 5;
 
+KnockbackState should be a trigger in animation, transition from Any State, so that's 
+how we avoid repeated transitions into the state from Any State in animator controller
+
 Data structure for colliders will actually be a collection of scripts
 Something like tree<IHittable>
 

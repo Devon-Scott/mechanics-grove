@@ -364,16 +364,9 @@ namespace StarterAssets
                 _attackTimeoutDelta = AttackTimeout;
                 if (_hasAnimator)
                 {
-                    _animator.SetBool(_animIDAttack, true);
+                    //_animator.SetBool(_animIDAttack, true);
+                    _animator.SetTrigger("Attack2");
                 }
-            }
-
-            if (_attackTimeoutDelta > 0.01f){
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDAttack, true);
-                }
-                _attackTimeoutDelta -= Time.deltaTime;
             }
             else
             {
