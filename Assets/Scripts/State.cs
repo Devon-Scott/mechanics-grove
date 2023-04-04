@@ -9,7 +9,5 @@ namespace MyUtils.StateMachine
         public virtual void Enter(T owner){}
         public virtual void Update(T owner){}
         public virtual void Exit(T owner){}
-        //public virtual void OnCollisionEnter(Collider other){}
     }
-
 }

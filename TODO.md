@@ -18,17 +18,21 @@ To-Do list for Mechanic's Grove
         - Third person controller and Camera
         - <s>Adding inputs to controller</s>
     - <s>Linking of models and animation</s>
-    - Implementing combat system
+    - Implementing combat system:
         - Cooldowns on enemy attacks
-        - Hitbox registration and knockback on affected objects
-   
+        - Hitbox and Hurtbox registration and knockback on affected objects
+        - Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit
+        - Create HurtboxManager class 
+        - Attacks instantiate hitboxes, different attacks produce different hitboxes
+        - Each attack animation can end simply with "destroyHitbox" 
+        - Attacks need to instantiate a collider object to associate with the hitbox 
 
 - Structural:
     - MainMenu button class
     - GameMenu button class
     - Enemy class 
     - Player Class
-        - Experiment with statemachine for controller
+        - Experiment with statemachine for enemy controller
             - Move State
             - Attack State
             - Knockback State
@@ -37,9 +41,9 @@ To-Do list for Mechanic's Grove
     - Level Manager
         - Contains list of LevelGraph objects
         - LevelGraph contains:
-            - Spawn Point
+            - Player Spawn Point
             - Path Nodes
-            - Enemy SpawnPoint
+            - Enemy Spawn Point
             - End Point of Path
     - Map Maker
         - Instantiate path tiles from one node to next
@@ -97,12 +101,13 @@ To-Do list for Mechanic's Grove
         - Also allow player to build blockades on the path
         - Push tower menu to player state stack, action continues in game state
         - Towers in mind so far:
-            - Cannonball tower: launches bombs that deal splash damage and have particle effect
-            - Mage tower: zaps single targets for high damage
+            - Cannonball tower: launches bombs that deal splash damage, knockback, and have particle effect
+            - Mage tower: zaps single targets for high damage with lightning bolt effect
+            - Cloud tower: slows enemies, or deals static area damage
             - Barracks: sends out mini soldiers to stand guard on the path
 
     - Pause menu
-        - Push pause menu to stack
+        - Push pause menu to gameplay state machine stack
         - Transparent view, like main menu, with Resume, Save, Settings, Exit buttons
 
 

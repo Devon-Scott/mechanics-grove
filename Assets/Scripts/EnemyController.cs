@@ -60,14 +60,13 @@ public class EnemyController : MonoBehaviour
         // Enemy prefab has a child collider that will tell Enemy if a target is in range
         // using GetTarget and RemoveTarget
         DoGravity();
-        if (grounded)
+        if (!attack)
         {
-            if (!attack)
-            {
-                Move();
-            } else {
-                AttackState();
-            }
+            Move();
+        }
+        else if (grounded)
+        {
+            AttackState();
         }
     }
 
@@ -97,7 +96,6 @@ public class EnemyController : MonoBehaviour
         // Move towards the next node
         Vector3 direction = new Vector3(0, verticalVelocity, 0) + (transform.forward * speed);
         controller.Move(direction * Time.deltaTime);
-        grounded = controller.isGrounded;
 
         if (hasAnimator){
             animator.SetFloat("speed", speed);
@@ -159,6 +157,7 @@ public class EnemyController : MonoBehaviour
         {
             verticalVelocity = Mathf.Clamp(verticalVelocity + gravity * Time.deltaTime, gravity, Mathf.Infinity);
         }
+        grounded = controller.isGrounded;
     }
 
     void RefreshAttack()

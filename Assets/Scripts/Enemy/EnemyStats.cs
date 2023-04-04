@@ -9,4 +9,6 @@ public class EnemyStats : MonoBehaviour
     public float turnSpeed;
 
     public float gravity;
+
+    public float knockbackThreshhold;
 }

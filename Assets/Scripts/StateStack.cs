@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyUtils.StateMachine{
-    public class StateStack<T> : MonoBehaviour{
+    public class StateStack<T> {
         T owner;
 
         public State<T> CurrentState{get; private set;}

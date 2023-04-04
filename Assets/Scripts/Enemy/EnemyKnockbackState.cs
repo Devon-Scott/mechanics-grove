@@ -1,7 +1,7 @@
 using UnityEngine;
 using MyUtils.StateMachine;
 
-public class EnemnyKnockbackState : State<EnemyState>
+public class EnemyKnockbackState : EnemyBaseState
 {
     public override void Enter(EnemyState owner)
     {
@@ -14,6 +14,11 @@ public class EnemnyKnockbackState : State<EnemyState>
     }
 
     public override void Exit(EnemyState owner)
+    {
+        
+    }
+
+    public override void OnHit(int damage, Vector3 impact)
     {
         
     }
