@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyStats : MonoBehaviour
+public class EntityStats : MonoBehaviour
 {
     public int damage;
 

@@ -20,7 +20,7 @@ public class EnemyState : MonoBehaviour
     the information necessary to get from point A to point B 
     */ 
     public static LevelGraph levelGraph;
-    public EnemyStats stats;
+    public EntityStats stats;
     public LayerMask attackLayers;
 
     // Reference to enemy players on the map;
@@ -42,7 +42,7 @@ public class EnemyState : MonoBehaviour
         controller = GetComponent<CharacterController>();
         environmentCheck = GetComponent<SphereCollider>();
         target = null;
-        stats = GetComponent<EnemyStats>();
+        stats = GetComponent<EntityStats>();
         levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
         stateStack.Push(MoveState);
         players = new List<Collider>();
@@ -51,6 +51,7 @@ public class EnemyState : MonoBehaviour
     void Update()
     {
         DoGravity();
+        currentState = stateStack.CurrentState;
         stateStack.Update();
     }
 
@@ -66,5 +67,18 @@ public class EnemyState : MonoBehaviour
         }
         grounded = controller.isGrounded;
 
+    }
+
+    public void toggleHitbox()
+    {
+        if (currentState == AttackState)
+        {
+            AttackState.hitboxActive = !AttackState.hitboxActive;
+            Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
+        }
+        else 
+        {
+            print("Attackstate not active");
+        }
     }
 }

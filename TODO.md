@@ -31,11 +31,11 @@ To-Do list for Mechanic's Grove
     - MainMenu button class
     - GameMenu button class
     - Enemy class 
-    - Player Class
         - Experiment with statemachine for enemy controller
             - Move State
             - Attack State
             - Knockback State
+    - Player Class
         - Experiment with identifying owner of hitbox
     - Tower Class
     - Level Manager

@@ -18,7 +18,7 @@ public class EnemyKnockbackState : EnemyBaseState
         
     }
 
-    public override void OnHit(int damage, Vector3 impact)
+    protected override void OnHit(int damage, Vector3 impact)
     {
         
     }

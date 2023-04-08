@@ -12,7 +12,7 @@ public class EnemyMoveState : EnemyBaseState
     private GraphNode nextNode;
     private GraphNode previousNode;
     private CharacterController controller;
-    private EnemyStats stats;
+    private EntityStats stats;
 
     private bool init = true;
     private Vector3 targetDirection;
@@ -91,7 +91,7 @@ public class EnemyMoveState : EnemyBaseState
         }
     }
 
-    public override void OnHit(int damage, Vector3 impact)
+    protected override void OnHit(int damage, Vector3 impact)
     {
         
     }

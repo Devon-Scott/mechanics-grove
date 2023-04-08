@@ -6,7 +6,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     private HashSet<Collider> HitObjects;
-    private Dictionary<Collider, HealthScript> History;
+    private static Dictionary<Collider, Hurtbox> History;
     private int damage;
     private CharacterController parentCollider;
 
@@ -16,7 +16,10 @@ public class Hitbox : MonoBehaviour
     void Start()
     {
         HitObjects = new HashSet<Collider>();
-        History = new Dictionary<Collider, HealthScript>();
+        if (History == null)
+        {
+            History = new Dictionary<Collider, Hurtbox>();
+        }
         parentCollider = transform.GetComponentInParent<CharacterController>();
         // Damage should be inherited from parent game object
         damage = 2;
@@ -38,7 +41,7 @@ public class Hitbox : MonoBehaviour
             if (!HitObjects.Contains(other))
             {
                 HitObjects.Add(other);
-                HealthScript hitTarget;
+                Hurtbox hitTarget;
 
                 // Then check if we recognize the object that we hit
                 // so we can quickly deal damage again
@@ -48,7 +51,8 @@ public class Hitbox : MonoBehaviour
                 }
                 else 
                 {
-                    hitTarget = other.gameObject.GetComponent<HealthScript>();
+                    hitTarget = other.gameObject.GetComponent<Hurtbox>();
+                    History.Add(other, hitTarget);
                 }
                 hitTarget.HandleHit(damage, other.transform.position - self.transform.position);
             }

@@ -140,7 +140,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: toggleHitbox
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a818cee1ca0af9c478ba2930b61b4555, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8300493
+        functionName: toggleHitbox
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a818cee1ca0af9c478ba2930b61b4555, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

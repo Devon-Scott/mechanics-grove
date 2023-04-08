@@ -5,11 +5,13 @@ public class EnemyAttackState : EnemyBaseState
 {
     private Collider target;
     private Vector3 targetDirection;
+    public bool hitboxActive;
     EnemyState owner;
 
     public override void Enter(EnemyState owner)
     {
         this.owner = owner;
+        hitboxActive = false;
         target = owner.target;
         if (owner.hasAnimator)
         {
@@ -64,7 +66,12 @@ public class EnemyAttackState : EnemyBaseState
         }
     }
 
-    public override void OnHit(int damage, Vector3 impact)
+    protected override void OnHit(int damage, Vector3 impact)
+    {
+        
+    }
+
+    public void Attack()
     {
         
     }

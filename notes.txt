@@ -18,3 +18,22 @@ knockbackThreshold
 Collider -> reference to the collider object that can be hit
 
 LowPoly path is 21 x 21 meters
+
+TinyHero has "weapon_r" which holds the sword and "weapon_l" to hold the shield
+When instantiating hitbox for sword, use reference to "weapon_r" to get position
+
+hitbox steps:
+
+- Hitbox GameObject with generic collider and hitbox script 
+    - Hitbox would be a child of weapons, projectiles, and enemies 
+- Enemies own a hitbox 
+- Player weapon owns a hitbox
+    - Make weapons prefabs 
+- Each Tower owns a unique projectile prefab, which owns a hitbox (need to figure out the dynamics of this)
+- Player build state can't attack (carries Hammer) so can't activate hitbox
+- Hitbox object is activated and deactivated during animations 
+- Hitbox set of colliders reset on deactivation?
+- Hitbox has properties of knockback and damage 
+- Obstacles, Players, and Enemies must implement Hurtbox interface
+    -Hurtbox has reference to Stats object 
+- Hurtboxes register themselves with ColliderManager, which has a Dictionary<collider, hurtbox>
