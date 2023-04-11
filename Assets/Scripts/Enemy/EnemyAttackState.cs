@@ -66,9 +66,9 @@ public class EnemyAttackState : EnemyBaseState
         }
     }
 
-    protected override void OnHit(int damage, Vector3 impact)
+    public override void OnHit(float damage, Vector3 knockback)
     {
-        
+        base.OnHit(damage, knockback);
     }
 
     public void Attack()

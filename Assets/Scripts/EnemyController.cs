@@ -160,9 +160,13 @@ public class EnemyController : MonoBehaviour
         grounded = controller.isGrounded;
     }
 
-    void RefreshAttack()
+    private void EnableDamage()
     {
-        print("Sending message to toggle hitbox");
-        hitbox.toggleHitbox();
+        hitbox.EnableDamage();
+    }
+
+    private void DisableDamage()
+    {
+        hitbox.DisableDamage();
     }
 }

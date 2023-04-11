@@ -8,7 +8,7 @@ public class EnemyState : MonoBehaviour
 {
     
     public StateStack<EnemyState> stateStack;
-    public State<EnemyState> currentState;
+    public EnemyBaseState currentState;
 
     public EnemyMoveState MoveState = new EnemyMoveState();
     public EnemyAttackState AttackState = new EnemyAttackState();
@@ -34,6 +34,8 @@ public class EnemyState : MonoBehaviour
 
     public bool grounded = true;
     public float verticalVelocity;
+
+    private bool Alive;
     
     void Start()
     {
@@ -51,8 +53,9 @@ public class EnemyState : MonoBehaviour
     void Update()
     {
         DoGravity();
-        currentState = stateStack.CurrentState;
+        currentState = (EnemyBaseState)stateStack.CurrentState;
         stateStack.Update();
+
     }
 
     void DoGravity()
@@ -63,10 +66,15 @@ public class EnemyState : MonoBehaviour
         } 
         else 
         {
-            verticalVelocity = Mathf.Clamp(verticalVelocity + stats.gravity * Time.deltaTime, stats.gravity, Mathf.Infinity);
+            verticalVelocity = Mathf.Clamp(verticalVelocity + stats.Gravity * Time.deltaTime, stats.Gravity, Mathf.Infinity);
         }
         grounded = controller.isGrounded;
 
+    }
+
+    public void OnHit(float damage, Vector3 knockback)
+    {
+        currentState.OnHit(damage, knockback);
     }
 
     public void toggleHitbox()
@@ -74,11 +82,11 @@ public class EnemyState : MonoBehaviour
         if (currentState == AttackState)
         {
             AttackState.hitboxActive = !AttackState.hitboxActive;
-            Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
+            //Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
         }
         else 
         {
-            print("Attackstate not active");
+            //print("Attackstate not active");
         }
     }
 }

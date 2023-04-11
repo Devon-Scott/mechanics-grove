@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    public int damage;
+    public float Health;
 
-    public float speed;
+    public int Damage;
 
-    public float turnSpeed;
+    public float Speed;
 
-    public float gravity;
+    public float TurnSpeed;
+
+    public float Gravity;
 
     public float knockbackThreshhold;
 }

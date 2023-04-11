@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyUtils.StateMachine;
 
-public abstract class Hurtbox : MonoBehaviour
+public class EnemyHurtbox : Hurtbox
 {
-    public EntityStats Stats;
-    public Collider Self;
-    // Collider might belong to a blockade, so can't use characterController 
+    public EnemyState stateMachine;
 
     void Start()
     {
         // Get a reference to the Collider for this Entity
-        Self = transform.GetComponent<Collider>();
-
+        Self = transform.GetComponent<CharacterController>();
+        stateMachine = transform.GetComponent<EnemyState>();
         // get the reference to the ColliderManager
         //colliderManager = FindObjectOfType<ColliderManager>();
         
@@ -21,6 +20,7 @@ public abstract class Hurtbox : MonoBehaviour
 
         // Get a reference to the Stats object for tracking Entity vitals
         Stats = GetComponent<EntityStats>();
+        
 
         /* 
         The idea would be for players, enemies, and obstacles to all have a hurtbox,
@@ -34,6 +34,14 @@ public abstract class Hurtbox : MonoBehaviour
         That way, appropriate knockback behaviour can be controlled in every state
         */
     }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
-    public abstract void HandleHit(float damage, Vector3 knockback);
+    public override void HandleHit(float damage, Vector3 knockback)
+    {
+        stateMachine.OnHit(damage, knockback);
+    }
 }

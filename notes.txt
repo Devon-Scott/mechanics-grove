@@ -37,3 +37,9 @@ hitbox steps:
 - Obstacles, Players, and Enemies must implement Hurtbox interface
     -Hurtbox has reference to Stats object 
 - Hurtboxes register themselves with ColliderManager, which has a Dictionary<collider, hurtbox>
+
+DistanceToLine function should use law of cosines and previous node as starting point for line?
+All vectors start at origin so need a way to properly calculate path, unless we just use layermask on ground 
+
+look more into chatGPT response:
+High-level classes are typically responsible for coordinating the interactions between lower-level classes, and they provide the abstraction necessary to manage the complexity of the system

@@ -103,6 +103,12 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
         private int _animIDAttack;
 
+        // Combat system
+        private GameObject _currentWeapon;
+        public GameObject weaponHolder;
+        public GameObject[] weapons;
+        private Hitbox hitbox;
+
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -139,6 +145,12 @@ namespace StarterAssets
 
         private void Start()
         {
+            _currentWeapon = Instantiate(weapons[0], weaponHolder.transform);
+            hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
+            if (hitbox == null)
+            {
+                print("Error in getting hitbox");
+            }
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -160,6 +172,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
+            
 
             JumpAndGravity();
             GroundedCheck();
@@ -377,6 +390,20 @@ namespace StarterAssets
                     _animator.SetBool(_animIDAttack, false);
                 }
             }
+        }
+
+        private void EnableDamage()
+        {
+            hitbox.EnableDamage();
+            if (_currentWeapon == null)
+            {
+                print("Error in getting weapon reference");
+            }
+        }
+
+        private void DisableDamage()
+        {
+            hitbox.DisableDamage();
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

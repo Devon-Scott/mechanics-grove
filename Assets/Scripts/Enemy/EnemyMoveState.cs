@@ -34,7 +34,7 @@ public class EnemyMoveState : EnemyBaseState
             players = owner.players;
         }
         if (owner.hasAnimator){
-            owner.animator.SetFloat("speed", stats.speed);
+            owner.animator.SetFloat("speed", stats.Speed);
         }
     }
 
@@ -73,28 +73,29 @@ public class EnemyMoveState : EnemyBaseState
             targetRotation = Quaternion.LookRotation(targetDirection);
         }
         // Rotate towards the next node
-        owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * stats.turnSpeed);
+        owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * stats.TurnSpeed);
 
         // Move towards the next node
-        Vector3 direction = new Vector3(0, owner.verticalVelocity, 0) + (owner.transform.forward * stats.speed);
+        Vector3 direction = new Vector3(0, owner.verticalVelocity, 0) + (owner.transform.forward * stats.Speed);
         controller.Move(direction * Time.deltaTime);
 
         if (owner.hasAnimator){
-            owner.animator.SetFloat("speed", stats.speed);
+            owner.animator.SetFloat("speed", stats.Speed);
         }
     }
 
     public override void Exit(EnemyState owner)
     {
         if (owner.hasAnimator){
-            owner.animator.SetFloat("speed", stats.speed);
+            owner.animator.SetFloat("speed", stats.Speed);
         }
     }
 
-    protected override void OnHit(int damage, Vector3 impact)
+    public override void OnHit(float damage, Vector3 knockback)
     {
-        
+        base.OnHit(damage, knockback);
     }
+
 
     // Used for determining distance to any other object the move state needs to be aware of
     protected float distanceTo(Vector3 other)

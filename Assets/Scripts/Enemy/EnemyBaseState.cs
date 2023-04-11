@@ -1,8 +1,11 @@
 using UnityEngine;
 using MyUtils.StateMachine;
 
-public abstract class EnemyBaseState : State<EnemyState>
+public class EnemyBaseState : State<EnemyState>
 {
-    protected abstract void OnHit(int damage, Vector3 impact);
+    public virtual void OnHit(float damage, Vector3 knockback)
+    { 
+        Debug.Log("Enemy has been hit for " + damage);
+    }
 }
 
