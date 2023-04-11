@@ -20,23 +20,22 @@ To-Do list for Mechanic's Grove
     - <s>Linking of models and animation</s>
     - Implementing combat system:
         - Cooldowns on enemy attacks
-        - Hitbox and Hurtbox registration and knockback on affected objects
-        - Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit
-        - Create HurtboxManager class 
-        - Attacks instantiate hitboxes, different attacks produce different hitboxes
-        - Each attack animation can end simply with "destroyHitbox" 
-        - Attacks need to instantiate a collider object to associate with the hitbox 
+        - <s>Hitbox and Hurtbox registration</s> and knockback on affected objects
+        - <s>Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit</s>
+        - Attacks attack hitboxes, different attacks produce different hitboxes
+        - Learn how to use animation events to pass arguments to EnableHitbox() 
 
 - Structural:
     - MainMenu button class
     - GameMenu button class
     - Enemy class 
         - Experiment with statemachine for enemy controller
-            - Move State
-            - Attack State
+            - <s>Move State
+            - Attack State</s>
             - Knockback State
     - Player Class
         - Experiment with identifying owner of hitbox
+        - Use starterAssets as jumping off point for a state machine
     - Tower Class
     - Level Manager
         - Contains list of LevelGraph objects
@@ -45,6 +44,8 @@ To-Do list for Mechanic's Grove
             - Path Nodes
             - Enemy Spawn Point
             - End Point of Path
+        - LevelGraph can be added as component to newly spawned enemy so they know where to go
+        - Also contains information about number and types and timings of enemies to spawn
     - Map Maker
         - Instantiate path tiles from one node to next
         - Have set to determine visited tiles to avoid repeated instantiation
@@ -91,10 +92,13 @@ To-Do list for Mechanic's Grove
     - Spawn tower: springy deform animation before tower becomes active with matching sound effect
     
     - Enemy pathfinding
-        - Series of empty game objects for enemies to walk towards? Split path and make them alternate between targets?
-        - Implementation of graph theory: A series of nodes placed at splits/joins in the path
+        - <s>Implementation of graph theory: A series of nodes placed at splits/joins in the path</s>
         - Levelmaker could pass these nodes in to the enemy class and make the enemy choose a path
         - LevelGraph object representing the nodes of the path: used for both level making and enemy pathfinding 
+        - Enemies in mind so far:
+            - Spined turtle: high attack, knockback resistant, slow
+            - Slime: medium in all respects
+            - Floating enemy: low attack, easy to knockback, high speed, trouble cornering
 
     - Tower Menu
         - When in a suitable build location, allow player to open tower build menu
@@ -103,7 +107,7 @@ To-Do list for Mechanic's Grove
         - Towers in mind so far:
             - Cannonball tower: launches bombs that deal splash damage, knockback, and have particle effect
             - Mage tower: zaps single targets for high damage with lightning bolt effect
-            - Cloud tower: slows enemies, or deals static area damage
+            - Mushroom Cloud tower: slows enemies, or deals static area damage
             - Barracks: sends out mini soldiers to stand guard on the path
 
     - Pause menu

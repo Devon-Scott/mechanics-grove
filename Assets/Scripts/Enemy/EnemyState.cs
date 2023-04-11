@@ -20,12 +20,13 @@ public class EnemyState : MonoBehaviour
     the information necessary to get from point A to point B 
     */ 
     public static LevelGraph levelGraph;
-    public EntityStats stats;
-    public LayerMask attackLayers;
 
     // Reference to enemy players on the map;
-    public List<Collider> players;
+    public static List<Collider> players;
 
+    public EntityStats stats;
+    public LayerMask attackLayers;
+    public float attackCooldown;
     public CharacterController controller;
     public Animator animator;
     public bool hasAnimator;
@@ -45,17 +46,23 @@ public class EnemyState : MonoBehaviour
         environmentCheck = GetComponent<SphereCollider>();
         target = null;
         stats = GetComponent<EntityStats>();
-        levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
+        if (levelGraph == null)
+        {
+            levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
+        }
         stateStack.Push(MoveState);
-        players = new List<Collider>();
+        if (players == null)
+        {
+            players = new List<Collider>();
+        }
     }
 
     void Update()
     {
         DoGravity();
+        CheckHealth();
         currentState = (EnemyBaseState)stateStack.CurrentState;
         stateStack.Update();
-
     }
 
     void DoGravity()
@@ -87,6 +94,21 @@ public class EnemyState : MonoBehaviour
         else 
         {
             //print("Attackstate not active");
+        }
+    }
+
+    void CheckHealth()
+    {
+        if (stats.Health <= 0)
+        {
+            if (currentState is EnemyKnockbackState)
+            {
+
+            }
+            else 
+            {
+                
+            }
         }
     }
 }
