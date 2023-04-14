@@ -14,6 +14,7 @@ public class Hitbox : MonoBehaviour
     private static Dictionary<Collider, Hurtbox> ColliderDictionary;
     
     public float damage;
+    public float KnockbackScaler;
     
     private RaycastHit hitInfo;
 
@@ -70,15 +71,16 @@ public class Hitbox : MonoBehaviour
                         hitTarget = hitObject.gameObject.GetComponent<Hurtbox>();
                         ColliderDictionary.Add(hitObject, hitTarget);
                     }
-                    hitTarget.HandleHit(damage, hitObject.transform.position - transform.position);
+                    hitTarget.HandleHit(damage, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
                 }
             }
         }
     }
 
-    public void EnableDamage()
+    public void EnableDamage(float damage)
     {
         Active = true;
+        this.damage = damage;
         HitObjects.Clear();
     }
 

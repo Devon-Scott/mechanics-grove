@@ -3132,12 +3132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a818cee1ca0af9c478ba2930b61b4555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerList:
+  - {fileID: 1085667155}
   stats: {fileID: 0}
   attackLayers:
     serializedVersion: 2
     m_Bits: 2176
-  players:
-  - {fileID: 1085667155}
+  attackCooldown: 0
   controller: {fileID: 3314354101050219019}
   animator: {fileID: 0}
   hasAnimator: 0

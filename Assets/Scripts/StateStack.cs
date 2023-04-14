@@ -14,10 +14,10 @@ namespace MyUtils.StateMachine{
             Stack = new Stack<State<T>>();
         }
 
-        public void Push(State<T> state){
+        public void Push(State<T> state, ArrayList data = null){
             Stack.Push(state);
             CurrentState = state;
-            CurrentState.Enter(owner);
+            CurrentState.Enter(owner, data);
         }
 
         public void Pop(){
@@ -30,14 +30,14 @@ namespace MyUtils.StateMachine{
             CurrentState?.Update(owner);
         }
 
-        public void ChangeState(State<T> state){
+        public void ChangeState(State<T> state, ArrayList data = null){
             if (CurrentState != null){
                 Stack.Pop();
                 CurrentState.Exit(owner);
             }
             Stack.Push(state);
             CurrentState = state;
-            CurrentState.Enter(owner);
+            CurrentState.Enter(owner, data);
         }
     }
 }

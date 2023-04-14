@@ -10,6 +10,7 @@ public abstract class Hurtbox : MonoBehaviour
 
     void Start()
     {
+        print("Hurtbox Start function");
         // Get a reference to the Collider for this Entity
         Self = transform.GetComponent<Collider>();
 

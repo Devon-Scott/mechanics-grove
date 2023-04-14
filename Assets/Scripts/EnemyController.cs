@@ -160,9 +160,9 @@ public class EnemyController : MonoBehaviour
         grounded = controller.isGrounded;
     }
 
-    private void EnableDamage()
+    private void EnableDamage(float damage)
     {
-        hitbox.EnableDamage();
+        hitbox.EnableDamage(damage);
     }
 
     private void DisableDamage()

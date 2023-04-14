@@ -22,7 +22,7 @@ public class EnemyState : MonoBehaviour
     public static LevelGraph levelGraph;
 
     // Reference to enemy players on the map;
-    public static List<Collider> players;
+    public List<Collider> PlayerList;
 
     public EntityStats stats;
     public LayerMask attackLayers;
@@ -51,14 +51,20 @@ public class EnemyState : MonoBehaviour
             levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
         }
         stateStack.Push(MoveState);
-        if (players == null)
+        if (PlayerList == null)
         {
-            players = new List<Collider>();
+            PlayerList = new List<Collider>();
+            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in Players)
+            {
+                PlayerList.Add(player.GetComponent<CharacterController>());
+            }
         }
     }
 
     void Update()
     {
+
         DoGravity();
         CheckHealth();
         currentState = (EnemyBaseState)stateStack.CurrentState;
@@ -76,7 +82,8 @@ public class EnemyState : MonoBehaviour
             verticalVelocity = Mathf.Clamp(verticalVelocity + stats.Gravity * Time.deltaTime, stats.Gravity, Mathf.Infinity);
         }
         grounded = controller.isGrounded;
-
+        animator.SetBool("Grounded", grounded);
+        animator.SetFloat("VerticalVelocity", verticalVelocity);
     }
 
     public void OnHit(float damage, Vector3 knockback)
@@ -107,7 +114,7 @@ public class EnemyState : MonoBehaviour
             }
             else 
             {
-                
+                // Enter the DeathState
             }
         }
     }

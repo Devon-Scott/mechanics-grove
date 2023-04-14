@@ -372,12 +372,11 @@ namespace StarterAssets
         // TODO: add a hitbox to the sword. Research hitboxes
         private void Attack()
         {
-            if (Grounded && _input.attack && _attackTimeoutDelta < 0.01f)
+            if (Grounded && _input.attack)
             {
                 _attackTimeoutDelta = AttackTimeout;
                 if (_hasAnimator)
                 {
-                    //_animator.SetBool(_animIDAttack, true);
                     _animator.SetTrigger("Attack2");
                 }
             }
@@ -388,13 +387,19 @@ namespace StarterAssets
                 if (_hasAnimator)
                 {
                     _animator.SetBool(_animIDAttack, false);
+                    _animator.SetBool("Combat", false);
                 }
+            }
+            if (_attackTimeoutDelta > 0f)
+            {
+                _animator.SetBool("Combat", true);
+                _attackTimeoutDelta -= Time.deltaTime;
             }
         }
 
-        private void EnableDamage()
+        private void EnableDamage(float damage)
         {
-            hitbox.EnableDamage();
+            hitbox.EnableDamage(damage);
             if (_currentWeapon == null)
             {
                 print("Error in getting weapon reference");

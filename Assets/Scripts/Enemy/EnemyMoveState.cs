@@ -17,9 +17,9 @@ public class EnemyMoveState : EnemyBaseState
     private bool init = true;
     private Vector3 targetDirection;
 
-    List<Collider> players;
+    List<Collider> PlayerList;
 
-    public override void Enter(EnemyState owner)
+    public override void Enter(EnemyState owner, ArrayList data)
     {
         if (init)
         {
@@ -31,7 +31,7 @@ public class EnemyMoveState : EnemyBaseState
             targetDirection = nextNode.Location - owner.transform.position;
             controller = owner.controller;
             stats = owner.stats;
-            players = owner.players;
+            PlayerList = owner.PlayerList;
         }
         if (owner.hasAnimator){
             owner.animator.SetFloat("speed", stats.Speed);
@@ -43,7 +43,7 @@ public class EnemyMoveState : EnemyBaseState
     public override void Update(EnemyState owner)
     {
         // Check if we need to target a player
-        foreach (Collider other in players)
+        foreach (Collider other in PlayerList)
         {
             if (distanceTo(other.transform.position) < 2.5f)
             {
@@ -94,6 +94,13 @@ public class EnemyMoveState : EnemyBaseState
     public override void OnHit(float damage, Vector3 knockback)
     {
         base.OnHit(damage, knockback);
+        stats.Health -= damage;
+        if (knockback.magnitude > stats.knockbackThreshhold)
+        {
+            ArrayList data = new ArrayList();
+            data.Add(knockback);
+            owner.stateStack.Push(owner.KnockbackState, data);
+        }
     }
 
 
