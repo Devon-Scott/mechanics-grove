@@ -17,6 +17,13 @@ to get to some number of end points. What will be relatively unique about this g
 will be one character, the mechanic, that will need to physically move around the map to fight enemies and build towers
 </p>
 
+<p>
+I have reached what I consider the first milestone of this project, implementing a knockback state for enemies to be pushed around the map:
+</p>
+
+![Animation](https://user-images.githubusercontent.com/65093027/232150991-5e2fc556-ad96-492a-872c-046a75c6eaff.gif)
+
+
 Current assets used:<br>
 - Free Low Poly Nature Forest : Pure Poly<br>
     - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742<br>
@@ -30,3 +37,5 @@ Current assets used:<br>
     - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
 FREE Fantasy Terrain Textures : 3D Haven
     - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640
+
+
