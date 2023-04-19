@@ -39,6 +39,25 @@ To-Do list for Mechanic's Grove
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine
     - Tower Class
+        - Has TowerBehaviour component
+        - Has Projectile component
+        - Each tower may need its own specialized Fire() method (static AoE towers will, at least)
+    - Projectile
+        - Base class for all projectiles, inherits from Monobehaviour
+            - Has a Hitbox with information on the projectile
+            - Tower should be able to manipulate this info as it gets upgraded
+        - Concrete classes for projectiles:
+            - Cannonball
+                - Rigidbody component for flight
+                - Hitbox not active till it hits the ground
+                - Large knockback scalar, produces sound, particle effects, and area damage
+            - Lightning bolt
+                - Hitbox active along length of bolt
+                - High damage, single target, low knockback scalar
+            - Poison Cloud
+                - Area of effect damage
+                - No knockback
+                - Spawns on all path tiles in radius of tower
     - Level Manager
         - Contains list of LevelGraph objects
         - LevelGraph contains:
