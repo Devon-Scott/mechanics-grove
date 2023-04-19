@@ -13,6 +13,7 @@ public class EnemyMoveState : EnemyBaseState
     private GraphNode previousNode;
     private CharacterController controller;
     private EntityStats stats;
+    private bool knockedBack;
 
     private bool init = true;
     private Vector3 targetDirection;
@@ -95,11 +96,23 @@ public class EnemyMoveState : EnemyBaseState
     {
         base.OnHit(damage, knockback);
         stats.Health -= damage;
+        // Check knockback before death (personal preference)
         if (knockback.magnitude > stats.knockbackThreshhold)
         {
             ArrayList data = new ArrayList();
             data.Add(knockback);
+            // We need to know if we've been knocked back so we can find our way back onto the path
+            owner.knockedBack = true;
             owner.stateStack.Push(owner.KnockbackState, data);
+        }
+        else if (stats.Health >= 0)
+        {
+            owner.stateStack.change(owner.DeathState);
+        }
+        else
+        {
+            // Flash to indicate damage
+            // Play sound to indicate damage
         }
     }
 
@@ -119,5 +132,18 @@ public class EnemyMoveState : EnemyBaseState
         float numerator = Vector3.Magnitude(Vector3.Cross(vectorToPoint, targetLine));
 
         return numerator / Vector3.Magnitude(targetLine);
+    }
+
+
+    Vector3 findClosestPath()
+    {
+        // Scan for nearest node and nearest child of that node
+        return Vector3.Project(owner.transform.position, )
+    }
+
+    // Get the closest node to a point
+    Vector3 findClosestNode()
+    {
+        Vector3 minimum;
     }
 }

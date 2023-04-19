@@ -10,9 +10,10 @@ public class EnemyState : MonoBehaviour
     public StateStack<EnemyState> stateStack;
     public EnemyBaseState currentState;
 
-    public EnemyMoveState MoveState = new EnemyMoveState();
-    public EnemyAttackState AttackState = new EnemyAttackState();
-    public EnemyKnockbackState KnockbackState = new EnemyKnockbackState();
+    public EnemyBaseState MoveState = new EnemyMoveState();
+    public EnemyBaseState AttackState = new EnemyAttackState();
+    public EnemyBaseState KnockbackState = new EnemyKnockbackState();
+    public EnemyBaseState DeathState = new EnemyDeathState();
 
     /*
     Reference to the graph data for pathfinding
@@ -33,6 +34,7 @@ public class EnemyState : MonoBehaviour
     public SphereCollider environmentCheck;
     public Collider target;
 
+    public bool knockedBack;
     public bool grounded = true;
     public float verticalVelocity;
 
@@ -64,10 +66,9 @@ public class EnemyState : MonoBehaviour
 
     void Update()
     {
-
         DoGravity();
         CheckHealth();
-        currentState = (EnemyBaseState)stateStack.CurrentState;
+        currentState = stateStack.CurrentState;
         stateStack.Update();
     }
 
@@ -108,13 +109,9 @@ public class EnemyState : MonoBehaviour
     {
         if (stats.Health <= 0)
         {
-            if (currentState is EnemyKnockbackState)
+            if (currentState is not EnemyKnockbackState)
             {
-
-            }
-            else 
-            {
-                // Enter the DeathState
+                stateStack.ChangeState(DeathState);
             }
         }
     }

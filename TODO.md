@@ -23,7 +23,8 @@ To-Do list for Mechanic's Grove
         - <s>Hitbox and Hurtbox registration</s> and knockback on affected objects
         - <s>Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit</s>
         - Attacks attack hitboxes, different attacks produce different hitboxes
-        - Learn how to use animation events to pass arguments to EnableHitbox() 
+        - <s>Learn how to use animation events to pass arguments to EnableHitbox()</s>
+    - Event handling for triggers such as onHealthZero for enemies
 
 - Structural:
     - MainMenu button class
@@ -32,7 +33,8 @@ To-Do list for Mechanic's Grove
         - Experiment with statemachine for enemy controller
             - <s>Move State
             - Attack State</s>
-            - Knockback State
+            - <s>Knockback State</s>
+            - Death State
     - Player Class
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine
@@ -63,8 +65,8 @@ To-Do list for Mechanic's Grove
     - If Play: switch to Gameplay Scene
     - If Settings: push Settings Menu onto Stack
     - Have settings object that persists indefinitely (preserve settings until program ends)
-        - (Ensure object is only modifiable outside of gameplay state)
         - Difficulty
+            - (Ensure object is only modifiable outside of gameplay state)
         - Music
         - Audio
 
@@ -99,6 +101,7 @@ To-Do list for Mechanic's Grove
             - Spined turtle: high attack, knockback resistant, slow
             - Slime: medium in all respects
             - Floating enemy: low attack, easy to knockback, high speed, trouble cornering
+            - Devil: On death, waits several seconds and spawns either itself or 2-4 other enemies
 
     - Tower Menu
         - When in a suitable build location, allow player to open tower build menu
