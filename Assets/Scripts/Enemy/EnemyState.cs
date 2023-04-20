@@ -68,7 +68,7 @@ public class EnemyState : MonoBehaviour
     {
         DoGravity();
         CheckHealth();
-        currentState = stateStack.CurrentState;
+        currentState = (EnemyBaseState)stateStack.CurrentState;
         stateStack.Update();
     }
 
@@ -92,18 +92,18 @@ public class EnemyState : MonoBehaviour
         currentState.OnHit(damage, knockback);
     }
 
-    public void toggleHitbox()
-    {
-        if (currentState == AttackState)
-        {
-            AttackState.hitboxActive = !AttackState.hitboxActive;
-            //Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
-        }
-        else 
-        {
-            //print("Attackstate not active");
-        }
-    }
+    // public void toggleHitbox()
+    // {
+    //     if (currentState == AttackState)
+    //     {
+    //         AttackState.hitboxActive = !AttackState.hitboxActive;
+    //         //Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
+    //     }
+    //     else 
+    //     {
+    //         //print("Attackstate not active");
+    //     }
+    // }
 
     void CheckHealth()
     {

@@ -47,7 +47,7 @@ public class EnemyMoveState : EnemyBaseState
         // Check if we need to target a player
         foreach (Collider other in PlayerList)
         {
-            if (distanceTo(other.transform.position) < 2.5f)
+            if (distanceBetween(owner.transform.position, other.transform.position) < 2.5f)
             {
                 owner.target = other;
                 owner.stateStack.Push(owner.AttackState);
@@ -79,7 +79,6 @@ public class EnemyMoveState : EnemyBaseState
         else if (nearPath)
         {
             targetDirection = nextNode.Location - positionAxis;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
         }
 
         if (targetDirection.magnitude <= 1f){
@@ -88,7 +87,7 @@ public class EnemyMoveState : EnemyBaseState
             {
                 // Get the next node
                 List<GraphNode> nextNodeList = nextNode.getChildren();
-                int index = (int)Mathf.Floor(Random.Range(0, nextNodeList.Count));
+                int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, nextNodeList.Count));
                 previousNode = nextNode;
                 nextNode = nextNodeList[index];
                 // update the Target Direction
@@ -101,7 +100,7 @@ public class EnemyMoveState : EnemyBaseState
             }
         }
         // Rotate towards the next node
-        targetRotation = Quaternion.LookRotation(targetDirection);
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
         owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * stats.TurnSpeed);
 
         // Move towards the next node
@@ -136,7 +135,7 @@ public class EnemyMoveState : EnemyBaseState
         }
         else if (stats.Health <= 0)
         {
-            owner.stateStack.change(owner.DeathState);
+            owner.stateStack.ChangeState(owner.DeathState);
         }
         else
         {

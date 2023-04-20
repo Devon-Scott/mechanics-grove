@@ -16,10 +16,12 @@ public class EnemyKnockbackState : EnemyBaseState
     private float _timer;
     private float _animationLength;
     private bool _alive;
+    private EnemyState _owner;
     private EntityStats _stats;
 
     public override void Enter(EnemyState owner, ArrayList data)
     {
+        this._owner = owner;
         // Assert that the first item in Data is a Vector3 with knockback info
         if (data[0] is Vector3)
         {
@@ -36,7 +38,7 @@ public class EnemyKnockbackState : EnemyBaseState
         this._friction = 1f;
         this._stats = owner.stats;
         this._gravity = _stats.Gravity;
-        this._alive = stats.Health > 0;
+        this._alive = _stats.Health > 0;
         _movement = _knockbackDirection * _speed;
         _movement.y += _verticalStart;
         owner.verticalVelocity = _verticalStart;
@@ -75,13 +77,13 @@ public class EnemyKnockbackState : EnemyBaseState
         if (_alive)
         {
             _stats.Health -= damage;
-            if (knockback.magnitude > stats.knockbackThreshhold * 3)
+            if (knockback.magnitude > _stats.knockbackThreshhold * 3)
             {
                 ArrayList data = new ArrayList();
                 data.Add(_movement + knockback);
-                owner.stateStack.Push(owner.KnockbackState, data);
+                _owner.stateStack.Push(_owner.KnockbackState, data);
             }
-            else if (stats.Health >= 0)
+            else if (_stats.Health >= 0)
             {
                 _alive = false;
             }

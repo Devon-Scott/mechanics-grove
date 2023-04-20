@@ -89,7 +89,7 @@ public class EnemyAttackState : EnemyBaseState
         }
         else if (stats.Health >= 0)
         {
-            owner.stateStack.change(owner.DeathState);
+            owner.stateStack.ChangeState(owner.DeathState);
         }
         else
         {
