@@ -24,12 +24,27 @@ To-Do list for Mechanic's Grove
         - <s>Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit</s>
         - Attacks attack hitboxes, different attacks produce different hitboxes
         - <s>Learn how to use animation events to pass arguments to EnableHitbox()</s>
-    - Event handling for triggers such as onHealthZero for enemies
+    - Event handling
+        - Triggers when an enemy spawns or dies 
+        - Alternatively, 
 
 - Structural:
     - MainMenu button class
     - GameMenu button class
+    - GameManager
+        - Initialize LevelManager with a given level (int)
+            - Level 0 can be the test arena
+            - Use the level to initialize the MapMaker
+            - Build paths from parents to children
+            - Fill the rest of the level with a flat plane
+            - Border the flat plane with mountains 
+                - Have a gap for enemy spawning (entering) and winning (leaving) the map
+        - Hold variables for # of enemies, those in the level overall, those alive, those that have won, and those that have died
+        - Create spawn points for player and enemy
+        - Initialize EnemySpawner with coordinates of spawn point
+        - Initialize ColiderManager to keep track of the hurtbox colliders in the level
     - Enemy class 
+        - Add distance variable as distance between Enemy and either SpawnPoint or EndPoint
         - Experiment with statemachine for enemy controller
             - <s>Move State
             - Attack State</s>
@@ -40,8 +55,10 @@ To-Do list for Mechanic's Grove
         - Use starterAssets as jumping off point for a state machine
     - Tower Class
         - Has TowerBehaviour component
+            - Get Target: choose enemy in range with least distance remaining (or greatest distance from spawn)
         - Has Projectile component
         - Each tower may need its own specialized Fire() method (static AoE towers will, at least)
+            - In general, a coroutine for firing a projectile might work
     - Projectile
         - Base class for all projectiles, inherits from Monobehaviour
             - Has a Hitbox with information on the projectile
@@ -65,11 +82,13 @@ To-Do list for Mechanic's Grove
             - Path Nodes
             - Enemy Spawn Point
             - End Point of Path
+            - Boundaries of the Level
         - LevelGraph can be added as component to newly spawned enemy so they know where to go
         - Also contains information about number and types and timings of enemies to spawn
     - Map Maker
         - Instantiate path tiles from one node to next
         - Have set to determine visited tiles to avoid repeated instantiation
+            - Use collision detection
         - Method to determine size of map
         - Fill empty tiles with ground, fill those with random decorations
     - Enemy Spawner

@@ -29,7 +29,6 @@ public class Hitbox : MonoBehaviour
     {
         parentPosition = transform.parent.position;
         SphereCastLength = (transform.position - parentPosition).magnitude;
-        print(SphereCastLength);
         Active = false;
         HitObjects = new HashSet<Collider>();
         // Lazy initialization of a static data structure for speeding up hurtbox references
