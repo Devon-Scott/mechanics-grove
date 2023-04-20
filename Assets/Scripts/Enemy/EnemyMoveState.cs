@@ -5,7 +5,6 @@ using UnityEngine;
 using MyUtils.StateMachine;
 using MyUtils.Graph;
 
-
 public class EnemyMoveState : EnemyBaseState
 {
     public static LevelGraph path;
@@ -43,8 +42,6 @@ public class EnemyMoveState : EnemyBaseState
         }
     }
 
-    
-
     public override void Update(EnemyState owner)
     {
         // Check if we need to target a player
@@ -58,9 +55,10 @@ public class EnemyMoveState : EnemyBaseState
             }
         }
         
-         // Position axis is meant to provide a purely vertical frame of reference
+        // Position axis is meant to provide a purely vertical frame of reference
         // for the enemy to know when to turn on a path, without taking
-        // the vertical (y) distance into account
+        // the vertical (y) distance into account, so that Controller doesn't get confused
+        // when close to a node that is "in the ground"
         // This may need refining with levels that have vertical components
         Vector3 positionAxis = owner.transform.position;
         positionAxis.y = 0;
@@ -155,13 +153,13 @@ public class EnemyMoveState : EnemyBaseState
         return closestPoint;
     }
 
-    // Used for determining distance to any other object the move state needs to be aware of
+    // Basic utility function for finding distance between points
     protected float distanceBetween(Vector3 start, Vector3 end)
     {
         return (end - start).magnitude;
     }
 
-    // Get the closest node to a point
+    // Get the closest node to a point in the scene. This can probably be reused elsewhere
     GraphNode BFSFindClosestNode(LevelGraph G, GraphNode source, Vector3 position)
     {
         if (G == null || source == null)
@@ -195,11 +193,11 @@ public class EnemyMoveState : EnemyBaseState
         return Closest;
     }
 
-    GraphNode findClosestChild(GraphNode G, Vector3 position)
+    GraphNode findClosestChild(GraphNode Parent, Vector3 position)
     {
-        GraphNode closestChild = G.childNodes[0];
+        GraphNode closestChild = Parent.childNodes[0];
         float closestDistance = distanceBetween(position, closestChild.Location);
-        foreach (GraphNode child in G.childNodes)
+        foreach (GraphNode child in Parent.childNodes)
         {
             float newDistance = distanceBetween(position, child.Location);
             if (newDistance < closestDistance)
