@@ -9,6 +9,7 @@ namespace MyUtils.Graph
     {
 
         public GraphNode StartNode;
+        public GraphNode EndNode;
         // Start is called before the first frame update
         void Awake()
         {

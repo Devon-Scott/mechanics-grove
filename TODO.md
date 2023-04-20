@@ -26,7 +26,12 @@ To-Do list for Mechanic's Grove
         - <s>Learn how to use animation events to pass arguments to EnableHitbox()</s>
     - Event handling
         - Triggers when an enemy spawns or dies 
-        - Alternatively, 
+        - Alternatively, look into using scriptable objects that other entities can watch?
+
+- Questions: 
+    - How to invoke methods on other components 
+    - How to broadcast messages to other game objects
+    - How to have a generic event queue that higher level classes can listen to events for
 
 - Structural:
     - MainMenu button class

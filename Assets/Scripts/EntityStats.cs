@@ -2,7 +2,20 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    public float Health;
+    private float _health;
+    public float Health
+    {
+        get { return _health;}
+        set 
+        {
+            _health = value;
+            if (_health <= 0)
+            {
+                _health = 0;
+                print("Entity has died");
+            }
+        }
+    }
 
     public int Damage;
 
