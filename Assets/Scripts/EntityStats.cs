@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
+    [SerializeField]
     private float _health;
     public float Health
     {

@@ -5,17 +5,20 @@ using MyUtils.StateMachine;
 
 public class EnemyDeathState : EnemyBaseState
 {
-    void Start(EnemyState owner, ArrayList data)
+    public override void Enter(EnemyState owner, ArrayList data)
+    {
+        Debug.Log("Entered Death state");
+        owner.animator.SetBool("attack", false);
+        owner.animator.SetBool("correctAngle", false);
+        owner.animator.SetFloat("speed", 0);
+    }
+
+    public override void Update(EnemyState owner)
     {
 
     }
 
-    void Update(EnemyState owner, ArrayList data)
-    {
-
-    }
-
-    void Exit(EnemyState owner, ArrayList data)
+    public override void Exit(EnemyState owner)
     {
         
     }

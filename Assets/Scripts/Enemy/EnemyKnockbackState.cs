@@ -21,6 +21,7 @@ public class EnemyKnockbackState : EnemyBaseState
 
     public override void Enter(EnemyState owner, ArrayList data)
     {
+        Debug.Log("Entered knockback state");
         this._owner = owner;
         // Assert that the first item in Data is a Vector3 with knockback info
         if (data[0] is Vector3)
@@ -43,12 +44,13 @@ public class EnemyKnockbackState : EnemyBaseState
         _movement.y += _verticalStart;
         owner.verticalVelocity = _verticalStart;
         owner.controller.Move(_movement * Time.deltaTime);
+        owner.grounded = false;
     }
 
     public override void Update(EnemyState owner)
     {
         // Need to test how this looks and feels
-        _speed = Math.Max(0, _speed - (_friction * Time.deltaTime));
+        //_speed = Math.Max(0, _speed - (_friction * Time.deltaTime));
         _movement = _knockbackDirection * _speed;
         _movement.y = owner.verticalVelocity;
         owner.controller.Move(_movement * Time.deltaTime);
@@ -56,16 +58,20 @@ public class EnemyKnockbackState : EnemyBaseState
         if (owner.grounded)
         {
             // Assume this state has been pushed to the state stack
-            owner.stateStack.Pop();
+            if (!_alive)
+            {
+                owner.stateStack.ChangeState(owner.DeathState);
+            }
+            else
+            {
+                owner.stateStack.Pop();
+            }
         }
     }
 
     public override void Exit(EnemyState owner)
     {
-        if (!_alive)
-        {
-            owner.stateStack.ChangeState(owner.DeathState);
-        }
+        Debug.Log("Exit knockback state");
     }
 
     public override void OnHit(float damage, Vector3 knockback)

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  KnockbackScaler: 4
+  KnockbackScaler: 2
   Active: 0
   SphereCastRadius: 0.15
   SphereCastLength: 0

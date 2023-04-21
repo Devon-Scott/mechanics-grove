@@ -13,11 +13,21 @@ public class EnemyMoveState : EnemyBaseState
     private GraphNode previousNode;
     private CharacterController controller;
     private EntityStats stats;
-    private bool knockedBack;
-    private bool nearPath;
+    private bool _nearPath;
+    private bool _needDirectionUpdate;
 
     private bool init = true;
     private Vector3 targetDirection;
+    private Vector3 _targetPoint;
+    public Vector3 TargetPoint
+    {
+        get {return _targetPoint;}
+        set 
+        {
+            Debug.Log("Changing course");
+            _targetPoint = value;
+        }
+    }
 
     List<Collider> PlayerList;
 
@@ -31,11 +41,11 @@ public class EnemyMoveState : EnemyBaseState
             previousNode = null;
             nextNode = path.StartNode;
             targetDirection = nextNode.Location - owner.transform.position;
+            TargetPoint = nextNode.Location;
             controller = owner.controller;
             stats = owner.stats;
             PlayerList = owner.PlayerList;
-            knockedBack = false;
-            nearPath = true;
+            _nearPath = true;
         }
         if (owner.hasAnimator){
             owner.animator.SetFloat("speed", stats.Speed);
@@ -65,46 +75,54 @@ public class EnemyMoveState : EnemyBaseState
 
         // Check if we need to find our way back to the path, and if so, walk to it.
         // If we're close enogh to the path, we point ourselves to the next node.
-        if (knockedBack)
+        if (owner.knockedBack)
         {
-            targetDirection = findClosestPointOnPath(path, owner.transform.position);
-            nextNode = findClosestChild(
-                    BFSFindClosestNode(path, path.StartNode, owner.transform.position),
-                    owner.transform.position
-                );
-            // Set knockedBack to false, because nearPath won't be true until we're
-            // close eough to the path, and we don't need to run this check every frame
-            knockedBack = false;
-        }
-        else if (nearPath)
-        {
-            targetDirection = nextNode.Location - positionAxis;
+            GraphNode closestParent = BFSFindClosestNode(path, path.StartNode, positionAxis);
+            GraphNode closestChild = findClosestChild(closestParent, positionAxis);
+            Vector3 closestPoint = findClosestPointBetween(closestParent, closestChild, positionAxis);
+            TargetPoint = closestPoint;
+            nextNode = closestChild;
+            // Set _knockedBack to false, because _nearPath won't be true until we're
+            // close eough to this TargetPoint, and we don't need to run this check every frame
+            owner.knockedBack = false;
         }
 
-        if (targetDirection.magnitude <= 1f){
+        if (distanceBetween(positionAxis, TargetPoint) <= 1f){
             // We're already on the path so we find the next node
-            if (nearPath)
+            Debug.Log("We're at the target");
+            if (_nearPath)
             {
-                // Get the next node
-                List<GraphNode> nextNodeList = nextNode.getChildren();
-                int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, nextNodeList.Count));
-                previousNode = nextNode;
-                nextNode = nextNodeList[index];
-                // update the Target Direction
-                targetDirection = nextNode.Location - positionAxis;
+                if (TargetPoint == nextNode.Location)
+                {
+                    // Get the next node
+                    List<GraphNode> nextNodeList = nextNode.getChildren();
+                    int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, nextNodeList.Count));
+                    previousNode = nextNode;
+                    nextNode = nextNodeList[index];
+                    // update the Target Direction
+                    targetDirection = nextNode.Location - positionAxis;
+                    TargetPoint = nextNode.Location;
+                } 
+                else 
+                {
+                    TargetPoint = nextNode.Location;
+                }
+
             }
             // Otherwise, we're close enough to the path that we can start moving to the next node
             else 
             {
-                nearPath = true;
+                _nearPath = true;
             }
         }
         // Rotate towards the next node
+        targetDirection = TargetPoint - positionAxis;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
         owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotation, Time.deltaTime * stats.TurnSpeed);
 
         // Move towards the next node
         Vector3 direction = new Vector3(0, owner.verticalVelocity, 0) + (owner.transform.forward * stats.Speed);
+        
         controller.Move(direction * Time.deltaTime);
 
         if (owner.hasAnimator){
@@ -123,14 +141,14 @@ public class EnemyMoveState : EnemyBaseState
     {
         base.OnHit(damage, knockback);
         stats.Health -= damage;
-        // Check knockback before death (personal preference)
+        // Check knockback before death (personal preference) maybe not
         if (knockback.magnitude > stats.knockbackThreshhold)
         {
             ArrayList data = new ArrayList();
             data.Add(knockback);
-            // We need to know if we've been knocked back so we can find our way back onto the path
-            knockedBack = true;
-            nearPath = false;
+            // We need to know if we've been knocked back so we can find our way back onto the path in EnemyMoveState
+            owner.knockedBack = true;
+            _nearPath = false;
             owner.stateStack.Push(owner.KnockbackState, data);
         }
         else if (stats.Health <= 0)
@@ -143,6 +161,7 @@ public class EnemyMoveState : EnemyBaseState
             // Play sound to indicate damage
         }
     }
+
 
     Vector3 findClosestPointOnPath(LevelGraph path, Vector3 position)
     {
@@ -216,13 +235,33 @@ public class EnemyMoveState : EnemyBaseState
 
         // If point does not lie on the line between parent and child, then presumably there exists
         // a set of nodes closer that should have been found by BFSFindClosestNode and FindClosestChild
-        return point;
+        // But we check just in case
+        if (pointIsInRange(parent.Location, child.Location, parent.Location + point))
+        {
+            return parent.Location + point;
+        }
+        else 
+        {
+            float parentDistance = (position - parent.Location).sqrMagnitude;
+            float childDistance = (position - child.Location).sqrMagnitude;
+            if (parentDistance <= childDistance)
+            {
+                return parent.Location;
+            }
+            else 
+            {
+                return child.Location;
+            }
+        }
+        
     }
 
-    void OnDrawGizmosSelected()
+    bool pointIsInRange(Vector3 start, Vector3 end, Vector3 point)
     {
-        // Draw a red sphere at the next location this is moving to
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(targetDirection, 2);
+        float dx = end.x - start.x;
+        float dy = end.y - start.y;
+        float dz = end.z - start.z;
+        float innerProduct = (point.x - start.x) * dx + (point.y - start.y) * dy + (point.z - start.z) * dz;
+        return 0 <= innerProduct && innerProduct <= dx * dx + dy * dy + dz * dz;
     }
 }

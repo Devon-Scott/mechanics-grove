@@ -13,10 +13,10 @@ namespace MyUtils.Graph
         // Start is called before the first frame update
         void Awake()
         {
-            GraphNode topLeft = new GraphNode(new Vector3(-6, 0, 7));
-            GraphNode topRight = new GraphNode(new Vector3(4, 0, 7));
-            GraphNode bottomRight = new GraphNode(new Vector3(4, 0, -1));
-            GraphNode bottomLeft = new GraphNode(new Vector3(-6, 0, -1));
+            GraphNode topLeft = new GraphNode(new Vector3(-9, 0, 10));
+            GraphNode topRight = new GraphNode(new Vector3(7, 0, 10));
+            GraphNode bottomRight = new GraphNode(new Vector3(7, 0, -4));
+            GraphNode bottomLeft = new GraphNode(new Vector3(-9, 0, -4));
 
             topLeft.addChild(topRight);
             topRight.addChild(bottomRight);

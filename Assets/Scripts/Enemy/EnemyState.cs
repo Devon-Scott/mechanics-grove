@@ -10,10 +10,11 @@ public class EnemyState : MonoBehaviour
     public StateStack<EnemyState> stateStack;
     public EnemyBaseState currentState;
 
-    public EnemyBaseState MoveState = new EnemyMoveState();
-    public EnemyBaseState AttackState = new EnemyAttackState();
-    public EnemyBaseState KnockbackState = new EnemyKnockbackState();
-    public EnemyBaseState DeathState = new EnemyDeathState();
+    // All states inherit from EnemyBaseState
+    public EnemyMoveState MoveState = new EnemyMoveState();
+    public EnemyAttackState AttackState = new EnemyAttackState();
+    public EnemyKnockbackState KnockbackState = new EnemyKnockbackState();
+    public EnemyDeathState DeathState = new EnemyDeathState();
 
     /*
     Reference to the graph data for pathfinding
@@ -42,6 +43,7 @@ public class EnemyState : MonoBehaviour
     
     void Start()
     {
+        knockedBack = false;
         stateStack = new StateStack<EnemyState>(this);
         hasAnimator = TryGetComponent(out animator);
         controller = GetComponent<CharacterController>();
@@ -67,7 +69,6 @@ public class EnemyState : MonoBehaviour
     void Update()
     {
         DoGravity();
-        CheckHealth();
         currentState = (EnemyBaseState)stateStack.CurrentState;
         stateStack.Update();
     }
@@ -92,24 +93,38 @@ public class EnemyState : MonoBehaviour
         currentState.OnHit(damage, knockback);
     }
 
-    // public void toggleHitbox()
-    // {
-    //     if (currentState == AttackState)
-    //     {
-    //         AttackState.hitboxActive = !AttackState.hitboxActive;
-    //         //Debug.Log("Hitbox toggled " + AttackState.hitboxActive);
-    //     }
-    //     else 
-    //     {
-    //         //print("Attackstate not active");
-    //     }
-    // }
+    void OnDrawGizmosSelected()
+    {
+        // Draw a red sphere at the next location this is moving to
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(MoveState.TargetPoint, 1);
+
+        Gizmos.color = Color.red;
+        HashSet<GraphNode> Visited = new HashSet<GraphNode>();
+        Queue<GraphNode> Queue = new Queue<GraphNode>();
+        //Visited.Add(levelGraph.StartNode);
+        Queue.Enqueue(levelGraph.StartNode);
+
+        GraphNode Closest = levelGraph.StartNode;
+        while (Queue.Count > 0)
+        {
+            GraphNode Node = Queue.Dequeue();
+            for (int i = 0; i < Node.childNodes.Count; i++)
+            {
+                GraphNode SampleNode = Node.childNodes[i];
+                if (Visited.Add(SampleNode)){
+                    Queue.Enqueue(SampleNode);
+                    Gizmos.DrawLine(Node.Location + Vector3.up, SampleNode.Location + Vector3.up);
+                }   
+            }
+        }
+    }
 
     void CheckHealth()
     {
         if (stats.Health <= 0)
         {
-            if (currentState is not EnemyKnockbackState)
+            if (currentState is not EnemyKnockbackState || currentState is not EnemyDeathState)
             {
                 stateStack.ChangeState(DeathState);
             }

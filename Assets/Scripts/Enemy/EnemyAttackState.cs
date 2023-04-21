@@ -54,7 +54,14 @@ public class EnemyAttackState : EnemyBaseState
         }
         else 
         {
-            owner.stateStack.Pop();
+            if (stats.Health <= 0)
+            {
+                owner.stateStack.ChangeState(owner.DeathState);
+            }
+            else
+            {
+                owner.stateStack.Pop();
+            }
         }
     }
 
@@ -87,7 +94,7 @@ public class EnemyAttackState : EnemyBaseState
             owner.knockedBack = true;
             owner.stateStack.Push(owner.KnockbackState, data);
         }
-        else if (stats.Health >= 0)
+        else if (stats.Health <= 0)
         {
             owner.stateStack.ChangeState(owner.DeathState);
         }
