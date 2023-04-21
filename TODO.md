@@ -46,7 +46,7 @@ To-Do list for Mechanic's Grove
                 - Have a gap for enemy spawning (entering) and winning (leaving) the map
         - Hold variables for # of enemies, those in the level overall, those alive, those that have won, and those that have died
         - Create spawn points for player and enemy
-        - Initialize EnemySpawner with coordinates of spawn point
+        - Initialize EnemyManager with coordinates of spawn point
         - Initialize ColiderManager to keep track of the hurtbox colliders in the level
     - Enemy class 
         - Add distance variable as distance between Enemy and either SpawnPoint or EndPoint
@@ -57,7 +57,7 @@ To-Do list for Mechanic's Grove
                 - Correct timings and cooldowns for attacks
                 - Experiment with coroutines and animation triggers
             - <s>Knockback State</s>
-            - Death State
+            - <s>Death State</s>
                 - <s>Start state with animation trigger for death</s>
                 - <s>Add onDeath() function to state manager as AnimationEvent at end of animation</s>
                 - <s>Destroy game object</s>

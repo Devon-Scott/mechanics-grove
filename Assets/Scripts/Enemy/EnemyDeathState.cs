@@ -5,7 +5,7 @@ using MyUtils.StateMachine;
 
 public class EnemyDeathState : EnemyBaseState
 {
-    public override void Enter(EnemyState owner, ArrayList data)
+    public override void Enter(Enemy owner, ArrayList data)
     {
         Debug.Log("Entered Death state");
         owner.animator.SetBool("attack", false);
@@ -14,12 +14,12 @@ public class EnemyDeathState : EnemyBaseState
         owner.animator.SetTrigger("Death");
     }
 
-    public override void Update(EnemyState owner)
+    public override void Update(Enemy owner)
     {
 
     }
 
-    public override void Exit(EnemyState owner)
+    public override void Exit(Enemy owner)
     {
         
     }

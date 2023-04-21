@@ -4,10 +4,10 @@ using UnityEngine;
 using MyUtils.Graph;
 using MyUtils.StateMachine;
 
-public class EnemyState : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     
-    public StateStack<EnemyState> stateStack;
+    public StateStack<Enemy> stateStack;
     public EnemyBaseState currentState;
 
     // All states inherit from EnemyBaseState
@@ -24,8 +24,9 @@ public class EnemyState : MonoBehaviour
     */ 
     public static LevelGraph levelGraph;
 
-    // Reference to enemy players on the map;
-    public List<Collider> PlayerList;
+    // Reference to players and observers in the scene
+    public static List<Collider> PlayerList;
+    private List<IEnemyObserver> observers = new List<IEnemyObserver>();
 
     public EntityStats stats;
     public LayerMask attackLayers;
@@ -45,7 +46,7 @@ public class EnemyState : MonoBehaviour
     void Start()
     {
         knockedBack = false;
-        stateStack = new StateStack<EnemyState>(this);
+        stateStack = new StateStack<Enemy>(this);
         hasAnimator = TryGetComponent(out animator);
         controller = GetComponent<CharacterController>();
         environmentCheck = GetComponent<SphereCollider>();
@@ -53,6 +54,7 @@ public class EnemyState : MonoBehaviour
         stats = GetComponent<EntityStats>();
         if (levelGraph == null)
         {
+            print("Instantiating level");
             levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
         }
         stateStack.Push(MoveState);
@@ -72,6 +74,11 @@ public class EnemyState : MonoBehaviour
         DoGravity();
         currentState = (EnemyBaseState)stateStack.CurrentState;
         stateStack.Update();
+    }
+
+    public void AddObserver(IEnemyObserver observer)
+    {
+        observers.Add(observer);
     }
 
     void DoGravity()
@@ -123,11 +130,11 @@ public class EnemyState : MonoBehaviour
 
     public void onDeath()
     {
-        print("onDeath");
-        float x = transform.position.x;
-        float y = transform.position.y;
-        float z = transform.position.z;
-        Instantiate(DeathExplosion, new Vector3(x, y, z), Quaternion.identity);
+        foreach (IEnemyObserver observer in observers)
+        {
+            observer.OnEnemyDeath(this);
+        }
+        Instantiate(DeathExplosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

@@ -7,7 +7,6 @@ namespace MyUtils.Graph
     [CreateAssetMenu(menuName = "ScriptableObjects/LevelGraph")]
     public class LevelGraph : ScriptableObject
     {
-
         public GraphNode StartNode;
         public GraphNode EndNode;
         // Start is called before the first frame update

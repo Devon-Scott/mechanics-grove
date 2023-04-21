@@ -5,14 +5,14 @@ using MyUtils.StateMachine;
 
 public class EnemyHurtbox : Hurtbox
 {
-    public EnemyState stateMachine;
+    public Enemy stateMachine;
 
     void Start()
     {
         print("EnemyHurtbox Start function");
         // Get a reference to the Collider for this Entity
         Self = transform.GetComponent<CharacterController>();
-        stateMachine = transform.GetComponent<EnemyState>();
+        stateMachine = transform.GetComponent<Enemy>();
         // get the reference to the ColliderManager
         //colliderManager = FindObjectOfType<ColliderManager>();
         

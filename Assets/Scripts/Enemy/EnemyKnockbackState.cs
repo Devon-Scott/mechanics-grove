@@ -16,10 +16,10 @@ public class EnemyKnockbackState : EnemyBaseState
     private float _timer;
     private float _animationLength;
     private bool _alive;
-    private EnemyState _owner;
+    private Enemy _owner;
     private EntityStats _stats;
 
-    public override void Enter(EnemyState owner, ArrayList data)
+    public override void Enter(Enemy owner, ArrayList data)
     {
         Debug.Log("Entered knockback state");
         this._owner = owner;
@@ -47,10 +47,10 @@ public class EnemyKnockbackState : EnemyBaseState
         owner.grounded = false;
     }
 
-    public override void Update(EnemyState owner)
+    public override void Update(Enemy owner)
     {
         // Need to test how this looks and feels
-        //_speed = Math.Max(0, _speed - (_friction * Time.deltaTime));
+        _speed = Math.Max(0, _speed - (_friction * Time.deltaTime));
         _movement = _knockbackDirection * _speed;
         _movement.y = owner.verticalVelocity;
         owner.controller.Move(_movement * Time.deltaTime);
@@ -69,7 +69,7 @@ public class EnemyKnockbackState : EnemyBaseState
         }
     }
 
-    public override void Exit(EnemyState owner)
+    public override void Exit(Enemy owner)
     {
         Debug.Log("Exit knockback state");
     }

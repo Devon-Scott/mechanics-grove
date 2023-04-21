@@ -1,7 +1,7 @@
 using UnityEngine;
 using MyUtils.StateMachine;
 
-public class EnemyBaseState : State<EnemyState>
+public class EnemyBaseState : State<Enemy>
 {
     public virtual void OnHit(float damage, Vector3 knockback)
     { 

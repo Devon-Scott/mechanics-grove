@@ -8,7 +8,7 @@ using MyUtils.Graph;
 public class EnemyMoveState : EnemyBaseState
 {
     public static LevelGraph path;
-    private EnemyState owner;
+    private Enemy owner;
     private GraphNode nextNode;
     private GraphNode previousNode;
     private CharacterController controller;
@@ -24,27 +24,30 @@ public class EnemyMoveState : EnemyBaseState
         get {return _targetPoint;}
         set 
         {
-            Debug.Log("Changing course");
             _targetPoint = value;
         }
     }
 
-    List<Collider> PlayerList;
+    static List<Collider> PlayerList;
 
-    public override void Enter(EnemyState owner, ArrayList data)
+    public override void Enter(Enemy owner, ArrayList data)
     {
         if (init)
         {
             this.owner = owner;
-            path = EnemyState.levelGraph;
+            path = Enemy.levelGraph;
             init = false;
             previousNode = null;
             nextNode = path.StartNode;
+            if (nextNode == null)
+            {
+                Debug.Log("what the hell");
+            }
             targetDirection = nextNode.Location - owner.transform.position;
             TargetPoint = nextNode.Location;
             controller = owner.controller;
             stats = owner.stats;
-            PlayerList = owner.PlayerList;
+            PlayerList = Enemy.PlayerList;
             _nearPath = true;
         }
         if (owner.hasAnimator){
@@ -52,10 +55,10 @@ public class EnemyMoveState : EnemyBaseState
         }
     }
 
-    public override void Update(EnemyState owner)
+    public override void Update(Enemy owner)
     {
         // Check if we need to target a player
-        foreach (Collider other in PlayerList)
+        foreach (Collider other in Enemy.PlayerList)
         {
             if (distanceBetween(owner.transform.position, other.transform.position) < 2.5f)
             {
@@ -89,7 +92,6 @@ public class EnemyMoveState : EnemyBaseState
 
         if (distanceBetween(positionAxis, TargetPoint) <= 1f){
             // We're already on the path so we find the next node
-            Debug.Log("We're at the target");
             if (_nearPath)
             {
                 if (TargetPoint == nextNode.Location)
@@ -130,7 +132,7 @@ public class EnemyMoveState : EnemyBaseState
         }
     }
 
-    public override void Exit(EnemyState owner)
+    public override void Exit(Enemy owner)
     {
         if (owner.hasAnimator){
             owner.animator.SetFloat("speed", stats.Speed);

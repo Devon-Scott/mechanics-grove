@@ -8,10 +8,10 @@ public class EnemyAttackState : EnemyBaseState
     private Collider target;
     private Vector3 targetDirection;
     public bool hitboxActive;
-    EnemyState owner;
+    Enemy owner;
     EntityStats stats;
 
-    public override void Enter(EnemyState owner, ArrayList data)
+    public override void Enter(Enemy owner, ArrayList data)
     {
         this.owner = owner;
         hitboxActive = false;
@@ -23,7 +23,7 @@ public class EnemyAttackState : EnemyBaseState
         stats = owner.stats;
     }
 
-    public override void Update(EnemyState owner)
+    public override void Update(Enemy owner)
     {
         if (distanceTo(target.ClosestPoint(owner.transform.position)) >= 2.5f)
         {
@@ -71,7 +71,7 @@ public class EnemyAttackState : EnemyBaseState
         return (other - owner.transform.position).magnitude;
     }
 
-    public override void Exit(EnemyState owner)
+    public override void Exit(Enemy owner)
     {
         if (owner.hasAnimator)
         {
