@@ -25,18 +25,18 @@ Update - April 14th 2023: I have reached what I consider the first milestone of 
 
 
 Current assets used:<br>
-- Free Low Poly Nature Forest : Pure Poly<br>
-    - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742<br>
-- Starter Assets - Third Person Character Controller : Unity<br>
-    - https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526<br>
-- RPG Tiny Hero Duo PBR Polyart : Dungeon Mason<br>
-    - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148<br>
+- Free Low Poly Nature Forest : Pure Poly
+    - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
+- Starter Assets - Third Person Character Controller : Unity
+    - https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526
+- RPG Tiny Hero Duo PBR Polyart : Dungeon Mason
+    - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148
 - RPG Monster Duo PBR Polyart
-    - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762<br>
-- Handpainted Turntable Platforms <br>
-    - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599<br>
-FREE Fantasy Terrain Textures : 3D Haven<br>
-    - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640<br>
-Cartoon FX Free Pack : RetroVistas<br>
-    - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179<br>
+    - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
+- Handpainted Turntable Platforms 
+    - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
+- FREE Fantasy Terrain Textures : 3D Haven
+    - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640
+- Cartoon FX Free Pack : RetroVistas
+    - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179
 
