@@ -1021,6 +1021,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: aa3ff026b46ff934080fb42b6a5f2f49, type: 2}
     - target: {fileID: 465709102764913990, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102764913990, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: SprintSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102764913990, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: weaponHolder
       value: 
       objectReference: {fileID: 465709104171710259}
@@ -3133,6 +3141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a818cee1ca0af9c478ba2930b61b4555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathExplosion: {fileID: 4843327791586857405, guid: 41417953a32c3b44eb284a1f5c41df67, type: 3}
   PlayerList:
   - {fileID: 1085667155}
   stats: {fileID: 0}
@@ -3178,7 +3187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af1ecf83a75efe4f86721cb1b00ac08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 6
   Damage: 2
   Speed: 2
   TurnSpeed: 2

@@ -142,7 +142,12 @@ public class EnemyMoveState : EnemyBaseState
         base.OnHit(damage, knockback);
         stats.Health -= damage;
         // Check knockback before death (personal preference) maybe not
-        if (knockback.magnitude > stats.knockbackThreshhold)
+        
+        if (stats.Health <= 0)
+        {
+            owner.stateStack.ChangeState(owner.DeathState);
+        }
+        else if (knockback.magnitude > stats.knockbackThreshhold)
         {
             ArrayList data = new ArrayList();
             data.Add(knockback);
@@ -150,10 +155,6 @@ public class EnemyMoveState : EnemyBaseState
             owner.knockedBack = true;
             _nearPath = false;
             owner.stateStack.Push(owner.KnockbackState, data);
-        }
-        else if (stats.Health <= 0)
-        {
-            owner.stateStack.ChangeState(owner.DeathState);
         }
         else
         {

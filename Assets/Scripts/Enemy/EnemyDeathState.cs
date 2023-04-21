@@ -11,6 +11,7 @@ public class EnemyDeathState : EnemyBaseState
         owner.animator.SetBool("attack", false);
         owner.animator.SetBool("correctAngle", false);
         owner.animator.SetFloat("speed", 0);
+        owner.animator.SetTrigger("Death");
     }
 
     public override void Update(EnemyState owner)

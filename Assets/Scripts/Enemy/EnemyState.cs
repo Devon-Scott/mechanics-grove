@@ -16,6 +16,7 @@ public class EnemyState : MonoBehaviour
     public EnemyKnockbackState KnockbackState = new EnemyKnockbackState();
     public EnemyDeathState DeathState = new EnemyDeathState();
 
+    public GameObject DeathExplosion;
     /*
     Reference to the graph data for pathfinding
     All this class needs to know is that LevelGraph will provide
@@ -120,14 +121,13 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    void CheckHealth()
+    public void onDeath()
     {
-        if (stats.Health <= 0)
-        {
-            if (currentState is not EnemyKnockbackState || currentState is not EnemyDeathState)
-            {
-                stateStack.ChangeState(DeathState);
-            }
-        }
+        print("onDeath");
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float z = transform.position.z;
+        Instantiate(DeathExplosion, new Vector3(x, y, z), Quaternion.identity);
+        Destroy(gameObject);
     }
 }

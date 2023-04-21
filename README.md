@@ -32,10 +32,11 @@ Current assets used:<br>
 - RPG Tiny Hero Duo PBR Polyart : Dungeon Mason<br>
     - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148<br>
 - RPG Monster Duo PBR Polyart
-    - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
+    - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762<br>
 - Handpainted Turntable Platforms <br>
-    - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
-FREE Fantasy Terrain Textures : 3D Haven
-    - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640
-
+    - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599<br>
+FREE Fantasy Terrain Textures : 3D Haven<br>
+    - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640<br>
+Cartoon FX Free Pack : RetroVistas<br>
+    - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179<br>
 

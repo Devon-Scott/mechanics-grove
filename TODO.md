@@ -50,11 +50,18 @@ To-Do list for Mechanic's Grove
         - Initialize ColiderManager to keep track of the hurtbox colliders in the level
     - Enemy class 
         - Add distance variable as distance between Enemy and either SpawnPoint or EndPoint
-        - Experiment with statemachine for enemy controller
-            - <s>Move State
-            - Attack State</s>
+        - <s>Experiment with statemachine for enemy controller</s>
+            - <s>Move State<s>
+                - <s>Implement wayfinding back to path if knocked off course</s>
+            - Attack State
+                - Correct timings and cooldowns for attacks
+                - Experiment with coroutines and animation triggers
             - <s>Knockback State</s>
             - Death State
+                - <s>Start state with animation trigger for death<s>
+                - <s>Add onDeath() function to state manager as AnimationEvent at end of animation</s>
+                - <s>Destroy game object</s>
+                - <s>Add particle effect on death that destroys itself once done playing</s>
     - Player Class
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine

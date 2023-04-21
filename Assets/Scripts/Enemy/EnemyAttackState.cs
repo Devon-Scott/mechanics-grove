@@ -86,17 +86,17 @@ public class EnemyAttackState : EnemyBaseState
         stats.Health -= damage;
         // Check knockback before death (personal preference)
         // Attack state has lower threshold
-        if (knockback.magnitude > stats.knockbackThreshhold - 1)
+        if (stats.Health <= 0)
+        {
+            owner.stateStack.ChangeState(owner.DeathState);
+        }
+        else if (knockback.magnitude > stats.knockbackThreshhold - 1)
         {
             ArrayList data = new ArrayList();
             data.Add(knockback);
             // We need to know if we've been knocked back so we can find our way back onto the path in EnemyMoveState
             owner.knockedBack = true;
             owner.stateStack.Push(owner.KnockbackState, data);
-        }
-        else if (stats.Health <= 0)
-        {
-            owner.stateStack.ChangeState(owner.DeathState);
         }
         else
         {
