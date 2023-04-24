@@ -13,7 +13,6 @@ public class EntityStats : MonoBehaviour
             if (_health <= 0)
             {
                 _health = 0;
-                print("Entity has died");
             }
         }
     }

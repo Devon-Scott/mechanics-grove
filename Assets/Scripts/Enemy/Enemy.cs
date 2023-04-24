@@ -67,6 +67,10 @@ public class Enemy : MonoBehaviour
                 PlayerList.Add(player.GetComponent<CharacterController>());
             }
         }
+        foreach (IEnemyObserver observer in observers)
+        {
+            observer.OnEnemySpawn(this);
+        }
     }
 
     void Update()
@@ -103,27 +107,30 @@ public class Enemy : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Draw a red sphere at the next location this is moving to
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(MoveState.TargetPoint, 1);
-
-        Gizmos.color = Color.red;
-        HashSet<GraphNode> Visited = new HashSet<GraphNode>();
-        Queue<GraphNode> Queue = new Queue<GraphNode>();
-        //Visited.Add(levelGraph.StartNode);
-        Queue.Enqueue(levelGraph.StartNode);
-
-        GraphNode Closest = levelGraph.StartNode;
-        while (Queue.Count > 0)
+        if (levelGraph != null)
         {
-            GraphNode Node = Queue.Dequeue();
-            for (int i = 0; i < Node.childNodes.Count; i++)
+            // Draw a green sphere at the next location this is moving to
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(MoveState.TargetPoint, 1);
+
+            // Draw a red line along the whole levelgraph if it's not null
+            Gizmos.color = Color.red;
+            HashSet<GraphNode> Visited = new HashSet<GraphNode>();
+            Queue<GraphNode> Queue = new Queue<GraphNode>();
+            Queue.Enqueue(levelGraph.StartNode);
+
+            GraphNode Closest = levelGraph.StartNode;
+            while (Queue.Count > 0)
             {
-                GraphNode SampleNode = Node.childNodes[i];
-                if (Visited.Add(SampleNode)){
-                    Queue.Enqueue(SampleNode);
-                    Gizmos.DrawLine(Node.Location + Vector3.up, SampleNode.Location + Vector3.up);
-                }   
+                GraphNode Node = Queue.Dequeue();
+                for (int i = 0; i < Node.childNodes.Count; i++)
+                {
+                    GraphNode SampleNode = Node.childNodes[i];
+                    if (Visited.Add(SampleNode)){
+                        Queue.Enqueue(SampleNode);
+                        Gizmos.DrawLine(Node.Location + Vector3.up, SampleNode.Location + Vector3.up);
+                    }   
+                }
             }
         }
     }

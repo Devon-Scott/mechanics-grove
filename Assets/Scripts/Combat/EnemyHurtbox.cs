@@ -9,7 +9,6 @@ public class EnemyHurtbox : Hurtbox
 
     void Start()
     {
-        print("EnemyHurtbox Start function");
         // Get a reference to the Collider for this Entity
         Self = transform.GetComponent<CharacterController>();
         stateMachine = transform.GetComponent<Enemy>();

@@ -39,10 +39,6 @@ public class EnemyMoveState : EnemyBaseState
             init = false;
             previousNode = null;
             nextNode = path.StartNode;
-            if (nextNode == null)
-            {
-                Debug.Log("what the hell");
-            }
             targetDirection = nextNode.Location - owner.transform.position;
             TargetPoint = nextNode.Location;
             controller = owner.controller;
@@ -107,6 +103,7 @@ public class EnemyMoveState : EnemyBaseState
                 } 
                 else 
                 {
+                    // We're back on the path and so move to the next node
                     TargetPoint = nextNode.Location;
                 }
 
