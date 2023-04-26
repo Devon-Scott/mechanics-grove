@@ -15,7 +15,7 @@ namespace MyUtils.Graph
         {
             private Graph _graph;
             private int index;
-            private List<Tuple<Vector3, Vector3>> edges;
+            private List<Edge> edges;
 
             public EdgeIterator(Graph g)
             {
@@ -32,7 +32,7 @@ namespace MyUtils.Graph
                 }
             }
 
-            public Tuple<Vector3, Vector3> Current
+            public Edge Current
             {
                 get 
                 {
@@ -66,13 +66,24 @@ namespace MyUtils.Graph
             return (IEnumerator) GetEnumerator();
         }
 
+        public class Edge
+        {
+            public Vector3 start;
+            public Vector3 end;
+            public Edge(Vector3 start, Vector3 end)
+            {
+                this.start = start;
+                this.end = end;
+            }
+        }
+
         internal List< Vector3 > nodes;
-        internal List< Tuple<Vector3, Vector3> > edges;
+        internal List< Edge > edges;
 
         public Graph()
         {
-            nodes = new List<Vector3>();
-            edges = new List< Tuple<Vector3, Vector3> >();
+            nodes = new List< Vector3 >();
+            edges = new List< Edge >();
         }
         
         public void addNode(Vector3 point)
@@ -87,17 +98,21 @@ namespace MyUtils.Graph
         {
             addNode(start);
             addNode(end);
-            edges.Add(new Tuple<Vector3, Vector3>(start, end));
+            Edge newEdge = new Edge(start, end);
+            if (!edges.Contains(newEdge))
+            {
+                edges.Add(newEdge);
+            }
         }
 
         public List<Vector3> getChildren(Vector3 point)
         {
             List<Vector3> children = new List<Vector3>();
-            foreach(Tuple<Vector3, Vector3> edge in edges)
+            foreach(Edge edge in edges)
             {
-                if (edge.Item1 == point)
+                if (edge.start == point)
                 {
-                    children.Add(edge.Item2);
+                    children.Add(edge.end);
                 }
             }
             return children;
