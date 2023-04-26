@@ -876,6 +876,7 @@ MonoBehaviour:
   Enemies:
   - {fileID: 3697426569549931499, guid: 9854e6638020c38459051822a798fb0b, type: 3}
   Path: {fileID: 0}
+  level: {fileID: 11400000, guid: f72c959c6ace3124d804e41f120d5911, type: 2}
 --- !u!4 &1503040865
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ using MyUtils.Graph;
 public class EnemyMoveState : EnemyBaseState
 {
     public static LevelGraph path;
+    public static Level level;
     private Enemy owner;
     private GraphNode nextNode;
     private GraphNode previousNode;
@@ -36,6 +37,7 @@ public class EnemyMoveState : EnemyBaseState
         {
             this.owner = owner;
             path = Enemy.levelGraph;
+            level = Enemy.level;
             init = false;
             previousNode = null;
             nextNode = path.StartNode;

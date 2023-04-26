@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
 {
     public Enemy[] Enemies;
     public LevelGraph Path;
+    public Level level;
     private int _enemiesSpawned;
     private int _enemiesKilled;
     private ColliderManager _colliderManager;
@@ -30,6 +31,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         }
         Path = ScriptableObject.CreateInstance<LevelGraph>();
         Enemy.levelGraph = Path;
+        Enemy.level = level;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
         StartCoroutine(SpawnEnemies());

@@ -5,6 +5,17 @@ using System;
 
 namespace MyUtils.Graph
 {
+    [System.Serializable]
+    public class Edge
+    {
+        public Vector3 start;
+        public Vector3 end;
+        public Edge(Vector3 start, Vector3 end)
+        {
+            this.start = start;
+            this.end = end;
+        }
+    }
     // Just make it a graph
     // Nodes are just Vector3 points
     // Edges are just pairs of Vector3 with start and end
@@ -66,17 +77,6 @@ namespace MyUtils.Graph
             return (IEnumerator) GetEnumerator();
         }
 
-        public class Edge
-        {
-            public Vector3 start;
-            public Vector3 end;
-            public Edge(Vector3 start, Vector3 end)
-            {
-                this.start = start;
-                this.end = end;
-            }
-        }
-
         internal List< Vector3 > nodes;
         internal List< Edge > edges;
 
@@ -103,6 +103,11 @@ namespace MyUtils.Graph
             {
                 edges.Add(newEdge);
             }
+        }
+
+        public void addEdge(Edge edge)
+        {
+            this.addEdge(edge.start, edge.end);
         }
 
         public List<Vector3> getChildren(Vector3 point)

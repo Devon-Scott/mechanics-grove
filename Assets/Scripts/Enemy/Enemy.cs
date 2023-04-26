@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     the information necessary to get from point A to point B 
     */ 
     public static LevelGraph levelGraph;
+    public static Level level;
 
     // Reference to players and observers in the scene
     public static List<Collider> PlayerList;
@@ -107,30 +108,15 @@ public class Enemy : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (levelGraph != null)
+        if (level != null)
         {
-            // Draw a green sphere at the next location this is moving to
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(MoveState.TargetPoint, 1);
 
-            // Draw a red line along the whole levelgraph if it's not null
             Gizmos.color = Color.red;
-            HashSet<GraphNode> Visited = new HashSet<GraphNode>();
-            Queue<GraphNode> Queue = new Queue<GraphNode>();
-            Queue.Enqueue(levelGraph.StartNode);
-
-            GraphNode Closest = levelGraph.StartNode;
-            while (Queue.Count > 0)
+            foreach(Edge edge in level.Edges)
             {
-                GraphNode Node = Queue.Dequeue();
-                for (int i = 0; i < Node.childNodes.Count; i++)
-                {
-                    GraphNode SampleNode = Node.childNodes[i];
-                    if (Visited.Add(SampleNode)){
-                        Queue.Enqueue(SampleNode);
-                        Gizmos.DrawLine(Node.Location + Vector3.up, SampleNode.Location + Vector3.up);
-                    }   
-                }
+                Gizmos.DrawLine(edge.start + Vector3.up, edge.end + Vector3.up);
             }
         }
     }
