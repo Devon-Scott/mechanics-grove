@@ -156,7 +156,7 @@ namespace MyUtils.Graph
             return closest;
         }
 
-        Vector3 findClosestChild(Vector3 Parent, Vector3 position)
+        public Vector3 findClosestChild(Vector3 Parent, Vector3 position)
         {
             List<Vector3> children = getChildren(Parent);
             if (children.Count == 0)
@@ -177,7 +177,7 @@ namespace MyUtils.Graph
             return closestChild;
         }
 
-        Vector3 findClosestPointBetween(Vector3 start, Vector3 end, Vector3 position)
+        public Vector3 findClosestPointBetween(Vector3 start, Vector3 end, Vector3 position)
         {
             // From my understanding, this creates an "origin" at the start node, and then the projection
             // is the vector from the start to the object onto the vector from the start to the end

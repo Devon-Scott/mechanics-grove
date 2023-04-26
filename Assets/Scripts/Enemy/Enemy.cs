@@ -19,10 +19,9 @@ public class Enemy : MonoBehaviour
     public GameObject DeathExplosion;
     /*
     Reference to the graph data for pathfinding
-    All this class needs to know is that LevelGraph will provide
+    All this class needs to know is that Level will provide
     the information necessary to get from point A to point B 
     */ 
-    public static LevelGraph levelGraph;
     public static Level level;
 
     // Reference to players and observers in the scene
@@ -53,11 +52,6 @@ public class Enemy : MonoBehaviour
         environmentCheck = GetComponent<SphereCollider>();
         target = null;
         stats = GetComponent<EntityStats>();
-        if (levelGraph == null)
-        {
-            print("Instantiating level");
-            levelGraph = ScriptableObject.CreateInstance<LevelGraph>();
-        }
         stateStack.Push(MoveState);
         if (PlayerList == null)
         {

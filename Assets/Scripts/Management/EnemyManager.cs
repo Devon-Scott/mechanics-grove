@@ -7,7 +7,6 @@ using MyUtils.Graph;
 public class EnemyManager : MonoBehaviour, IEnemyObserver
 {
     public Enemy[] Enemies;
-    public LevelGraph Path;
     public Level level;
     private int _enemiesSpawned;
     private int _enemiesKilled;
@@ -29,9 +28,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
                 Enemy.PlayerList.Add(player.GetComponent<CharacterController>());
             }
         }
-        Path = ScriptableObject.CreateInstance<LevelGraph>();
-        Enemy.levelGraph = Path;
         Enemy.level = level;
+        Enemy.level.Awake();
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
         StartCoroutine(SpawnEnemies());
