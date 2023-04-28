@@ -79,7 +79,6 @@ public class EnemyKnockbackState : EnemyBaseState
         // We can still take damage but not be knocked back again during knockback
         // Except for very strong attacks
         // Might change this depending on gameplay experience
-        base.OnHit(damage, _movement + knockback);
         if (_alive)
         {
             _stats.Health -= damage;

@@ -100,6 +100,8 @@ public class Enemy : MonoBehaviour
         currentState.OnHit(damage, knockback);
     }
 
+    // When an enemy is selected in the inspector, draws a red line on all the
+    // paths of the level, and a green circle around the point the enemy is moving to
     void OnDrawGizmosSelected()
     {
         if (level != null)

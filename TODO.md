@@ -36,6 +36,7 @@ To-Do list for Mechanic's Grove
 - Structural:
     - MainMenu button class
     - GameMenu button class
+    - <s>Graph class for storing path data and methods to aid pathfinding on the graph</s>
     - GameManager
         - Initialize LevelManager with a given level (int)
             - Level 0 can be the test arena
@@ -62,6 +63,11 @@ To-Do list for Mechanic's Grove
                 - <s>Add onDeath() function to state manager as AnimationEvent at end of animation</s>
                 - <s>Destroy game object</s>
                 - <s>Add particle effect on death that destroys itself once done playing</s>
+            - Victory state
+                - Trigger victory animation when enemy reaches EndPoint of Path
+                - Move somewhere out of the way
+                - Destroy after 10 seconds
+                - Make OnVictory() method in Enemy class
     - Player Class
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine

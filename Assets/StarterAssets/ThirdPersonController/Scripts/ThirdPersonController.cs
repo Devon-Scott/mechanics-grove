@@ -112,7 +112,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
-        private Animator _animator;
+        public Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
@@ -145,12 +145,7 @@ namespace StarterAssets
 
         private void Start()
         {
-            _currentWeapon = Instantiate(weapons[0], weaponHolder.transform);
-            hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
-            if (hitbox == null)
-            {
-                print("Error in getting hitbox");
-            }
+            
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -167,6 +162,14 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            _currentWeapon = Instantiate(weapons[0], weaponHolder.transform);
+            hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
+            if (hitbox == null)
+            {
+                print("Error in getting hitbox");
+            }
+            _animator.SetBool("Combat", true);
         }
 
         private void Update()
@@ -377,23 +380,16 @@ namespace StarterAssets
                 _attackTimeoutDelta = AttackTimeout;
                 if (_hasAnimator)
                 {
-                    _animator.SetTrigger("Attack2");
-                }
-            }
-            else
-            {
-                _attackTimeoutDelta = 0;
-                _input.attack = false;
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDAttack, false);
-                    _animator.SetBool("Combat", false);
+                    _animator.SetBool(_animIDAttack, true);
                 }
             }
             if (_attackTimeoutDelta > 0f)
             {
-                _animator.SetBool("Combat", true);
                 _attackTimeoutDelta -= Time.deltaTime;
+            }
+            else 
+            {
+                _attackTimeoutDelta = 0;
             }
         }
 
@@ -409,6 +405,10 @@ namespace StarterAssets
         private void DisableDamage()
         {
             hitbox.DisableDamage();
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDAttack, false);
+            }
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

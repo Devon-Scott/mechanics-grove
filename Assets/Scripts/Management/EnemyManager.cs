@@ -43,13 +43,11 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemySpawn(Enemy enemy)
     {
         _enemiesSpawned++;
-        print("Enemies Spawned: " + _enemiesSpawned);
     }
 
     public void OnEnemyDeath(Enemy enemy)
     {
         _enemiesKilled++;
-        print("Enemies Killed: " + _enemiesKilled);
     }
 
     IEnumerator SpawnEnemies()

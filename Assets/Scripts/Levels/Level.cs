@@ -8,9 +8,10 @@ public class Level : ScriptableObject
 {
     [HideInInspector]
     public Graph _graph;
-    public Vector3[] Points;
+    public Vector3[] PathPoints;
     public Vector3 StartPoint;
     public Vector3 EndPoint;
+    public Vector3 SpawnPoint;
     [SerializeField]
     public Edge[] Edges;
     public Vector3 MapCorner;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ColliderManager : MonoBehaviour, IEnemyObserver
 {
     // This class will also need to be IColliderObserver
-    private static Dictionary<Collider, Hurtbox> ColliderDictionary;
+    public static Dictionary<Collider, Hurtbox> ColliderDictionary;
 
     void Awake()
     {
@@ -31,14 +31,12 @@ public class ColliderManager : MonoBehaviour, IEnemyObserver
         Hurtbox enemyHurtbox = enemy.GetComponent<Hurtbox>();
         Collider enemyCollider = enemy.GetComponent<Collider>();
         ColliderDictionary.Add(enemyCollider, enemyHurtbox);
-        print("Collider added");
     }
 
     public void OnEnemyDeath(Enemy enemy)
     {
         Collider enemyCollider = enemy.GetComponent<Collider>();
         ColliderDictionary.Remove(enemyCollider);
-        print("Collider removed");
     }
 
 }

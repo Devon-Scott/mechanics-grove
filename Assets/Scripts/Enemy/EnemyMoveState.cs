@@ -134,7 +134,6 @@ public class EnemyMoveState : EnemyBaseState
 
     public override void OnHit(float damage, Vector3 knockback)
     {
-        base.OnHit(damage, knockback);
         stats.Health -= damage;
         // Check knockback before death (personal preference) maybe not
         

@@ -82,7 +82,6 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void OnHit(float damage, Vector3 knockback)
     {
-        base.OnHit(damage, knockback);
         stats.Health -= damage;
         // Check knockback before death (personal preference)
         // Attack state has lower threshold

@@ -34,7 +34,7 @@ public class Hitbox : MonoBehaviour
         // Lazy initialization of a static data structure for speeding up hurtbox references
         if (ColliderDictionary == null)
         {
-            ColliderDictionary = new Dictionary<Collider, Hurtbox>();
+            ColliderDictionary = ColliderManager.ColliderDictionary;
         }
     }
 
@@ -67,8 +67,10 @@ public class Hitbox : MonoBehaviour
                     }
                     else 
                     {
+                        // Keep the game flowing but log an error to be investigated
                         hitTarget = hitObject.gameObject.GetComponent<Hurtbox>();
                         ColliderDictionary.Add(hitObject, hitTarget);
+                        Debug.LogError("Entity was not in Dictionary", hitTarget);
                     }
                     hitTarget.HandleHit(damage, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
                 }
