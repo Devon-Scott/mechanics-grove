@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 148306375321867273}
   - component: {fileID: 5019986502726657225}
   - component: {fileID: 7287427961396820399}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 3x3x1_PathTile01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

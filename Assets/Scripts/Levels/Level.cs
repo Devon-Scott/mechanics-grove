@@ -16,7 +16,9 @@ public class Level : ScriptableObject
     [HideInInspector]
     public Vector3 StartPoint;
     public Vector3 EndPoint;
-    public Vector3 SpawnPoint;
+
+    [Tooltip("Where will the player spawn on the map?")]
+    public Vector3 PlayerSpawnPoint;
 
     [Tooltip("Which element in Path Points will the enemy move towards first?")]
     public int StartPointIndex;
