@@ -420,8 +420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathExplosion: {fileID: 4843327791586857405, guid: 41417953a32c3b44eb284a1f5c41df67, type: 3}
-  PlayerList:
-  - {fileID: 0}
   stats: {fileID: 0}
   attackLayers:
     serializedVersion: 2
