@@ -21,7 +21,6 @@ public class EnemyKnockbackState : EnemyBaseState
 
     public override void Enter(Enemy owner, ArrayList data)
     {
-        Debug.Log("Entered knockback state");
         this._owner = owner;
         // Assert that the first item in Data is a Vector3 with knockback info
         if (data[0] is Vector3)
@@ -71,7 +70,7 @@ public class EnemyKnockbackState : EnemyBaseState
 
     public override void Exit(Enemy owner)
     {
-        Debug.Log("Exit knockback state");
+
     }
 
     public override void OnHit(float damage, Vector3 knockback)

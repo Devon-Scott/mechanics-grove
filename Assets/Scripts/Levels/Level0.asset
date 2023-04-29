@@ -12,19 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d211523dbd068a449b89e3b9790669c, type: 3}
   m_Name: Level0
   m_EditorClassIdentifier: 
-  Points:
-  - {x: 0, y: 0, z: 0}
-  StartPoint: {x: -9, y: 0, z: -4}
+  PathPoints:
+  - {x: -9, y: 0, z: 10}
+  - {x: -12, y: 0, z: -4}
+  - {x: 7, y: 0, z: -4}
+  - {x: 14, y: 0, z: 10}
+  ParentChildMatrix:
+    gridSize: {x: 4, y: 4}
+    cellSize: {x: 32, y: 16}
+    cells:
+    - row: 00000000010000000100000000000000
+    - row: 00000000000000000100000000000000
+    - row: 00000000000000000000000001000000
+    - row: 01000000000000000000000000000000
+  StartPoint: {x: -9, y: 0, z: 10}
   EndPoint: {x: 0, y: 0, z: 0}
-  Edges:
-  - start: {x: -9, y: 0, z: 10}
-    end: {x: 7, y: 0, z: 10}
-  - start: {x: 7, y: 0, z: 10}
-    end: {x: 7, y: 0, z: -4}
-  - start: {x: 7, y: 0, z: -4}
-    end: {x: -9, y: 0, z: -4}
-  - start: {x: -9, y: 0, z: -4}
-    end: {x: -9, y: 0, z: 10}
+  SpawnPoint: {x: 0, y: 0, z: 0}
+  StartPointIndex: 0
+  Edges: []
   MapCorner: {x: -15, y: 0, z: -15}
   Width: 30
   Length: 30

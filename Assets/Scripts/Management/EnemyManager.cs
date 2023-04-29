@@ -12,12 +12,21 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int _enemiesKilled;
     private ColliderManager _colliderManager;
 
-    void Start()
+    void Awake()
     {
         // https://docs.unity3d.com/ScriptReference/Object.FindAnyObjectByType.html
         // Assets\Scripts\Management\EnemyManager.cs(19,39): error CS0117: 'Object' does not contain a definition for 'FindAnyObjectByType'
         // DOES IT REALLY NOT HAVE A DEFINITION FOR IT???
         // Unity is shaming me because this method is slow but it won't let me use the faster ones
+        
+        level.Awake();
+        Enemy.level = level;
+        _enemiesSpawned = 0;
+        _enemiesKilled = 0;
+    }
+
+    void Start()
+    {
         _colliderManager = GameObject.FindObjectOfType<ColliderManager>();
         if (Enemy.PlayerList == null)
         {
@@ -28,10 +37,6 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
                 Enemy.PlayerList.Add(player.GetComponent<CharacterController>());
             }
         }
-        Enemy.level = level;
-        Enemy.level.Awake();
-        _enemiesSpawned = 0;
-        _enemiesKilled = 0;
         StartCoroutine(SpawnEnemies());
     }
 
