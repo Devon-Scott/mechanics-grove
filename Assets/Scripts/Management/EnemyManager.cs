@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int _enemiesSpawned;
     private int _enemiesKilled;
     private ColliderManager _colliderManager;
+    private ParticleSystem spawnEffect;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         Enemy.level = level;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
+        spawnEffect = GetComponentInChildren<ParticleSystem>();
     }
 
     void Start()
@@ -48,6 +50,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemySpawn(Enemy enemy)
     {
         _enemiesSpawned++;
+        spawnEffect.transform.position = enemy.transform.position;
+        spawnEffect.Play();
     }
 
     public void OnEnemyDeath(Enemy enemy)
@@ -59,8 +63,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     {
         while (_enemiesSpawned < 10) {
 
-			Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], new Vector3(Random.Range(-7, 10), 0, Random.Range(-7, 10)),
-				Quaternion.identity);
+			Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], level.StartPoint, Quaternion.identity);
             enemy.AddObserver(this);
             enemy.AddObserver(_colliderManager);
         
