@@ -67,7 +67,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
             enemy.AddObserver(this);
             enemy.AddObserver(_colliderManager);
         
-			yield return new WaitForSeconds(Random.Range(3, 10));
+			yield return new WaitForSeconds(Random.Range(2, 5));
 		}
         StopCoroutine(SpawnEnemies());
     }

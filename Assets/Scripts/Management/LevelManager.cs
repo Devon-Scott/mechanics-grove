@@ -22,9 +22,9 @@ public class LevelManager : MonoBehaviour
         {
             InstantiateTiles(edge);
         }
-        for (int x = (int)level.MapCorner.x; x < level.MapCorner.x + level.Width; x += 10)
+        for (int x = (int)level.MapCorner.x; x < level.MapCorner.x + level.Width; x += 20)
         {
-            for (int z = (int)level.MapCorner.z; z < level.MapCorner.z + level.Width; z += 10)
+            for (int z = (int)level.MapCorner.z; z < level.MapCorner.z + level.Width; z += 20)
             {
                 InstantiateGround(x, z);
             }
@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
 
     void InstantiateGround(int x, int z)
     {
-        Vector3 location = new Vector3(x, 0, z);
+        Vector3 location = new Vector3(x, -2.3f, z);
         Quaternion rotation = Quaternion.identity;
         GameObject Tile = GameObject.Instantiate(groundTile, location, rotation, Ground.transform);
         int numOfDecorations = (int)(UnityEngine.Random.value * 30);

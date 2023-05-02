@@ -92,23 +92,25 @@ To-Do list for Mechanic's Grove
             - Poison Cloud
                 - Area of effect damage
                 - No knockback
+                - No movement
                 - Spawns on all path tiles in radius of tower
     - Level Manager
-        - Contains list of LevelGraph objects
-        - LevelGraph contains:
+        - Contains list of Level objects
+        - <s>Level contains:
             - Player Spawn Point
             - Path Nodes
+            - Relationships between nodes in adjacency matrix
             - Enemy Spawn Point
             - End Point of Path
-            - Boundaries of the Level
-        - LevelGraph can be added as component to newly spawned enemy so they know where to go
+            - Boundaries of the Level</s>
+        - <s>Level can be added as component to newly spawned enemy so they know where to go</s>
         - Also contains information about number and types and timings of enemies to spawn
     - Map Maker
-        - Instantiate path tiles from one node to next
+        - <s>Instantiate path tiles along every edge in Level graph</s>
         - Have set to determine visited tiles to avoid repeated instantiation
             - Use collision detection
         - Method to determine size of map
-        - Fill empty tiles with ground, fill those with random decorations
+        - <s>Fill empty tiles with ground, fill those with random decorations</s>
     - Enemy Spawner
 
 - Main Menu State
@@ -151,8 +153,8 @@ To-Do list for Mechanic's Grove
     
     - Enemy pathfinding
         - <s>Implementation of graph theory: A series of nodes placed at splits/joins in the path</s>
-        - Levelmaker could pass these nodes in to the enemy class and make the enemy choose a path
-        - LevelGraph object representing the nodes of the path: used for both level making and enemy pathfinding 
+        - <s>Levelmaker could pass these nodes in to the enemy class and make the enemy choose a path</s>
+        - <s>LevelGraph object representing the nodes of the path: used for both level making and enemy pathfinding</s>
         - Enemies in mind so far:
             - Spined turtle: high attack, knockback resistant, slow
             - Slime: medium in all respects
