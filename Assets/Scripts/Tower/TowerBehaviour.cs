@@ -6,7 +6,7 @@ using MyUtils.Graph;
 public class TowerBehaviour : MonoBehaviour
 {
     [SerializeField]    
-    private GameObject _projectile;
+    private Projectile _projectile;
     [SerializeField]
     private float _cooldown;
     [SerializeField]
@@ -15,6 +15,8 @@ public class TowerBehaviour : MonoBehaviour
     private float _rotationalOffset;
     [SerializeField]
     private LayerMask _targetLayers;
+    [SerializeField]
+    private Vector3[] _projectileSpawnPoints;
     
     private bool _firing;
     private Collider _target;
@@ -70,20 +72,34 @@ public class TowerBehaviour : MonoBehaviour
 
     private bool TargetIsInRange()
     {
-        return Graph.distanceBetween(transform.position, _target.transform.position) < _attackRadius;
+        return Graph.distanceBetween(transform.position, _target.transform.position) <= _attackRadius;
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _attackRadius);
+
+        Gizmos.color = Color.red;
+        foreach(Vector3 point in _projectileSpawnPoints)
+        {
+            if (_projectile != null)
+            {
+                Gizmos.DrawWireSphere(point, _projectile.radius);
+            }
+            else
+            {
+                Gizmos.DrawWireSphere(point, 0.25f);
+            }
+        }
     }
 
     IEnumerator Fire()
     {
         while (_target != null)
         {
-            // Instantiate projectile
+            Projectile projectile = GameObject.Instantiate(_projectile, _projectileSpawnPoints[0], Quaternion.identity);
+            projectile.ApplyForce(_target.transform.position);
             print("Firing!");
             // Give projectile target position to travel towards
             yield return new WaitForSeconds(_cooldown);

@@ -78,7 +78,7 @@ public class EnemyMoveState : EnemyBaseState
         {
             Vector3 closestParent = level._graph.FindClosestNode(positionAxis);
             Vector3 closestChild = level._graph.findClosestChild(closestParent, positionAxis);
-            Vector3 closestPoint = level._graph.findClosestPointBetween(closestParent, closestChild, positionAxis);
+            Vector3 closestPoint = Graph.findClosestPointBetween(closestParent, closestChild, positionAxis);
             TargetPoint = closestPoint;
             _nextNode = closestChild;
             // Set _knockedBack to false, because _nearPath won't be true until we're

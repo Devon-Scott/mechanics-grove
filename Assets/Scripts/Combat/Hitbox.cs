@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyUtils.Graph;
 
 // https://www.youtube.com/watch?v=uGFzWM1sJjU
 // Change hit logic to update, use spherecast or some kinnd of manual collider to check
@@ -27,11 +28,19 @@ public class Hitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parentPosition = transform.parent.position;
+        if (transform.parent == null)
+        {
+            parentPosition = transform.position;
+        }
+        else
+        {
+            parentPosition = transform.parent.position;
+        }
+        
         SphereCastLength = (transform.position - parentPosition).magnitude;
         Active = false;
         HitObjects = new HashSet<Collider>();
-        // Lazy initialization of a static data structure for speeding up hurtbox references
+        // Get static data reference to the collider dictionary used for fast lookup of hitboxes
         if (ColliderDictionary == null)
         {
             ColliderDictionary = ColliderManager.ColliderDictionary;
@@ -41,9 +50,17 @@ public class Hitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        parentPosition = transform.parent.position;
+        
         if (Active)
         {
+            if (transform.parent == null)
+            {
+                parentPosition = transform.position;
+            }
+            else
+            {
+                parentPosition = transform.parent.position;
+            }
             
             // Check if anything was hit in the layermask we care about and along the size of this hitbox
             if(Physics.SphereCast(parentPosition, SphereCastRadius, transform.up, out hitInfo, SphereCastLength, TargetableObjects))
@@ -72,7 +89,11 @@ public class Hitbox : MonoBehaviour
                         ColliderDictionary.Add(hitObject, hitTarget);
                         Debug.LogError("Entity was not in Dictionary", hitTarget);
                     }
-                    hitTarget.HandleHit(damage, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
+                    // Easier to see these distance calculations applied to damage but they need to be applied to knockback as well
+                    float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, hitObject.transform.position);
+                    print(DistanceFromCentre);
+                    float ScaledDamageForDistance = 1 - (DistanceFromCentre / SphereCastRadius);
+                    hitTarget.HandleHit(damage * ScaledDamageForDistance, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
                 }
             }
         }

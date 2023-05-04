@@ -129,7 +129,7 @@ namespace MyUtils.Graph
         {
             Vector3 closestParent = this.FindClosestNode(position);
             Vector3 closestChild = this.findClosestChild(closestParent, position);
-            Vector3 closestPoint = this.findClosestPointBetween(closestParent, closestChild, position);
+            Vector3 closestPoint = Graph.findClosestPointBetween(closestParent, closestChild, position);
             return closestPoint;
         }
 
@@ -137,6 +137,13 @@ namespace MyUtils.Graph
         public static float distanceBetween(Vector3 start, Vector3 end)
         {
             return (end - start).magnitude;
+        }
+
+        public static float DistanceToLine(Vector3 start, Vector3 end, Vector3 point)
+        {
+            Vector3 ClosestPoint = findClosestPointBetween(start, end, point);
+            float Distance = (point - ClosestPoint).magnitude;
+            return Distance;
         }
 
         // Get the closest node to a point in the graph
@@ -177,7 +184,7 @@ namespace MyUtils.Graph
             return closestChild;
         }
 
-        public Vector3 findClosestPointBetween(Vector3 start, Vector3 end, Vector3 position)
+        public static Vector3 findClosestPointBetween(Vector3 start, Vector3 end, Vector3 position)
         {
             // From my understanding, this creates an "origin" at the start node, and then the projection
             // is the vector from the start to the object onto the vector from the start to the end
@@ -206,7 +213,7 @@ namespace MyUtils.Graph
             
         }
 
-        bool pointIsInRange(Vector3 start, Vector3 end, Vector3 point)
+        static bool pointIsInRange(Vector3 start, Vector3 end, Vector3 point)
         {
             float dx = end.x - start.x;
             float dy = end.y - start.y;
