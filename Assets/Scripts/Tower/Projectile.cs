@@ -29,6 +29,15 @@ public class Projectile : MonoBehaviour
         self.AddForce(direction);
     }
 
+    void OnDrawGizmos()
+    {
+        if (hitbox.enabled)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, radius);
+        }
+    }
+
     void OnCollisionEnter()
     {
         hitbox.enabled = true;

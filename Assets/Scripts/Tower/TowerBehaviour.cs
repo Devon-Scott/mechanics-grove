@@ -17,15 +17,21 @@ public class TowerBehaviour : MonoBehaviour
     private LayerMask _targetLayers;
     [SerializeField]
     private Vector3[] _projectileSpawnPoints;
+    private Vector3[] _spawnPoints;
+    private int _numOfSpawnPoints;
     
     private bool _firing;
     private Collider _target;
     
+    // Need to have projectile spawner be child of tower weapon
+    // Projectile spawner needs to do the physics calculation for sending cannonball to target
     // Start is called before the first frame update
     void Start()
     {
         _target = null;
         _firing = false;
+        _numOfSpawnPoints = _projectileSpawnPoints.GetLength(0);
+        _spawnPoints = new Vector3[_numOfSpawnPoints];
     }
 
     // Update is called once per frame
@@ -50,8 +56,13 @@ public class TowerBehaviour : MonoBehaviour
             else
             {
                 Vector3 targetDirection = _target.transform.position - transform.position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection) * Quaternion.Euler(0, _rotationalOffset, 0);
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection) * Quaternion.Euler(-30, 0, 0) * Quaternion.Euler(0, _rotationalOffset, 0);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 4);
+                for(int i = 0; i < _numOfSpawnPoints; i++)
+                {
+                    _spawnPoints[i] = transform.rotation * Quaternion.Euler(0, -_rotationalOffset, 45) * _projectileSpawnPoints[i];
+                }
+                
             }
         }
     }
@@ -77,20 +88,22 @@ public class TowerBehaviour : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, _attackRadius);
-
-        Gizmos.color = Color.red;
-        foreach(Vector3 point in _projectileSpawnPoints)
+        if (_spawnPoints != null)
         {
-            if (_projectile != null)
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, _attackRadius);
+
+            Gizmos.color = Color.red;
+            foreach(Vector3 point in _spawnPoints)
             {
-                Gizmos.DrawWireSphere(point, _projectile.radius);
+                Vector3 spawnPoint = transform.position + point;
+                Gizmos.DrawSphere(spawnPoint, 0.25f);
             }
-            else
-            {
-                Gizmos.DrawWireSphere(point, 0.25f);
-            }
+        }
+        if (_target != null)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(_target.transform.position, 1f);
         }
     }
 
@@ -98,12 +111,19 @@ public class TowerBehaviour : MonoBehaviour
     {
         while (_target != null)
         {
-            Projectile projectile = GameObject.Instantiate(_projectile, _projectileSpawnPoints[0], Quaternion.identity);
-            projectile.ApplyForce(_target.transform.position);
+            Vector3 launchDirection = (_target.transform.position - transform.position);
+            Vector3 launchVector = (_spawnPoints[0] - transform.position);
+            float launchPower = 24 * (launchDirection).magnitude;
+            
+            Vector3 verticalComponent = new Vector3(0, (_target.transform.position - transform.position).magnitude, 0) * 4;
+            Vector3 forceVector = 3.5f * (_target.transform.position - transform.position).magnitude * (_target.transform.position - transform.position) + verticalComponent;
+            
+            Instantiate(_projectile, _spawnPoints[0] + transform.position, Quaternion.identity).ApplyForce(launchPower * launchVector);
             print("Firing!");
             // Give projectile target position to travel towards
             yield return new WaitForSeconds(_cooldown);
         }
+        _firing = false;
         StopCoroutine(Fire());
     }
 }

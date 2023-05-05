@@ -4082,7 +4082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1467320545208338754, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.09
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1467320545208338754, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4114,7 +4114,7 @@ PrefabInstance:
       objectReference: {fileID: 4168939937797049930, guid: 870924e96a5060445b721e3f1e53cc88, type: 3}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _attackRadius
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _rotationalOffset
@@ -4130,15 +4130,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _projectileSpawnPoints.Array.data[0].x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _projectileSpawnPoints.Array.data[0].y
-      value: 4
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _projectileSpawnPoints.Array.data[0].z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4575036780082365878, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: m_RootOrder
