@@ -149,24 +149,34 @@ public class TowerBehaviour : MonoBehaviour
 
             Vector3 forward = _spawnPoints[0];                
             forward.y = 0;
-            float angleInRadians = Vector3.Angle(forward, (transform.position - _spawnPoints[0]));
+            //float angleInRadians = Vector3.Angle(forward, (transform.position - _spawnPoints[0]));
             
-            float launchHeight = transform.position.y;
+            float launchHeight = (transform.position + _spawnPoints[0]).y;
             float targetHeight = _target.transform.position.y;
             float verDistance = launchHeight - targetHeight;
 
+            float launchZ = transform.position.z;
+            float targetZ = _target.transform.position.z;
+            float zDiff = launchZ - targetZ;
+
+            float launchX = transform.position.x;
+            float targetX = _target.transform.position.x;
+            float xDiff = launchX - targetX;
+
             float timeOfFlight = 1.5f;
-            
-            float Vx = horDistance / timeOfFlight;
-            float Vy = (verDistance + (0.5f * gravity * timeOfFlight * timeOfFlight)) / timeOfFlight;
 
-            float magnitude = new Vector2(Vx, Vy).magnitude;
-
-            float force = mass * magnitude / timeOfFlight;
-            print(force);
-            Vector3 launchVector = force * (_spawnPoints[0]);
+            float angle = Mathf.Atan2(verDistance, horDistance);
             
-            Instantiate(_projectile, transform.position + _spawnPoints[0], Quaternion.identity).ApplyForce(launchVector);
+            float velocityMagnitude = Mathf.Sqrt(Mathf.Abs((gravity * horDistance * horDistance) / (2 * (verDistance - horDistance * Mathf.Tan(angle)))));
+            float Vx = xDiff / timeOfFlight;
+            float Vy = (verDistance + (timeOfFlight * timeOfFlight)) / timeOfFlight;
+            float Vz = zDiff / timeOfFlight;
+
+            float force = mass * velocityMagnitude / timeOfFlight;
+
+            Vector3 direction = new Vector3(-Vx, Vy, -Vz);
+            
+            Instantiate(_projectile, transform.position + _spawnPoints[0], Quaternion.identity).ApplyForce(direction);
             // Give projectile target position to travel towards
             yield return new WaitForSeconds(_cooldown);
         }
