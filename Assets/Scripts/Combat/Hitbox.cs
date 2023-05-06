@@ -19,7 +19,7 @@ public class Hitbox : MonoBehaviour
     
     private RaycastHit hitInfo;
 
-    private Vector3 parentPosition;
+    public Vector3 parentPosition;
 
     public bool Active;
     public float SphereCastRadius;
@@ -28,11 +28,7 @@ public class Hitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (transform.parent == null)
-        {
-            parentPosition = transform.position;
-        }
-        else
+        if (transform.parent != null)
         {
             parentPosition = transform.parent.position;
         }
@@ -50,17 +46,17 @@ public class Hitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.parent == null)
+        {
+            parentPosition = transform.position;
+        }
+        else
+        {
+            parentPosition = transform.parent.position;
+        }
         if (Active)
         {
-            if (transform.parent == null)
-            {
-                parentPosition = transform.position;
-            }
-            else
-            {
-                parentPosition = transform.parent.position;
-            }
+            
             
             // Check if anything was hit in the layermask we care about and along the size of this hitbox
             if(Physics.SphereCast(parentPosition, SphereCastRadius, transform.up, out hitInfo, SphereCastLength, TargetableObjects))
@@ -91,8 +87,7 @@ public class Hitbox : MonoBehaviour
                     }
                     // Easier to see these distance calculations applied to damage but they need to be applied to knockback as well
                     float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, hitObject.transform.position);
-                    print(DistanceFromCentre);
-                    float ScaledDamageForDistance = 1 - (DistanceFromCentre / SphereCastRadius);
+                    float ScaledDamageForDistance = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
                     hitTarget.HandleHit(damage * ScaledDamageForDistance, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
                 }
             }
@@ -115,5 +110,7 @@ public class Hitbox : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, parentPosition);
+        Gizmos.DrawWireSphere(transform.position, SphereCastRadius);
+        Gizmos.DrawWireSphere(parentPosition, SphereCastRadius);
     }
 }
