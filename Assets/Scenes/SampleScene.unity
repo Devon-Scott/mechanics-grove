@@ -4125,8 +4125,20 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
+      propertyPath: _timeOfFlight
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
+      propertyPath: _towerMechanism
+      value: 
+      objectReference: {fileID: 1672688070}
+    - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _rotationalOffset
       value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
+      propertyPath: _velocityMagnitude
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3263434467610091532, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
       propertyPath: _targetLayers.m_Bits
@@ -5511,6 +5523,26 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1672688068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2992702749189903931, guid: 14efdefcbe1ca4d439582277f5d1ea41, type: 3}
+  m_PrefabInstance: {fileID: 1250040963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1672688070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672688068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaee4b6b1d7e8a47a90f49c59e7ef51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VerticalAngleOffset: -45
+  RotationalOffset: -125
+  launchExponent: 1.45
 --- !u!43 &1693522748
 Mesh:
   m_ObjectHideFlags: 0

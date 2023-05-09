@@ -19,6 +19,10 @@ public class TowerBehaviour : MonoBehaviour
     private LayerMask _targetLayers;
     [SerializeField]
     private Vector3[] _projectileSpawnPoints;
+    [SerializeField]
+    private float _velocityMagnitude;
+    [SerializeField]
+    private Mechanism _towerMechanism;
     
     private Vector3[] _spawnPoints;
     private int _numOfSpawnPoints;
@@ -44,7 +48,7 @@ public class TowerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _towerMechanism = gameObject.GetComponent<Mechanism>();
     }
 
     // Update is called once per frame
@@ -68,9 +72,7 @@ public class TowerBehaviour : MonoBehaviour
             }
             else
             {
-                Vector3 targetDirection = _target.transform.position - transform.position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection) * Quaternion.Euler(-_launchAngle, 0, 0) * Quaternion.Euler(0, _rotationalOffset, 0);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 4);
+                transform.rotation = _towerMechanism.GetAimRotation(_target);
                 for(int i = 0; i < _numOfSpawnPoints; i++)
                 {
                     //_spawnPoints[i] = transform.rotation * Quaternion.Euler(0, -_rotationalOffset, 45) * _projectileSpawnPoints[i];
@@ -129,52 +131,15 @@ public class TowerBehaviour : MonoBehaviour
         {
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(_target.transform.position, 1f);
+            Gizmos.DrawLine(transform.position + _spawnPoints[0], _target.transform.position);
         }
-    }
-
-    float GetHorizontalDistance(Vector3 start, Vector3 end)
-    {
-        Vector3 flatStart = new Vector3(start.x, 0, start.z);
-        Vector3 flatEnd = new Vector3(end.x, 0, end.z);
-        return Graph.distanceBetween(flatStart, flatEnd);
     }
 
     IEnumerator Fire()
     {
         while (_target != null)
         {
-            float mass = _projectile.self.mass;
-            float gravity = Physics.gravity.magnitude;
-            float horDistance = GetHorizontalDistance(transform.position, _target.transform.position);
-
-            Vector3 forward = _spawnPoints[0];                
-            forward.y = 0;
-            //float angleInRadians = Vector3.Angle(forward, (transform.position - _spawnPoints[0]));
-            
-            float launchHeight = (transform.position + _spawnPoints[0]).y;
-            float targetHeight = _target.transform.position.y;
-            float verDistance = launchHeight - targetHeight;
-
-            float launchZ = transform.position.z;
-            float targetZ = _target.transform.position.z;
-            float zDiff = launchZ - targetZ;
-
-            float launchX = transform.position.x;
-            float targetX = _target.transform.position.x;
-            float xDiff = launchX - targetX;
-
-            float timeOfFlight = 1.5f;
-
-            float angle = Mathf.Atan2(verDistance, horDistance);
-            
-            float velocityMagnitude = Mathf.Sqrt(Mathf.Abs((gravity * horDistance * horDistance) / (2 * (verDistance - horDistance * Mathf.Tan(angle)))));
-            float Vx = xDiff / timeOfFlight;
-            float Vy = (verDistance + (timeOfFlight * timeOfFlight)) / timeOfFlight;
-            float Vz = zDiff / timeOfFlight;
-
-            float force = mass * velocityMagnitude / timeOfFlight;
-
-            Vector3 direction = new Vector3(-Vx, Vy, -Vz);
+            Vector3 direction = _towerMechanism.GetFiringVector(_target, _spawnPoints[0]);
             
             Instantiate(_projectile, transform.position + _spawnPoints[0], Quaternion.identity).ApplyForce(direction);
             // Give projectile target position to travel towards
