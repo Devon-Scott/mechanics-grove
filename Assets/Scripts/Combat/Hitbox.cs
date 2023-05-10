@@ -57,40 +57,61 @@ public class Hitbox : MonoBehaviour
         if (Active)
         {
             
-            
-            // Check if anything was hit in the layermask we care about and along the size of this hitbox
-            if(Physics.SphereCast(parentPosition, SphereCastRadius, transform.up, out hitInfo, SphereCastLength, TargetableObjects))
+            Collider[] ContactedObjects = Physics.OverlapCapsule(parentPosition, transform.position, SphereCastRadius, TargetableObjects);
+            foreach(Collider other in ContactedObjects)
             {
-                Collider hitObject = hitInfo.collider;
-
-                // Then check if the object has already been hit this animation
-                if (!HitObjects.Contains(hitObject))
+                if (!HitObjects.Contains(other))
                 {
-                    // Add it to the list so we don't hit it again during this attack
-                    HitObjects.Add(hitObject);
-
-                    // Instantiate a hurtbox to store the reference of the collider we hit
+                    HitObjects.Add(other);
                     Hurtbox hitTarget;
-
-                    // Then check if we recognize the object that we hit from a static dictionary
-                    // so we can quickly deal damage again
-                    if (ColliderDictionary.ContainsKey(hitObject))
+                    if (ColliderDictionary.ContainsKey(other))
                     {
-                        hitTarget = ColliderDictionary[hitObject];
+                        hitTarget = ColliderDictionary[other];
                     }
                     else 
                     {
-                        // Keep the game flowing but log an error to be investigated
-                        hitTarget = hitObject.gameObject.GetComponent<Hurtbox>();
-                        ColliderDictionary.Add(hitObject, hitTarget);
+                        hitTarget = other.gameObject.GetComponent<Hurtbox>();
+                        ColliderDictionary.Add(other, hitTarget);
                         Debug.LogError("Entity was not in Dictionary", hitTarget);
                     }
-                    // Easier to see these distance calculations applied to damage but they need to be applied to knockback as well
-                    float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, hitObject.transform.position);
+                    float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, other.transform.position);
                     float ScaledDamageForDistance = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
-                    hitTarget.HandleHit(damage * ScaledDamageForDistance, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
+                    hitTarget.HandleHit(damage * ScaledDamageForDistance, (other.transform.position - parentPosition).normalized * KnockbackScaler);
                 }
             }
+            // Check if anything was hit in the layermask we care about and along the size of this hitbox
+            // if(Physics.SphereCast(parentPosition, SphereCastRadius, transform.up, out hitInfo, SphereCastLength, TargetableObjects))
+            // {
+            //     Collider hitObject = hitInfo.collider;
+
+            //     // Then check if the object has already been hit this animation
+            //     if (!HitObjects.Contains(hitObject))
+            //     {
+            //         // Add it to the list so we don't hit it again during this attack
+            //         HitObjects.Add(hitObject);
+
+            //         // Instantiate a hurtbox to store the reference of the collider we hit
+            //         Hurtbox hitTarget;
+
+            //         // Then check if we recognize the object that we hit from a static dictionary
+            //         // so we can quickly deal damage again
+            //         if (ColliderDictionary.ContainsKey(hitObject))
+            //         {
+            //             hitTarget = ColliderDictionary[hitObject];
+            //         }
+            //         else 
+            //         {
+            //             // Keep the game flowing but log an error to be investigated
+            //             hitTarget = hitObject.gameObject.GetComponent<Hurtbox>();
+            //             ColliderDictionary.Add(hitObject, hitTarget);
+            //             Debug.LogError("Entity was not in Dictionary", hitTarget);
+            //         }
+            //         // Easier to see these distance calculations applied to damage but they need to be applied to knockback as well
+            //         float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, hitObject.transform.position);
+            //         float ScaledDamageForDistance = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
+            //         hitTarget.HandleHit(damage * ScaledDamageForDistance, (hitObject.transform.position - parentPosition).normalized * KnockbackScaler);
+            //     }
+            // }
         }
     }
 
