@@ -41,9 +41,9 @@ To-Do list for Mechanic's Grove
         - Initialize LevelManager with a given level (int)
             - Level 0 can be the test arena
             - Use the level to initialize the MapMaker
-            - Build paths from parents to children
+            - <s>Build paths from parents to children
             - Fill the rest of the level with a flat plane
-            - Border the flat plane with mountains 
+            - Border the flat plane with mountains</s>
                 - Have a gap for enemy spawning (entering) and winning (leaving) the map
         - Hold variables for # of enemies, those in the level overall, those alive, those that have won, and those that have died
         - Create spawn points for player and enemy
@@ -72,20 +72,21 @@ To-Do list for Mechanic's Grove
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine
     - Tower Class
-        - Has TowerBehaviour component
+        - <s>Has TowerBehaviour component
             - Get Target: choose enemy in range with least distance remaining (or greatest distance from spawn)
         - Has Projectile component
+        - Has unique aiming/firing Mechanism component
         - Each tower may need its own specialized Fire() method (static AoE towers will, at least)
-            - In general, a coroutine for firing a projectile might work
+            - In general, a coroutine for firing a projectile might work</s>
     - Projectile
         - Base class for all projectiles, inherits from Monobehaviour
             - Has a Hitbox with information on the projectile
             - Tower should be able to manipulate this info as it gets upgraded
         - Concrete classes for projectiles:
-            - Cannonball
+            - <s>Cannonball
                 - Rigidbody component for flight
                 - Hitbox not active till it hits the ground
-                - Large knockback scalar, produces sound, particle effects, and area damage
+                - Large knockback scalar, produces sound, particle effects, and area damage</s>
             - Lightning bolt
                 - Hitbox active along length of bolt
                 - High damage, single target, low knockback scalar
@@ -104,7 +105,7 @@ To-Do list for Mechanic's Grove
             - End Point of Path
             - Boundaries of the Level</s>
         - <s>Level can be added as component to newly spawned enemy so they know where to go</s>
-        - Also contains information about number and types and timings of enemies to spawn
+        - <s>Also contains information about number and types and timings of enemies to spawn</s>
     - Map Maker
         - <s>Instantiate path tiles along every edge in Level graph</s>
         - Have set to determine visited tiles to avoid repeated instantiation
@@ -166,7 +167,7 @@ To-Do list for Mechanic's Grove
         - Also allow player to build blockades on the path
         - Push tower menu to player state stack, action continues in game state
         - Towers in mind so far:
-            - Cannonball tower: launches bombs that deal splash damage, knockback, and have particle effect
+            - <s>Cannonball tower: launches bombs that deal splash damage, knockback, and have particle effect</s>
             - Mage tower: zaps single targets for high damage with lightning bolt effect
             - Mushroom Cloud tower: slows enemies, or deals static area damage
             - Barracks: sends out mini soldiers to stand guard on the path
