@@ -27,7 +27,15 @@ Update - April 14th 2023: I have reached what I consider the first milestone of 
 I am using https://github.com/Eldoir/Array2DEditor for quick level creation and manipulation using graph adjacency matrices
 </p>
 
-Current assets used:<br>
+<p>
+Update - May 10th 2023: The first visually appealing milestone of the game. Some towers will deal explosive knockback to enemies, 
+and they will be forced to find their way back to the path in order to continue onwards
+</p>
+
+https://github.com/Devon-Scott/mechanics-grove/assets/65093027/a906d003-766e-4d71-8f63-cdf4d3e27b30
+
+
+<br>Current assets used:<br>
 - Free Low Poly Nature Forest : Pure Poly
     - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
 - Starter Assets - Third Person Character Controller : Unity
@@ -42,4 +50,6 @@ Current assets used:<br>
     - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640
 - Cartoon FX Free Pack : RetroVistas
     - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179
+- Fantasy Tower defence turrets : Ingus
+    - https://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-tower-defence-turrets-188300
 
