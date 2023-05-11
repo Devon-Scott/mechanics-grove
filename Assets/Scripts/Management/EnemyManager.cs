@@ -12,6 +12,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int _enemiesKilled;
     private ColliderManager _colliderManager;
     private ParticleSystem spawnEffect;
+    private int _enemiesToSpawn;
+    private float _enemyCooldown;
 
     void Awake()
     {
@@ -22,6 +24,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         
         level.Awake();
         Enemy.level = level;
+        _enemiesToSpawn = level.EnemiesToSpawn;
+        _enemyCooldown = level.EnemyCooldown;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
         spawnEffect = GetComponentInChildren<ParticleSystem>();
@@ -61,13 +65,13 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
 
     IEnumerator SpawnEnemies()
     {
-        while (_enemiesSpawned < 10) {
+        while (_enemiesSpawned < _enemiesToSpawn) {
 
 			Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], level.StartPoint, Quaternion.identity);
             enemy.AddObserver(this);
             enemy.AddObserver(_colliderManager);
         
-			yield return new WaitForSeconds(Random.Range(2, 5));
+			yield return new WaitForSeconds(_enemyCooldown);
 		}
         StopCoroutine(SpawnEnemies());
     }
