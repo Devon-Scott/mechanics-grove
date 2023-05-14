@@ -40,8 +40,8 @@ public class EnemyHurtbox : Hurtbox
         
     }
 
-    public override void HandleHit(float damage, Vector3 knockback)
+    public override void HandleHit(float damage, Vector3 knockback, float scalar)
     {
-        stateMachine.OnHit(damage, knockback);
+        stateMachine.OnHit(damage, knockback, scalar);
     }
 }

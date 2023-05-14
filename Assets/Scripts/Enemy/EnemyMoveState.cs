@@ -132,7 +132,7 @@ public class EnemyMoveState : EnemyBaseState
         }
     }
 
-    public override void OnHit(float damage, Vector3 knockback)
+    public override void OnHit(float damage, Vector3 knockback, float scalar)
     {
         stats.Health -= damage;
         // Check knockback before death (personal preference) maybe not
@@ -145,6 +145,7 @@ public class EnemyMoveState : EnemyBaseState
         {
             ArrayList data = new ArrayList();
             data.Add(knockback);
+            data.Add(scalar);
             // We need to know if we've been knocked back so we can find our way back onto the path in EnemyMoveState
             owner.knockedBack = true;
             _nearPath = false;

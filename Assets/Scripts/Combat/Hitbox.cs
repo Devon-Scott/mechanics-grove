@@ -74,9 +74,11 @@ public class Hitbox : MonoBehaviour
                         ColliderDictionary.Add(other, hitTarget);
                         Debug.LogError("Entity was not in Dictionary", hitTarget);
                     }
-                    float DistanceFromCentre = Graph.DistanceToLine(parentPosition, transform.position, other.transform.position);
-                    float ScaledDamageForDistance = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
-                    hitTarget.HandleHit(damage * ScaledDamageForDistance, (other.transform.position - parentPosition).normalized * KnockbackScaler);
+                    // If the collider is completely overlapping the centre of the cast, distance should be 0 to avoid negative values
+                    float DistanceFromCentre = Mathf.Max(0, Graph.DistanceToLine(parentPosition, transform.position, other.transform.position));
+                    float HitScalar = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
+                    print(HitScalar);
+                    hitTarget.HandleHit(damage, (other.transform.position - parentPosition).normalized * KnockbackScaler, HitScalar);
                 }
             }
             // Check if anything was hit in the layermask we care about and along the size of this hitbox

@@ -23,5 +23,5 @@ public abstract class Hurtbox : MonoBehaviour
         Stats = GetComponent<EntityStats>();
     }
 
-    public abstract void HandleHit(float damage, Vector3 knockback);
+    public abstract void HandleHit(float damage, Vector3 knockback, float scalar);
 }

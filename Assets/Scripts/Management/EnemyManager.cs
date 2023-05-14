@@ -66,8 +66,9 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     IEnumerator SpawnEnemies()
     {
         while (_enemiesSpawned < _enemiesToSpawn) {
-
-			Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], level.StartPoint, Quaternion.identity);
+            Vector2 offset = Random.insideUnitCircle * 1.5f;
+            Vector3 spawnPoint = new Vector3(level.StartPoint.x + offset.x, level.StartPoint.y, level.StartPoint.z + offset.y);
+			Enemy enemy = Instantiate(Enemies[Random.Range(0, Enemies.Length)], spawnPoint, Quaternion.identity);
             enemy.AddObserver(this);
             enemy.AddObserver(_colliderManager);
         

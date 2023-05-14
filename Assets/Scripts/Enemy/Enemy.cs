@@ -95,9 +95,9 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("VerticalVelocity", verticalVelocity);
     }
 
-    public void OnHit(float damage, Vector3 knockback)
+    public void OnHit(float damage, Vector3 knockback, float scalar)
     {
-        currentState.OnHit(damage, knockback);
+        currentState.OnHit(damage, knockback, scalar);
     }
 
     // When an enemy is selected in the inspector, draws a red line on all the

@@ -23,13 +23,14 @@ public class EnemyKnockbackState : EnemyBaseState
     {
         this._owner = owner;
         // Assert that the first item in Data is a Vector3 with knockback info
-        if (data[0] is Vector3)
+        // Assert the second item is a float with scalar information
+        if (data[0] is Vector3 && data[1] is float)
         {
-            _knockbackDirection = (Vector3)data[0];
+            _knockbackDirection = (Vector3)data[0] * (float)data[1];
         }
         else 
         {
-            throw new ArgumentException("First argument of Data must be Vector3");
+            throw new ArgumentException("First argument of Data must be Vector3, second must be float");
         }
         if (owner.hasAnimator){
             owner.animator.SetTrigger("Knockback");
@@ -73,7 +74,7 @@ public class EnemyKnockbackState : EnemyBaseState
 
     }
 
-    public override void OnHit(float damage, Vector3 knockback)
+    public override void OnHit(float damage, Vector3 knockback, float scalar)
     {
         // We can still take damage but not be knocked back again during knockback
         // Except for very strong attacks
@@ -85,6 +86,7 @@ public class EnemyKnockbackState : EnemyBaseState
             {
                 ArrayList data = new ArrayList();
                 data.Add(_movement + knockback);
+                data.Add(scalar);
                 _owner.stateStack.Push(_owner.KnockbackState, data);
             }
             else if (_stats.Health >= 0)
