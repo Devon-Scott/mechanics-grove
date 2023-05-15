@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool attack;
+		public bool build;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;

@@ -11,7 +11,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int _enemiesSpawned;
     private int _enemiesKilled;
     private ColliderManager _colliderManager;
-    private ParticleSystem spawnEffect;
+    [SerializeField]
+    private GameObject spawnEffect;
     private int _enemiesToSpawn;
     private float _enemyCooldown;
 
@@ -28,7 +29,6 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         _enemyCooldown = level.EnemyCooldown;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
-        spawnEffect = GetComponentInChildren<ParticleSystem>();
     }
 
     void Start()
@@ -54,8 +54,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemySpawn(Enemy enemy)
     {
         _enemiesSpawned++;
-        spawnEffect.transform.position = enemy.transform.position;
-        spawnEffect.Play();
+        ParticleManager.ParticleManagerInit(enemy.transform.position, spawnEffect);
     }
 
     public void OnEnemyDeath(Enemy enemy)

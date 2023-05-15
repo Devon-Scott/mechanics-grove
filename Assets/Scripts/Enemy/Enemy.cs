@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     
     public StateStack<Enemy> stateStack;
     public EnemyBaseState currentState;
+    public string StateName;
 
     // All states inherit from EnemyBaseState
     public EnemyMoveState MoveState = new EnemyMoveState();
@@ -71,7 +72,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DoGravity();
+        if (stateStack.Stack.Count == 0)
+        {
+            stateStack.Push(MoveState);
+        }
         currentState = (EnemyBaseState)stateStack.CurrentState;
+        StateName = currentState.GetType().Name;
         stateStack.Update();
     }
 
@@ -123,7 +129,8 @@ public class Enemy : MonoBehaviour
         {
             observer.OnEnemyDeath(this);
         }
-        Instantiate(DeathExplosion, transform.position, Quaternion.identity);
+        ParticleManager.ParticleManagerInit(transform.position, DeathExplosion);
+        //Instantiate(DeathExplosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
