@@ -51,8 +51,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleBuildState",
-                    "type": "Button",
+                    "name": "Build",
+                    "type": "PassThrough",
                     "id": "59b4c1c7-f016-4875-b4ae-808673f4a6b3",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -255,7 +255,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ToggleBuildState",
+                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

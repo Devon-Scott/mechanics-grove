@@ -36,6 +36,6 @@ public class HealthScript : MonoBehaviour
 
     void EnterKnockback(Vector3 impact)
     {
-        print(impact.ToString());
+        //print(impact.ToString());
     }
 }

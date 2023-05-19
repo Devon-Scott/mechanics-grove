@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerBuildState : MonoBehaviour
 {
     public GameObject[] Towers;
+    public GameObject[] Meshes;
+    
+    [HideInInspector]
+    public bool BuildState;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,9 @@ public class PlayerBuildState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (BuildState)
+        {
+            
+        }
     }
 }

@@ -14,6 +14,15 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        
+        enum State
+        {
+            Build,
+            Combat
+        }
+        private State _state;
+        private PlayerBuildState _buildState;
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -103,10 +112,13 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
         private int _animIDAttack;
 
-        // Combat system
+        // Item management system
         private GameObject _currentWeapon;
-        public GameObject weaponHolder;
+        private GameObject _currentOffHand;
+        public GameObject leftHandObject;
+        public GameObject rightHandObject;
         public GameObject[] weapons;
+        public GameObject[] offHands;
         private Hitbox hitbox;
 
 #if ENABLE_INPUT_SYSTEM 
@@ -163,7 +175,13 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
-            _currentWeapon = Instantiate(weapons[0], weaponHolder.transform);
+            _buildState = GetComponent<PlayerBuildState>();
+            _buildState.BuildState = false;
+
+            _state = State.Combat;
+            _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
+            _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
+
             hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
             if (hitbox == null)
             {
@@ -180,6 +198,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            HandleState();
             Attack();
         }
 
@@ -371,25 +390,68 @@ namespace StarterAssets
             }
         }
 
+        private void HandleState()
+        {
+            if (_input.build)
+            {
+                if (_state == State.Build)
+                {
+                    // Destroy the old, add the new
+                    _state = State.Combat;
+                    _buildState.BuildState = false;
+                    Destroy(_currentWeapon);
+                    _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
+                    _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool("Combat", false);
+                        _animator.SetBool("Build", true);
+                    }
+                }
+                else 
+                {
+                    _state = State.Build;
+                    _buildState.BuildState = true;
+                    Destroy(_currentWeapon);
+                    Destroy(_currentOffHand);
+                    _currentWeapon = Instantiate(weapons[1], rightHandObject.transform);
+                    _currentOffHand = null;
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool("Combat", true);
+                        _animator.SetBool("Build", false);
+                    }
+                }
+                _input.build = false;
+            }
+            
+        }
+
         // Basic attack
-        // TODO: add a hitbox to the sword. Research hitboxes
         private void Attack()
         {
-            if (Grounded && _input.attack)
+            if (_state == State.Combat)
             {
-                _attackTimeoutDelta = AttackTimeout;
-                if (_hasAnimator)
+                if (Grounded && _input.attack)
                 {
-                    _animator.SetBool(_animIDAttack, true);
+                    _attackTimeoutDelta = AttackTimeout;
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool(_animIDAttack, true);
+                    }
                 }
-            }
-            if (_attackTimeoutDelta > 0f)
-            {
-                _attackTimeoutDelta -= Time.deltaTime;
+                if (_attackTimeoutDelta > 0f)
+                {
+                    _attackTimeoutDelta -= Time.deltaTime;
+                }
+                else 
+                {
+                    _attackTimeoutDelta = 0;
+                }
             }
             else 
             {
-                _attackTimeoutDelta = 0;
+
             }
         }
 

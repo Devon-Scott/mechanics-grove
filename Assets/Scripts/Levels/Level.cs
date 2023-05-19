@@ -34,7 +34,7 @@ public class Level : ScriptableObject
     // Needs to be called by the Game manager, or the Level manager
     public void Awake()
     {
-        Debug.Log("Level Awake");
+        //Debug.Log("Level Awake");
         Vector2 GridSize = ParentChildMatrix.GridSize;
         _graph = new Graph();
 

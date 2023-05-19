@@ -50,6 +50,12 @@ namespace StarterAssets
 		{
 			AttackInput(value.isPressed);
 		}
+
+		public void OnBuild(InputValue value)
+		{
+			print("Build button pressed");
+			BuildToggleInput(value.isPressed);
+		}
 #endif
 
 
@@ -76,6 +82,11 @@ namespace StarterAssets
 		public void AttackInput(bool newAttackState)
 		{
 			attack = newAttackState;
+		}
+
+		public void BuildToggleInput(bool newBuildToggle)
+		{
+			build = newBuildToggle;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

@@ -103,7 +103,14 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(float damage, Vector3 knockback, float scalar)
     {
-        currentState.OnHit(damage, knockback, scalar);
+        if (currentState != null)
+        {
+            currentState.OnHit(damage, knockback, scalar);
+        }
+        else
+        {
+            Debug.Log("Current state was somehow null");
+        }
     }
 
     // When an enemy is selected in the inspector, draws a red line on all the
