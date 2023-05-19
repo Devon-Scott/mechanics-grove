@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     public Hitbox hitbox;
     public Rigidbody self;
     private float _destroyTimer;
-    private ParticleSystem _impactEffect;
+    [SerializeField]
+    private GameObject _impactEffect;
     [SerializeField]
     private LayerMask _layers;
 
@@ -21,8 +22,6 @@ public class Projectile : MonoBehaviour
 
         hitbox.enabled = false;
         hitbox.parentPosition = transform.position;
-        _impactEffect = gameObject.GetComponentInChildren<ParticleSystem>();
-        _impactEffect.Stop();
     }
 
     // Update is called once per frame
@@ -51,8 +50,7 @@ public class Projectile : MonoBehaviour
         {
             hitbox.enabled = true;
             hitbox.EnableDamage(20);
-            _impactEffect.transform.position = transform.position;
-            _impactEffect.Play();
+            ParticleManager.ParticleManagerInit(transform.position, _impactEffect);
             self.isKinematic = true;
             StartCoroutine(DestroyObject());
         }

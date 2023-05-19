@@ -42,9 +42,9 @@ https://github.com/Devon-Scott/mechanics-grove/assets/65093027/a906d003-766e-4d7
     - https://assetstore.unity.com/packages/essentials/starter-assets-third-person-character-controller-196526
 - RPG Tiny Hero Duo PBR Polyart : Dungeon Mason
     - https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148
-- RPG Monster Duo PBR Polyart
+- RPG Monster Duo PBR Polyart : Dungeon Mason
     - https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
-- Handpainted Turntable Platforms 
+- Handpainted Turntable Platforms : 3d.rina
     - https://assetstore.unity.com/packages/3d/props/handpainted-turntable-platforms-66599
 - FREE Fantasy Terrain Textures : 3D Haven
     - https://assetstore.unity.com/packages/2d/textures-materials/free-fantasy-terrain-textures-233640
@@ -52,4 +52,5 @@ https://github.com/Devon-Scott/mechanics-grove/assets/65093027/a906d003-766e-4d7
     - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179
 - Fantasy Tower defence turrets : Ingus
     - https://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-tower-defence-turrets-188300
-
+- Unity Particle Pack : Unity
+    - https://assetstore.unity.com/packages/vfx/particles/particle-pack-127325

@@ -10,6 +10,7 @@ public class PlayerBuildState : MonoBehaviour
     [HideInInspector]
     public bool BuildState;
 
+    private CharacterController _controller;
 
     // Start is called before the first frame update
     void Start()

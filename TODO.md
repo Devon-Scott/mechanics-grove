@@ -11,8 +11,8 @@ To-Do list for Mechanic's Grove
         - Tiny Hero Duo already comes with lots of useful animations </s>
     - <s>Learn how to attach hitboxes to objects meant for attacking
         - Learn how objects register that they've been attacked</s>
-    - Learn how to use assets to build a level
-    - Learn how to modify assets using code
+    - <s>Learn how to use assets to build a level
+    - Learn how to modify assets using code</s>
     - Implementation of buttons in menus
     - Implementation of Controllers
         - Third person controller and Camera
@@ -24,9 +24,8 @@ To-Do list for Mechanic's Grove
         - <s>Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit</s>
         - Attacks attack hitboxes, different attacks produce different hitboxes
         - <s>Learn how to use animation events to pass arguments to EnableHitbox()</s>
-    - Event handling
-        - Triggers when an enemy spawns or dies 
-        - Alternatively, look into using scriptable objects that other entities can watch?
+    - <s>Event handling
+        - Triggers when an enemy spawns or dies </s>
 
 - Questions: 
     - How to invoke methods on other components 
@@ -51,11 +50,13 @@ To-Do list for Mechanic's Grove
         - Initialize ColiderManager to keep track of the hurtbox colliders in the level
     - Enemy class 
         - Add distance variable as distance between Enemy and either SpawnPoint or EndPoint
+        - Add health value visible above enemy
         - <s>Experiment with statemachine for enemy controller</s>
             - <s>Move State</s>
                 - <s>Implement wayfinding back to path if knocked off course</s>
             - Attack State
                 - Correct timings and cooldowns for attacks
+                - Add Hitbox that deals damage to player
                 - Experiment with coroutines and animation triggers
             - <s>Knockback State</s>
             - <s>Death State</s>

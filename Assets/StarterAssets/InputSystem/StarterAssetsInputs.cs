@@ -53,7 +53,6 @@ namespace StarterAssets
 
 		public void OnBuild(InputValue value)
 		{
-			print("Build button pressed");
 			BuildToggleInput(value.isPressed);
 		}
 #endif

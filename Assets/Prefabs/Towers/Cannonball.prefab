@@ -153,6 +153,7 @@ MonoBehaviour:
   radius: 0
   hitbox: {fileID: 4168939937797049931}
   self: {fileID: 4168939937797049932}
+  _impactEffect: {fileID: 5976847776177367894}
   _layers:
     serializedVersion: 2
     m_Bits: 1345
@@ -313,6 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
+--- !u!1 &5976847776177367894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
+  m_PrefabInstance: {fileID: 5976737535812726940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5980582941141448308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4203849390966504, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
