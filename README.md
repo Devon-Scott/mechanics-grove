@@ -34,6 +34,12 @@ and they will be forced to find their way back to the path in order to continue 
 
 https://github.com/Devon-Scott/mechanics-grove/assets/65093027/a906d003-766e-4d71-8f63-cdf4d3e27b30
 
+<p>
+Update - May 25th 2023: Building some more interactivity into the game. Enemies now have health bars above them, and the player can now build towers to attack those enemies 
+</p>
+
+https://github.com/Devon-Scott/mechanics-grove/assets/65093027/8a04df9f-af0c-4e57-a72c-13b40c81a751
+
 
 <br>Current assets used:<br>
 - Free Low Poly Nature Forest : Pure Poly
