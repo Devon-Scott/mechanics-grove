@@ -89,7 +89,7 @@ public class EnemyKnockbackState : EnemyBaseState
                 data.Add(scalar);
                 _owner.stateStack.Push(_owner.KnockbackState, data);
             }
-            else if (_stats.Health >= 0)
+            else if (_stats.Health <= 0)
             {
                 _alive = false;
             }
