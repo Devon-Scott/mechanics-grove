@@ -33,5 +33,5 @@ MonoBehaviour:
   MapCorner: {x: -30, y: 0, z: -30}
   Width: 70
   Length: 70
-  EnemiesToSpawn: 1
-  EnemyCooldown: 0.5
+  EnemiesToSpawn: 100
+  EnemyCooldown: 0.1

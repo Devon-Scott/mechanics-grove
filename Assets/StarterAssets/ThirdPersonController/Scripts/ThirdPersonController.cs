@@ -424,6 +424,18 @@ namespace StarterAssets
                 }
                 _input.build = false;
             }
+            if (_buildState.BuildState == false)
+            {
+                _state = State.Combat;
+                Destroy(_currentWeapon);
+                _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
+                _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
+                if (_hasAnimator)
+                {
+                    _animator.SetBool("Combat", false);
+                    _animator.SetBool("Build", true);
+                }
+            }
             
         }
 

@@ -44,6 +44,8 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
             }
         }
         StartCoroutine(SpawnEnemies());
+        spawnEffect.transform.position = new Vector3(-100, -100, -100);
+
     }
 
     void Update()
