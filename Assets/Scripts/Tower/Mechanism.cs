@@ -18,7 +18,7 @@ public abstract class Mechanism : MonoBehaviour
     {
         Vector3 flatStart = new Vector3(start.x, 0, start.z);
         Vector3 flatEnd = new Vector3(end.x, 0, end.z);
-        return Graph.distanceBetween(flatStart, flatEnd);
+        return Vector3.Distance(flatStart, flatEnd);
     }
 
     public virtual Quaternion GetAimRotation(Collider target){return Quaternion.identity;}

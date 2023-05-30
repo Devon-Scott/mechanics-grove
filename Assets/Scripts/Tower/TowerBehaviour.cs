@@ -118,14 +118,11 @@ public class TowerBehaviour : MonoBehaviour
                 Gizmos.DrawLine(transform.position, spawnPoint);
 
                 Gizmos.color = Color.blue;
-                
                 Vector3 forward = point;
                 forward.y = 0;
                 Gizmos.DrawSphere(transform.position + forward, 0.25f);
                 Gizmos.DrawLine(transform.position, transform.position + forward);    
             }
-
-            
         }
         if (_target != null)
         {

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2315759051401338620}
   - component: {fileID: 1816585138780305330}
+  - component: {fileID: 3782956430653111035}
   - component: {fileID: 8390990531743921680}
   - component: {fileID: 8883501771268749712}
-  - component: {fileID: 3782956430653111035}
   m_Layer: 9
   m_Name: Turret_1_Level_1_Weapon
   m_TagString: Untagged
@@ -59,6 +59,21 @@ MonoBehaviour:
   - {x: 0, y: 0.125, z: 1}
   _velocityMagnitude: 1000
   _towerMechanism: {fileID: 3782956430653111035}
+--- !u!114 &3782956430653111035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159464613272748421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaee4b6b1d7e8a47a90f49c59e7ef51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VerticalAngleOffset: -45
+  RotationalOffset: -125
+  launchExponent: 1.45
 --- !u!33 &8390990531743921680
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110,21 +125,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3782956430653111035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2159464613272748421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdaee4b6b1d7e8a47a90f49c59e7ef51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VerticalAngleOffset: -45
-  RotationalOffset: -125
-  launchExponent: 1.45
 --- !u!1 &6388438535645025325
 GameObject:
   m_ObjectHideFlags: 0
