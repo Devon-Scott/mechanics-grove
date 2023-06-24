@@ -13,7 +13,7 @@ To-Do list for Mechanic's Grove
         - Learn how objects register that they've been attacked</s>
     - <s>Learn how to use assets to build a level
     - Learn how to modify assets using code</s>
-    - Implementation of buttons in menus
+    - <s>Implementation of buttons in menus</s>
     - Implementation of Controllers
         - Third person controller and Camera
         - <s>Adding inputs to controller</s>
@@ -28,29 +28,27 @@ To-Do list for Mechanic's Grove
         - Triggers when an enemy spawns or dies </s>
 
 - Questions: 
-    - How to invoke methods on other components 
-    - How to broadcast messages to other game objects
+    - <s>How to invoke methods on other components 
+    - How to broadcast messages to other game objects</s>
     - How to have a generic event queue that higher level classes can listen to events for
 
 - Structural:
-    - MainMenu button class
-    - GameMenu button class
     - <s>Graph class for storing path data and methods to aid pathfinding on the graph</s>
     - GameManager
         - Initialize LevelManager with a given level (int)
-            - Level 0 can be the test arena
-            - Use the level to initialize the MapMaker
+            - <s>Level 0 can be the test arena</s>
+            - <s>Use the level to initialize the MapMaker</s>
             - <s>Build paths from parents to children
             - Fill the rest of the level with a flat plane
             - Border the flat plane with mountains</s>
                 - Have a gap for enemy spawning (entering) and winning (leaving) the map
-        - Hold variables for # of enemies, those in the level overall, those alive, those that have won, and those that have died
-        - Create spawn points for player and enemy
+        - <s>Hold variables for # of enemies, those in the level overall, those alive, those that have won, and those that have died</s>
+        - <s>Create spawn points for player and enemy
         - Initialize EnemyManager with coordinates of spawn point
-        - Initialize ColiderManager to keep track of the hurtbox colliders in the level
+        - Initialize ColiderManager to keep track of the hurtbox colliders in the level</s>
     - Enemy class 
         - Add distance variable as distance between Enemy and either SpawnPoint or EndPoint
-        - Add health value visible above enemy
+        - <s>Add health value visible above enemy</s>
         - <s>Experiment with statemachine for enemy controller</s>
             - <s>Move State</s>
                 - <s>Implement wayfinding back to path if knocked off course</s>
@@ -68,7 +66,7 @@ To-Do list for Mechanic's Grove
                 - Trigger victory animation when enemy reaches EndPoint of Path
                 - Move somewhere out of the way
                 - Destroy after 10 seconds
-                - Make OnVictory() method in Enemy class
+                - <s>Make OnVictory() method in Enemy class</s>
     - Player Class
         - Experiment with identifying owner of hitbox
         - Use starterAssets as jumping off point for a state machine
@@ -118,11 +116,11 @@ To-Do list for Mechanic's Grove
 - Main Menu State
     - Have blurry image of gameplay in background
     - Make buttons for:
-        - Play
+        - <s>Play</s>
         - Settings
         - Leaderboard
-        - Exit
-    - If Play: switch to Gameplay Scene
+        - <s>Exit
+    - If Play: switch to Gameplay Scene</s>
     - If Settings: push Settings Menu onto Stack
     - Have settings object that persists indefinitely (preserve settings until program ends)
         - Difficulty
