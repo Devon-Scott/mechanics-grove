@@ -56,8 +56,10 @@ public class EnemyMoveState : EnemyBaseState
         // Check if we need to target a player
         foreach (Collider other in Enemy.PlayerList)
         {
-            if (Graph.distanceBetween(owner.transform.position, other.transform.position) < 2.5f)
+            Debug.Log("Checking in range");
+            if (Vector3.Distance(owner.transform.position, other.transform.position) < 2.5f)
             {
+                
                 owner.target = other;
                 owner.stateStack.Push(owner.AttackState);
                 break;
@@ -94,10 +96,17 @@ public class EnemyMoveState : EnemyBaseState
                 {
                     // Get the next node
                     List<Vector3> nextNodeList = level._graph.getChildren(_nextNode);
-                    int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, nextNodeList.Count));
-                    _nextNode = nextNodeList[index];
-                    // update the Target Direction
-                    _targetDirection = _nextNode - positionAxis;  
+                    if (nextNodeList.Count == 0)
+                    {
+                        owner.onVictory();
+                    }
+                    else
+                    {
+                        int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, nextNodeList.Count));
+                        _nextNode = nextNodeList[index];
+                        // update the Target Direction
+                        _targetDirection = _nextNode - positionAxis;  
+                    }
                 } 
                 // If _nearPath was not true on the last call, it will be true now
                 // So regardless of if we reach a node or just got back to the path

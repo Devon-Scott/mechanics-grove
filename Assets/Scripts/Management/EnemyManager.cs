@@ -10,9 +10,9 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public Level level;
     private int _enemiesSpawned;
     private int _enemiesKilled;
+    private int _enemiesPassed;
     private ColliderManager _colliderManager;
     [SerializeField]
-    private GameObject spawnEffect;
     private int _enemiesToSpawn;
     private float _enemyCooldown;
 
@@ -29,6 +29,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         _enemyCooldown = level.EnemyCooldown;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
+        _enemiesPassed = 0;
     }
 
     void Start()
@@ -44,8 +45,6 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
             }
         }
         StartCoroutine(SpawnEnemies());
-        spawnEffect.transform.position = new Vector3(-100, -100, -100);
-
     }
 
     void Update()
@@ -56,12 +55,16 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemySpawn(Enemy enemy)
     {
         _enemiesSpawned++;
-        ParticleManager.ParticleManagerInit(enemy.transform.position, spawnEffect);
     }
 
     public void OnEnemyDeath(Enemy enemy)
     {
         _enemiesKilled++;
+    }
+
+    public void OnEnemyVictory(Enemy enemy)
+    {
+        _enemiesPassed++;
     }
 
     IEnumerator SpawnEnemies()

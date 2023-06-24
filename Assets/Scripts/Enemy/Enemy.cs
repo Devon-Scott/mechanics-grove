@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public EnemyDeathState DeathState = new EnemyDeathState();
 
     public GameObject DeathExplosion;
+    public GameObject VictoryParticle;
     /*
     Reference to the graph data for pathfinding
     All this class needs to know is that Level will provide
@@ -57,6 +58,9 @@ public class Enemy : MonoBehaviour
         if (PlayerList == null)
         {
             PlayerList = new List<Collider>();
+        }
+        if (PlayerList.Count == 0)
+        {
             GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
             foreach (GameObject player in Players)
             {
@@ -67,6 +71,7 @@ public class Enemy : MonoBehaviour
         {
             observer.OnEnemySpawn(this);
         }
+        
     }
 
     void Update()
@@ -137,7 +142,16 @@ public class Enemy : MonoBehaviour
             observer.OnEnemyDeath(this);
         }
         ParticleManager.ParticleManagerInit(transform.position, DeathExplosion);
-        //Instantiate(DeathExplosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    public void onVictory(){
+        foreach (IEnemyObserver observer in observers)
+        {
+            observer.OnEnemyVictory(this);
+        }
+        ParticleManager.ParticleManagerInit(transform.position, VictoryParticle);
+
         Destroy(gameObject);
     }
 }

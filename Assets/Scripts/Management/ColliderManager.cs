@@ -39,4 +39,10 @@ public class ColliderManager : MonoBehaviour, IEnemyObserver
         ColliderDictionary.Remove(enemyCollider);
     }
 
+    public void OnEnemyVictory(Enemy enemy)
+    {
+        Collider enemyCollider = enemy.GetComponent<Collider>();
+        ColliderDictionary.Remove(enemyCollider);
+    }
+
 }

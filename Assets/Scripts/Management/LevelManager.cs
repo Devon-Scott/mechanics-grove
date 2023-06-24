@@ -9,12 +9,17 @@ public class LevelManager : MonoBehaviour
     public GameObject pathTile;
     public GameObject groundTile;
     public GameObject SpawnPlate;
+    public GameObject Player;
     public GameObject[] Decorations;
     private GameObject Path;
     private GameObject Ground;
 
+    public bool InstantiatePlayer;
+
     void Start()
     {
+        level.Awake();
+        //Destroy(GameObject.FindWithTag("MainCamera"));
         UnityEngine.Random.InitState(42);
         Path = new GameObject("Path");
         Ground = new GameObject("Ground");
@@ -29,7 +34,11 @@ public class LevelManager : MonoBehaviour
                 InstantiateGround(x, z);
             }
         }
-        //GameObject.Instantiate(SpawnPlate, level.PlayerSpawnPoint, Quaternion.identity);
+        GameObject.Instantiate(SpawnPlate, level.PlayerSpawnPoint, Quaternion.identity);
+        if (InstantiatePlayer)
+        {
+            GameObject.Instantiate(Player, level.PlayerSpawnPoint + (2 * Vector3.up), Quaternion.identity);
+        }
     }
 
     void InstantiateTiles(Edge edge)
@@ -54,16 +63,17 @@ public class LevelManager : MonoBehaviour
 
     void InstantiateGround(int x, int z)
     {
-        Vector3 location = new Vector3(x, -2.3f, z);
+        float groundHeight = -0.5f ;
+        Vector3 location = new Vector3(x, groundHeight, z);
         Quaternion rotation = Quaternion.identity;
         GameObject Tile = GameObject.Instantiate(groundTile, location, rotation, Ground.transform);
-        int numOfDecorations = (int)(UnityEngine.Random.value * 30);
+        int numOfDecorations = (int)(UnityEngine.Random.value * 75);
         for (int i = 0; i < numOfDecorations; i++){
-            float decX = (UnityEngine.Random.value * 10f) - 5f;
-            float decZ = (UnityEngine.Random.value * 10f) - 5f;
+            float decX = (UnityEngine.Random.value * 20f) - 10f;
+            float decZ = (UnityEngine.Random.value * 20f) - 10f;
             int index = (int)Mathf.Floor(UnityEngine.Random.Range(0, Decorations.Length));
             Vector3 position = new Vector3(x + decX, 0, z + decZ);
-            GameObject.Instantiate(Decorations[index], position, rotation, Tile.transform).transform.localScale = new Vector3(2, 2, 2);
+            GameObject.Instantiate(Decorations[index], position, rotation, Tile.transform).transform.localScale = new Vector3(2, 8, 2);
         }
     }
 } 

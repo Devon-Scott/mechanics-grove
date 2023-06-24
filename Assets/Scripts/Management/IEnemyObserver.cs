@@ -7,4 +7,5 @@ public interface IEnemyObserver
 {
     public void OnEnemySpawn(Enemy enemy);
     public void OnEnemyDeath(Enemy enemy);
+    public void OnEnemyVictory(Enemy enemy);
 }
