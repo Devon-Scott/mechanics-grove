@@ -5,7 +5,7 @@ using UnityEngine;
 using MyUtils.Graph;
 
 // https://www.youtube.com/watch?v=uGFzWM1sJjU
-// Change hit logic to update, use spherecast or some kinnd of manual collider to check
+// Change hit logic to update, use spherecast or some kind of manual collider to check
 // That way static AOE damage can just clear hit objects once per second and everything still works
 // Now jsut need to figure out how to get information for the spherecast 
 
@@ -56,7 +56,6 @@ public class Hitbox : MonoBehaviour
         }
         if (Active)
         {
-            
             Collider[] ContactedObjects = Physics.OverlapCapsule(parentPosition, transform.position, SphereCastRadius, TargetableObjects);
             foreach(Collider other in ContactedObjects)
             {
@@ -97,9 +96,12 @@ public class Hitbox : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = (Active ? Color.red : Color.yellow);
         Gizmos.DrawLine(transform.position, parentPosition);
         Gizmos.DrawWireSphere(transform.position, SphereCastRadius);
         Gizmos.DrawWireSphere(parentPosition, SphereCastRadius);
+    }
+
+    void OnDestroy() {
     }
 }

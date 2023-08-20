@@ -424,7 +424,7 @@ namespace StarterAssets
                 }
                 _input.build = false;
             }
-            if (_buildState.BuildState == false)
+            if (_state == State.Build && _buildState.BuildState == false)
             {
                 _state = State.Combat;
                 Destroy(_currentWeapon);
