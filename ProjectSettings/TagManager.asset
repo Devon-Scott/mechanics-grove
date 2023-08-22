@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - EnemyDeathParticle
+  - MiniMapCam
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Path
   - Obstacle
   - Player_Weapon
-  - 
+  - MiniMap
   - 
   - 
   - 

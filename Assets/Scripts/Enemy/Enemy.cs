@@ -108,7 +108,6 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(float damage, Vector3 knockback, float scalar)
     {
-        print("State Machine OnHit Method Called");
         if (currentState != null)
         {
             currentState.OnHit(damage, knockback, scalar);
