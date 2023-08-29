@@ -69,7 +69,7 @@ To-Do list for Mechanic's Grove
                 - <s>Make OnVictory() method in Enemy class</s>
     - Player Class
         - Experiment with identifying owner of hitbox
-        - Use starterAssets as jumping off point for a state machine
+        - <s>Use starterAssets as jumping off point for a state machine</s>
     - Tower Class
         - <s>Has TowerBehaviour component
             - Get Target: choose enemy in range with least distance remaining (or greatest distance from spawn)
@@ -140,10 +140,11 @@ To-Do list for Mechanic's Grove
         - Build mode and combat mode for player
             - Build mode activates small circle showing build location, ready for build menu
             - Build mode can build blockades on path and towers off of path
-            - Carry hammer or other tools to indicate ready to build
+            - <s>Carry hammer or other tools to indicate ready to build</s>
             - Combat mode ready for inputs related to attack, defense, and getting hit
             - Carry sword and shield ready for combat
             - Add animations and hitboxes for sword attacks and defending states
+            - Add onHit and onKnockback functionality for player, with corresponding states
         - Keeping settings object from main menu
             - Render music if music enabled
             - Render sound if sound enabled
