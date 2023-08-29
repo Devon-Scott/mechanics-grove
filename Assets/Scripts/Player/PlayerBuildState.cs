@@ -4,88 +4,109 @@ using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 using MyUtils.Graph;
+using MyUtils.StateMachine;
 
-public class PlayerBuildState : MonoBehaviour
+
+public class PlayerBuildState : PlayerBaseState
 {
-    public GameObject[] Towers;
-    public GameObject[] Meshes;
-    
-    [HideInInspector]
-    public bool BuildState;
-
-    [SerializeField]
-    private LayerMask unallowedTerrain;
-
-    private CharacterController _controller;
-    private StarterAssetsInputs _input;
+    private TowerData _towerData;
+    private float _castCooldown;
+    private float _swapCooldown;
 
     private int _towerIndex;
-    private int _numOfTowers;
+    private LayerMask unallowedTerrain;
 
     private GameObject _towerMesh;
-    private bool _firstUpdate;
 
     // Start is called before the first frame update
-    void Start()
+    public PlayerBuildState(ThirdPersonController owner) : base(owner)
     {
-        _input = GetComponent<StarterAssetsInputs>();
+        _towerData = owner.GetComponent<TowerData>();
+        _towerIndex = 0;
+    }
 
-        _numOfTowers = Towers.GetLength(0);
-        Meshes = new GameObject[_numOfTowers];
-        for (int i = 0; i < _numOfTowers; i++)
+    public override void Enter(ThirdPersonController owner, ArrayList data = null){
+        _towerMesh = ThirdPersonController.Instantiate(_towerData.Meshes[_towerIndex]);
+
+        ThirdPersonController.Destroy(owner._currentWeapon);
+        
+
+        if (owner._currentOffHand)
         {
-            Meshes[i] = new GameObject("TowerMesh " + i);
-            Meshes[i].transform.position = new Vector3(-100, -100, -100);
-            MeshFilter existingMeshFilter = Towers[i].GetComponent<MeshFilter>();
-            MeshFilter newMeshFilter = Meshes[i].AddComponent<MeshFilter>();
-            newMeshFilter.sharedMesh = existingMeshFilter.sharedMesh;
-            newMeshFilter.transform.localScale = existingMeshFilter.transform.localScale;
-
-            MeshRenderer existingRenderer = Towers[i].GetComponent<MeshRenderer>();
-            MeshRenderer newMeshRender = Meshes[i].AddComponent<MeshRenderer>();
-            newMeshRender.sharedMaterials = existingRenderer.sharedMaterials;
+            ThirdPersonController.Destroy(owner._currentOffHand);
+        }
+        else 
+        {
+            ThirdPersonController.print("No offhand object to destroy");
         }
 
-        _towerIndex = 0;
-        _firstUpdate = true;
-        BuildState = false;
+        owner._currentWeapon = ThirdPersonController.Instantiate(owner.weapons[1], owner.rightHandObject.transform);
+        owner._currentOffHand = null;
+        if (owner._hasAnimator)
+        {
+            owner._animator.SetBool("Combat", false);
+            owner._animator.SetBool("Build", true);
+        }
+
+        _swapCooldown = 1f;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update(ThirdPersonController owner)
     {
-        
-        if (BuildState)
+        base.Update(owner);
+        if ((_input.build && _swapCooldown <= 0) || (_castCooldown <= 0 && !_towerMesh))
         {
-            if (_firstUpdate)
-            {
-                _towerMesh = Instantiate(Meshes[_towerIndex]);
-                _firstUpdate = false;
-            }
-            _towerMesh.transform.position = transform.position + transform.forward * 3.5f;
-
-            if (_input.attack)
-            {
-                if (CanBuildTower(_towerMesh.transform.position))
-                {
-                    Instantiate(Towers[_towerIndex], _towerMesh.transform.position, Quaternion.identity);
-                    BuildState = false;
-                }
-                else 
-                {
-                    // Play Error Sound
-                }
-            }
-        } 
-        else
-        {
-            Destroy(_towerMesh);
-            _firstUpdate = true;
+            swapCombat();
         }
+        
+        if (_towerMesh)
+        {
+            _towerMesh.transform.position = owner.transform.position + owner.transform.forward * 3.5f;
+        }
+
+        if (_input.attack && _castCooldown <= 0)
+        {
+            if (CanBuildTower(_towerMesh.transform.position))
+            {
+                ThirdPersonController.Instantiate(_towerData.Towers[_towerIndex], _towerMesh.transform.position, Quaternion.identity);
+                ThirdPersonController.Destroy(_towerMesh);
+                _castCooldown = 1f;
+            }
+            else 
+            {
+                // Play Error Sound
+            }
+        }
+
+        if (_castCooldown > 0)
+        {
+            _castCooldown -= Time.deltaTime;
+        } 
+        if (_swapCooldown > 0)
+        {
+            _swapCooldown -= Time.deltaTime;
+        }
+        
     }
 
+    public override void Exit(ThirdPersonController owner)
+    {
+        
+    }
+
+    void swapCombat()
+    {
+        if (_towerMesh)
+        {
+            ThirdPersonController.Destroy(_towerMesh);
+        }
+        player.stateStack.ChangeState(player.CombatState);
+    }
+
+    // Ensure the new tower doesn't collide with an Enemy, Tower, Obstacle, or Path tile
     bool CanBuildTower(Vector3 position)
     {
-        return !Physics.CheckSphere(position, 2.5f, unallowedTerrain);
+        return !Physics.CheckSphere(position, 2.5f, _towerData.unallowedTerrain);
     }
 }

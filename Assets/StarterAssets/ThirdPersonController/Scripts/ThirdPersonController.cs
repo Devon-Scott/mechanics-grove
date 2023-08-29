@@ -1,7 +1,9 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
+
+using MyUtils.StateMachine;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -14,16 +16,35 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
-        
-        enum State
-        {
-            Build,
-            Combat
-        }
-        private State _state;
-        private PlayerBuildState _buildState;
-
         [Header("Player")]
+
+        public StateStack<ThirdPersonController> stateStack;
+        public PlayerBaseState currentState;
+        public string StateName;
+
+        public PlayerBuildState BuildState;
+        public PlayerCombatState CombatState;
+
+        public float MaxHealth;
+        private float _health;
+        public float Health
+        {
+            get { return _health;}
+            set 
+            {
+                _health = value;
+                if (_health <= 0)
+                {
+                    _health = 0;
+                }
+                // Send a message to the UI to change the health value (Might need to change this)
+                BroadcastMessage("setHealth", Health);
+            }
+        }
+
+        public int Lives;
+        public int Money;
+
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
@@ -113,8 +134,10 @@ namespace StarterAssets
         private int _animIDAttack;
 
         // Item management system
-        private GameObject _currentWeapon;
-        private GameObject _currentOffHand;
+        [HideInInspector]
+        public GameObject _currentWeapon;
+        [HideInInspector]
+        public GameObject _currentOffHand;
         public GameObject leftHandObject;
         public GameObject rightHandObject;
         public GameObject[] weapons;
@@ -122,16 +145,16 @@ namespace StarterAssets
         private Hitbox hitbox;
 
 #if ENABLE_INPUT_SYSTEM 
-        private PlayerInput _playerInput;
+        public PlayerInput _playerInput;
 #endif
         public Animator _animator;
-        private CharacterController _controller;
-        private StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        public CharacterController _controller;
+        public StarterAssetsInputs _input;
+        public GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
 
-        private bool _hasAnimator;
+        public bool _hasAnimator;
 
         private bool IsCurrentDeviceMouse
         {
@@ -175,12 +198,12 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
-            _buildState = GetComponent<PlayerBuildState>();
-            _buildState.BuildState = false;
+            stateStack = new StateStack<ThirdPersonController>(this);
+            BuildState = new PlayerBuildState(this);
+            CombatState = new PlayerCombatState(this);
 
-            _state = State.Combat;
-            _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
-            _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
+            stateStack.Push(CombatState);
+            currentState = (PlayerBaseState)stateStack.CurrentState;
 
             hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
             if (hitbox == null)
@@ -194,11 +217,9 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
             
+            stateStack.Update();
+            currentState = (PlayerBaseState)stateStack.CurrentState;
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
-            HandleState();
             Attack();
         }
 
@@ -217,7 +238,7 @@ namespace StarterAssets
             _animIDAttack = Animator.StringToHash("Attack");
         }
 
-        private void GroundedCheck()
+        public void GroundedCheck()
         {
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
@@ -232,7 +253,7 @@ namespace StarterAssets
             }
         }
 
-        private void CameraRotation()
+        public void CameraRotation()
         {
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
@@ -253,7 +274,7 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void Move()
+        public void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
@@ -321,7 +342,7 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
+        public void JumpAndGravity()
         {
             if (Grounded)
             {
@@ -390,81 +411,26 @@ namespace StarterAssets
             }
         }
 
-        private void HandleState()
-        {
-            if (_input.build)
-            {
-                if (_state == State.Build)
-                {
-                    // Destroy the old, add the new
-                    _state = State.Combat;
-                    _buildState.BuildState = false;
-                    Destroy(_currentWeapon);
-                    _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
-                    _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool("Combat", false);
-                        _animator.SetBool("Build", true);
-                    }
-                }
-                else 
-                {
-                    _state = State.Build;
-                    _buildState.BuildState = true;
-                    Destroy(_currentWeapon);
-                    Destroy(_currentOffHand);
-                    _currentWeapon = Instantiate(weapons[1], rightHandObject.transform);
-                    _currentOffHand = null;
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool("Combat", true);
-                        _animator.SetBool("Build", false);
-                    }
-                }
-                _input.build = false;
-            }
-            if (_state == State.Build && _buildState.BuildState == false)
-            {
-                _state = State.Combat;
-                Destroy(_currentWeapon);
-                _currentWeapon = Instantiate(weapons[0], rightHandObject.transform);
-                _currentOffHand = Instantiate(offHands[0], leftHandObject.transform);
-                if (_hasAnimator)
-                {
-                    _animator.SetBool("Combat", false);
-                    _animator.SetBool("Build", true);
-                }
-            }
-            
-        }
-
         // Basic attack
         private void Attack()
         {
-            if (_state == State.Combat)
+            if (Grounded && _input.attack)
             {
-                if (Grounded && _input.attack)
+                _attackTimeoutDelta = AttackTimeout;
+                if (_hasAnimator)
                 {
-                    _attackTimeoutDelta = AttackTimeout;
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool(_animIDAttack, true);
-                    }
+                    _animator.SetBool(_animIDAttack, true);
                 }
-                if (_attackTimeoutDelta > 0f)
-                {
-                    _attackTimeoutDelta -= Time.deltaTime;
-                }
-                else 
-                {
-                    _attackTimeoutDelta = 0;
-                }
+            }
+            if (_attackTimeoutDelta > 0f)
+            {
+                _attackTimeoutDelta -= Time.deltaTime;
             }
             else 
             {
-
+                _attackTimeoutDelta = 0;
             }
+            
         }
 
         private void EnableDamage(float damage)

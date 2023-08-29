@@ -7,7 +7,7 @@ using MyUtils.Graph;
 // https://www.youtube.com/watch?v=uGFzWM1sJjU
 // Change hit logic to update, use spherecast or some kind of manual collider to check
 // That way static AOE damage can just clear hit objects once per second and everything still works
-// Now jsut need to figure out how to get information for the spherecast 
+// Now just need to figure out how to get information for the spherecast 
 
 public class Hitbox : MonoBehaviour
 {

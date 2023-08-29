@@ -40,11 +40,13 @@ public class EnemyKnockbackState : EnemyBaseState
         this._stats = owner.stats;
         this._gravity = _stats.Gravity;
         this._alive = _stats.Health > 0;
+        _knockbackDirection.y = Math.Abs(_knockbackDirection.y);
         _movement = _knockbackDirection * _speed;
         _movement.y += _verticalStart;
         owner.verticalVelocity = _verticalStart;
         owner.controller.Move(_movement * Time.deltaTime);
         owner.grounded = false;
+        // Enemy.print(_movement.ToString());
     }
 
     public override void Update(Enemy owner)

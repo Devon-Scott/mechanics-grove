@@ -10194,24 +10194,84 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 465709102146074896, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102146074896, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.44500005
+      value: 0.6450001
       objectReference: {fileID: 0}
     - target: {fileID: 465709102146074896, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 465709102146074903, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: orthographic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 465709102146074903, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: field of view
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102146074903, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: near clip plane
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102146074903, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 8183
       objectReference: {fileID: 0}
+    - target: {fileID: 465709102400166088, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: ShoulderOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102400166088, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: ShoulderOffset.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102400166088, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: ShoulderOffset.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6450001
+      objectReference: {fileID: 0}
     - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9996294
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.027223766
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709102876727973, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709103291566538, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.02503407
+      objectReference: {fileID: 0}
+    - target: {fileID: 465709103291566538, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0012542874
       objectReference: {fileID: 0}
     - target: {fileID: 465709103811464028, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
       propertyPath: m_Name
@@ -10273,7 +10333,16 @@ PrefabInstance:
       propertyPath: Towers.Array.data[3]
       value: 
       objectReference: {fileID: 1864950901}
-    m_RemovedComponents: []
+    - target: {fileID: 4477879462889090527, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: Meshes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477879462889090527, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
+      propertyPath: Meshes.Array.data[0]
+      value: 
+      objectReference: {fileID: -1758028175254073469, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3144287950972455250, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 96328c92c0220b3438b746a5496d5ccc, type: 3}
 --- !u!4 &465709104171710259 stripped
 Transform:

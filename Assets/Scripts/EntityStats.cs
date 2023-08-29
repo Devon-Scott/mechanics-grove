@@ -14,6 +14,7 @@ public class EntityStats : MonoBehaviour
             {
                 _health = 0;
             }
+            // Send a message to the health bar to change the health value
             BroadcastMessage("setHealth", Health);
         }
     }

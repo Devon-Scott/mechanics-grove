@@ -134,6 +134,7 @@ public class TowerBehaviour : MonoBehaviour
 
     IEnumerator Fire()
     {
+        yield return new WaitForSeconds(_cooldown);
         while (_target != null)
         {
             Vector3 direction = _towerMechanism.GetFiringVector(_target, _spawnPoints[0]);
