@@ -34,6 +34,7 @@ public class PlayerBaseState : State<ThirdPersonController>
         player.JumpAndGravity();
         player.GroundedCheck();
         player.Move();
+        player.Attack();
     }
 
     public void LateUpdate()
@@ -43,6 +44,6 @@ public class PlayerBaseState : State<ThirdPersonController>
 
     public void HandleEndOfCast()
     {
-        
+
     }
 }

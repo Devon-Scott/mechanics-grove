@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3173464521824087993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3173464521824087975}
+  - component: {fileID: 3173464521824087974}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3173464521824087975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173464521824087993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79663384, y: -2.5654304, z: 2.4113863}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3173464521824087974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173464521824087993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283b8e19efe35844380f534eeef9378c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: {fileID: 11400000, guid: f72c959c6ace3124d804e41f120d5911, type: 2}
+  pathTile: {fileID: 7636358338024919060, guid: 4bd4e37140cde9a419dbc3854554fbb4, type: 3}
+  groundTile: {fileID: 2357419356555822539, guid: cf22a2db10f09a34495e9f83913738c8, type: 3}
+  SpawnPlate: {fileID: 0}
+  Player: {fileID: 0}
+  Decorations:
+  - {fileID: 919132149155446097, guid: 35ee73710ebf4c948a5acfe6197d3a93, type: 3}
+  - {fileID: 919132149155446097, guid: 5030fd1d972e217468a19106448f8aaa, type: 3}
+  - {fileID: 919132149155446097, guid: 09ed0b6959dc0f444a5cf3e0a9f377ef, type: 3}
+  - {fileID: 919132149155446097, guid: 09a86446a6eaebe428b74e42b40bf040, type: 3}
+  - {fileID: 919132149155446097, guid: e22d7b81035e74741b7ca3dc7726906a, type: 3}
+  - {fileID: 919132149155446097, guid: a0b25d18d5364d3479459f7cb7b6d6bb, type: 3}
+  - {fileID: 919132149155446097, guid: 00363705c56790c459450e44ea1ac637, type: 3}
+  - {fileID: 919132149155446097, guid: 727e853cddbd0084c8ba1602fdbfd34a, type: 3}
+  - {fileID: 919132149155446097, guid: 047c042e971e1cd4386923268b19c04c, type: 3}
+  Canvas: {fileID: 797441228203851462, guid: ed3abac918b9f0a45b9fa15751a40162, type: 3}
+  minX: 0
+  minZ: 0
+  maxX: 0
+  maxZ: 0
+  levelNum: 0
+  InstantiatePlayer: 0
+  InstantiateLevel: 0

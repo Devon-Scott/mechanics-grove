@@ -19,6 +19,8 @@ public class EntityStats : MonoBehaviour
         }
     }
 
+    public int Value;
+
     public int Damage;
 
     public float Speed;

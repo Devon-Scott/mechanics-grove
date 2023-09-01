@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59ede7547997f44ab5e3ce9fd35b3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 300
   _projectile: {fileID: 4168939937797049930, guid: 870924e96a5060445b721e3f1e53cc88, type: 3}
   _cooldown: 1
   _attackRadius: 30.85

@@ -67,8 +67,9 @@ public class PlayerBuildState : PlayerBaseState
 
         if (_input.attack && _castCooldown <= 0)
         {
-            if (CanBuildTower(_towerMesh.transform.position))
+            if (CanBuildTower(_towerMesh.transform.position, owner.stats.Money, _towerData.Costs[_towerIndex]))
             {
+                owner.stats.Money -= _towerData.Costs[_towerIndex];
                 ThirdPersonController.Instantiate(_towerData.Towers[_towerIndex], _towerMesh.transform.position, Quaternion.identity);
                 ThirdPersonController.Destroy(_towerMesh);
                 _castCooldown = 1f;
@@ -105,8 +106,11 @@ public class PlayerBuildState : PlayerBaseState
     }
 
     // Ensure the new tower doesn't collide with an Enemy, Tower, Obstacle, or Path tile
-    bool CanBuildTower(Vector3 position)
+    // And that we can afford the tower
+    bool CanBuildTower(Vector3 position, int money, int cost)
     {
-        return !Physics.CheckSphere(position, 2.5f, _towerData.unallowedTerrain);
+        bool validPlace = !Physics.CheckSphere(position, 2.5f, _towerData.unallowedTerrain);
+        bool validPrice = money >= cost;
+        return validPlace && validPrice;
     }
 }

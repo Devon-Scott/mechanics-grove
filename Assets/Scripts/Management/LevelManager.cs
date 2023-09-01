@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyUtils.Graph;
-
+/*
+    Level Maker Class, uses the Level Graph data to instantiate a path,
+    then creates decorations, ground, and other objects
+*/
 public class LevelManager : MonoBehaviour
 {
     public Level level;
@@ -14,27 +17,52 @@ public class LevelManager : MonoBehaviour
     private GameObject Path;
     private GameObject Ground;
 
+    public GameObject Canvas;
+
+    [HideInInspector]
+    public int minX = 0, minZ = 0, maxX= 0, maxZ = 0;
+    public int levelNum;
+
     public bool InstantiatePlayer;
+    public bool InstantiateLevel;
+
+    void Awake()
+    {
+        Initializer init = FindObjectOfType<Initializer>();
+        level = init._levelData;
+        //level.Awake();
+        levelNum = level.LevelNum;
+    }
 
     void Start()
     {
-        level.Awake();
+        // Data  for the size of our map, used for Camera
+        foreach (Vector3 point in level.PathPoints)
+        {
+            minX = (int)Mathf.Min(minX, point.x);
+            minZ = (int)Mathf.Min(minZ, point.z);
+            maxX = (int)Mathf.Max(maxX, point.x);
+            maxZ = (int)Mathf.Max(maxZ, point.z);
+        }
         //Destroy(GameObject.FindWithTag("MainCamera"));
         UnityEngine.Random.InitState(42);
         Path = new GameObject("Path");
         Ground = new GameObject("Ground");
-        foreach (Edge edge in level._graph.edges)
+        if (InstantiateLevel)
         {
-            InstantiateTiles(edge);
-        }
-        for (int x = (int)level.MapCorner.x; x < level.MapCorner.x + level.Width; x += 20)
-        {
-            for (int z = (int)level.MapCorner.z; z < level.MapCorner.z + level.Width; z += 20)
+            foreach (Edge edge in level._graph.edges)
             {
-                InstantiateGround(x, z);
+                InstantiateTiles(edge);
             }
+            for (int x = (int)level.MapCorner.x; x < level.MapCorner.x + level.Width; x += 20)
+            {
+                for (int z = (int)level.MapCorner.z; z < level.MapCorner.z + level.Width; z += 20)
+                {
+                    InstantiateGround(x, z);
+                }
+            }
+            GameObject.Instantiate(SpawnPlate, level.PlayerSpawnPoint, Quaternion.identity);
         }
-        GameObject.Instantiate(SpawnPlate, level.PlayerSpawnPoint, Quaternion.identity);
         if (InstantiatePlayer)
         {
             GameObject.Instantiate(Player, level.PlayerSpawnPoint + (2 * Vector3.up), Quaternion.identity);

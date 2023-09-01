@@ -28,8 +28,12 @@ public class Level : ScriptableObject
     public float Width;
     public float Length;
 
-    public int EnemiesToSpawn;
-    public float EnemyCooldown;
+    public int LevelNum;
+    public int Waves;
+    public int[] EnemiesToSpawn;
+    public int[] TypesToSpawn;
+    public int EnemyCooldown;
+    public int WaveCooldown;
 
     // Needs to be called by the Game manager, or the Level manager
     public void Awake()

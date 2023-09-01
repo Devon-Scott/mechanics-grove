@@ -5,6 +5,8 @@ using MyUtils.Graph;
 
 public class TowerBehaviour : MonoBehaviour
 {
+    [Header("Stats")]
+    public int Cost;
     [SerializeField]    
     private Projectile _projectile;
     [SerializeField]
@@ -26,7 +28,6 @@ public class TowerBehaviour : MonoBehaviour
     
     private Vector3[] _spawnPoints;
     private int _numOfSpawnPoints;
-    
     
     private bool _firing;
     private Collider _target;

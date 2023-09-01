@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -14,8 +16,9 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : MonoBehaviour, IEnemyObserver
     {
+        private List<IPlayerObserver> observers = new List<IPlayerObserver>();
         [Header("Player")]
 
         public StateStack<ThirdPersonController> stateStack;
@@ -25,25 +28,8 @@ namespace StarterAssets
         public PlayerBuildState BuildState;
         public PlayerCombatState CombatState;
 
-        public float MaxHealth;
-        private float _health;
-        public float Health
-        {
-            get { return _health;}
-            set 
-            {
-                _health = value;
-                if (_health <= 0)
-                {
-                    _health = 0;
-                }
-                // Send a message to the UI to change the health value (Might need to change this)
-                BroadcastMessage("setHealth", Health);
-            }
-        }
+        public PlayerStats stats;
 
-        public int Lives;
-        public int Money;
 
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -220,7 +206,6 @@ namespace StarterAssets
             stateStack.Update();
             currentState = (PlayerBaseState)stateStack.CurrentState;
 
-            Attack();
         }
 
         private void LateUpdate()
@@ -412,7 +397,7 @@ namespace StarterAssets
         }
 
         // Basic attack
-        private void Attack()
+        public void Attack()
         {
             if (Grounded && _input.attack)
             {
@@ -449,6 +434,62 @@ namespace StarterAssets
             {
                 _animator.SetBool(_animIDAttack, false);
             }
+        }
+
+        public void TriggerDeath()
+        {
+            // Probably should implement different logic, not sure
+            // stateMachine.changeState(KnockbackState, true)
+        }
+
+        public void TriggerGameOver()
+        {
+
+        }
+
+        public void AddObserver(IPlayerObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void OnSpawn()
+        {
+            observers.ForEach(observer => observer.OnPlayerSpawn(this)); 
+        }
+        
+        public void OnHealth(int health)
+        {
+            observers.ForEach(observer => observer.OnPlayerHealth(health)); 
+        }
+
+        public void OnMoney(int money)
+        {
+            observers.ForEach(observer => observer.OnPlayerMoney(money)); 
+        }
+
+        public void OnDeath()
+        {
+            observers.ForEach(observer => observer.OnPlayerDeath(this)); 
+        }
+
+        public void OnLifeLost(int lives)
+        {
+            observers.ForEach(observer => observer.OnPlayerLifeLost(lives)); 
+        }
+
+        public void OnVictory()
+        {
+            observers.ForEach(observer => observer.OnPlayerVictory(this)); 
+        }
+
+        public void OnEnemySpawn(Enemy enemy){}
+        public void OnEnemyDeath(Enemy enemy)
+        {
+            this.stats.Money += enemy.stats.Value;
+        }
+        public void OnEnemyVictory(Enemy enemy)
+        {
+            this.stats.Lives -= 1;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

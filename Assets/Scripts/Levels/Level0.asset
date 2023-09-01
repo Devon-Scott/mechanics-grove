@@ -33,5 +33,9 @@ MonoBehaviour:
   MapCorner: {x: -30, y: 0, z: -30}
   Width: 70
   Length: 70
-  EnemiesToSpawn: 10
+  LevelNum: 0
+  Waves: 7
+  EnemiesToSpawn: 14000000140000001400000014000000140000001400000014000000
+  TypesToSpawn: 00000000
   EnemyCooldown: 2
+  WaveCooldown: 2

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class TowerData : MonoBehaviour
 {
     public GameObject[] Towers;
     public GameObject[] Meshes;
+    public int[] Costs;
 
     private int _numOfTowers;
 
@@ -16,6 +18,7 @@ public class TowerData : MonoBehaviour
     {
         _numOfTowers = Towers.GetLength(0);
         Meshes = new GameObject[_numOfTowers];
+        Costs = new int[_numOfTowers];
         for (int i = 0; i < _numOfTowers; i++)
         {
             Meshes[i] = new GameObject("TowerMesh " + i);
@@ -28,6 +31,8 @@ public class TowerData : MonoBehaviour
             MeshRenderer existingRenderer = Towers[i].GetComponent<MeshRenderer>();
             MeshRenderer newMeshRender = Meshes[i].AddComponent<MeshRenderer>();
             newMeshRender.sharedMaterials = existingRenderer.sharedMaterials;
+
+            Costs[i] = Towers[i].GetComponentInChildren<TowerBehaviour>().Cost;
         }
 
     }
