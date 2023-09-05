@@ -26,12 +26,12 @@ public class Initializer : MonoBehaviour
 
     void Awake()
     {
-
+// Make player add collider manager as observer
         GameObject.Instantiate(_event);
         Assert.IsNotNull(_levelData);
         _levelData.Awake();
-        GameObject.Instantiate(_level);
         GameObject.Instantiate(_collider);
+        GameObject.Instantiate(_level);
         GameObject.Instantiate(_enemy);
         GameObject.Instantiate(_canvas);
     }

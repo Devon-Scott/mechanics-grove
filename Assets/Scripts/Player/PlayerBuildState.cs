@@ -93,7 +93,10 @@ public class PlayerBuildState : PlayerBaseState
 
     public override void Exit(ThirdPersonController owner)
     {
-        
+        if (_towerMesh)
+        {
+            ThirdPersonController.Destroy(_towerMesh);
+        }
     }
 
     void swapCombat()

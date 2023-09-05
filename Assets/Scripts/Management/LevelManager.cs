@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+
         // Data  for the size of our map, used for Camera
         foreach (Vector3 point in level.PathPoints)
         {
@@ -67,6 +68,8 @@ public class LevelManager : MonoBehaviour
         {
             GameObject.Instantiate(Player, level.PlayerSpawnPoint + (2 * Vector3.up), Quaternion.identity);
         }
+        // add player observer?
+
     }
 
     void InstantiateTiles(Edge edge)

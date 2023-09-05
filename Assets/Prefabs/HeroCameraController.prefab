@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465709102146074899}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6450001, z: -5}
+  m_LocalPosition: {x: 0.20000005, y: 0.44500005, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2172,6 +2172,7 @@ GameObject:
   - component: {fileID: 465709102764913990}
   - component: {fileID: 465709102764913985}
   - component: {fileID: 465709102764913984}
+  - component: {fileID: 4562428933329425262}
   - component: {fileID: 465709102764913987}
   m_Layer: 7
   m_Name: PlayerArmature
@@ -2251,6 +2252,10 @@ MonoBehaviour:
   Towers:
   - {fileID: 6388438535645025325, guid: 8cb2879244b679b4bab2f3056b596b24, type: 3}
   Meshes: []
+  Costs: 
+  unallowedTerrain:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4087989390086075265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2263,7 +2268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1650f38610323ee46b456358cc0c4243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  MaxHealth: 0
+  _health: 0
+  InitialLives: 0
+  InitialMoney: 0
   knockbackThreshold: 3
 --- !u!114 &465709102764913990
 MonoBehaviour:
@@ -2278,9 +2286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateName: 
-  MaxHealth: 0
-  Lives: 0
-  Money: 0
+  stats: {fileID: 0}
   MoveSpeed: 3
   SprintSpeed: 7
   RotationSmoothTime: 0.12
@@ -2314,6 +2320,13 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _animIDSpeed: 0
+  _animIDGrounded: 0
+  _animIDJump: 0
+  _animIDFreeFall: 0
+  _animIDMotionSpeed: 0
+  _animIDAttack: 0
+  _animIDKnockback: 0
   _currentWeapon: {fileID: 0}
   _currentOffHand: {fileID: 0}
   leftHandObject: {fileID: 465709104111545971}
@@ -2367,6 +2380,20 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+--- !u!114 &4562428933329425262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465709102764914013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d16df234213284e88fb82bfb3cbb05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats: {fileID: 0}
+  Self: {fileID: 0}
 --- !u!114 &465709102764913987
 MonoBehaviour:
   m_ObjectHideFlags: 0

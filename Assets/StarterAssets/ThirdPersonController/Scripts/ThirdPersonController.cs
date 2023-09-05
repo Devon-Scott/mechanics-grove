@@ -27,6 +27,9 @@ namespace StarterAssets
 
         public PlayerBuildState BuildState;
         public PlayerCombatState CombatState;
+        public PlayerKnockbackState KnockbackState;
+        public PlayerGetUpState GetUpState;
+        public PlayerHitState HitState;
 
         public PlayerStats stats;
 
@@ -112,12 +115,14 @@ namespace StarterAssets
         private float _attackTimeoutDelta;
 
         // animation IDs
-        private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
-        private int _animIDAttack;
+        public int _animIDSpeed;
+        public int _animIDGrounded;
+        public int _animIDJump;
+        public int _animIDFreeFall;
+        public int _animIDMotionSpeed;
+        public int _animIDAttack;
+        public int _animIDKnockback;
+        public int _animIDHit;
 
         // Item management system
         [HideInInspector]
@@ -129,6 +134,8 @@ namespace StarterAssets
         public GameObject[] weapons;
         public GameObject[] offHands;
         private Hitbox hitbox;
+        private ColliderManager _colliderManager;
+
 
 #if ENABLE_INPUT_SYSTEM 
         public PlayerInput _playerInput;
@@ -187,9 +194,15 @@ namespace StarterAssets
             stateStack = new StateStack<ThirdPersonController>(this);
             BuildState = new PlayerBuildState(this);
             CombatState = new PlayerCombatState(this);
+            KnockbackState = new PlayerKnockbackState(this);
+            GetUpState = new PlayerGetUpState(this);
+            HitState = new PlayerHitState(this);
 
             stateStack.Push(CombatState);
             currentState = (PlayerBaseState)stateStack.CurrentState;
+
+            _colliderManager = GameObject.FindObjectOfType<ColliderManager>();
+            AddObserver(_colliderManager);
 
             hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
             if (hitbox == null)
@@ -197,11 +210,13 @@ namespace StarterAssets
                 print("Error in getting hitbox");
             }
             _animator.SetBool("Combat", true);
+
+            OnSpawn();
         }
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
+            //_hasAnimator = TryGetComponent(out _animator);
             
             stateStack.Update();
             currentState = (PlayerBaseState)stateStack.CurrentState;
@@ -221,6 +236,23 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDAttack = Animator.StringToHash("Attack");
+            _animIDKnockback = Animator.StringToHash("Knockback");
+            _animIDHit = Animator.StringToHash("Hit");
+        }
+
+        public void OnHit(float damage, Vector3 knockback, float scalar)
+        {
+            currentState.OnHit(damage, knockback, scalar);
+        }
+
+        private void ExitKnockback()
+        {
+            stateStack.ChangeState(CombatState);
+        }
+
+        private void Transition()
+        {
+            currentState.Transition();
         }
 
         public void GroundedCheck()
@@ -440,6 +472,8 @@ namespace StarterAssets
         {
             // Probably should implement different logic, not sure
             // stateMachine.changeState(KnockbackState, true)
+
+            // Just use playerstats to send an event
         }
 
         public void TriggerGameOver()

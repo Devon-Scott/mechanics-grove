@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
-public class ColliderManager : MonoBehaviour, IEnemyObserver
+public class ColliderManager : MonoBehaviour, IEnemyObserver, IPlayerObserver
 {
     // This class will also need to be IColliderObserver
     public static Dictionary<Collider, Hurtbox> ColliderDictionary;
@@ -45,4 +46,15 @@ public class ColliderManager : MonoBehaviour, IEnemyObserver
         ColliderDictionary.Remove(enemyCollider);
     }
 
+    public void OnPlayerSpawn(ThirdPersonController player)
+    {
+        Hurtbox playerHurtbox = player.GetComponent<Hurtbox>();
+        Collider playerCollider = player.GetComponent<Collider>();
+        ColliderDictionary.Add(playerCollider, playerHurtbox);
+    }
+    public void OnPlayerHealth(int health){}
+    public void OnPlayerMoney(int money){}
+    public void OnPlayerDeath(ThirdPersonController player){}
+    public void OnPlayerLifeLost(int lives){}
+    public void OnPlayerVictory(ThirdPersonController player){}
 }

@@ -1,4 +1,5 @@
-using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;using UnityEngine;
 using StarterAssets;
 using MyUtils.StateMachine;
 #if ENABLE_INPUT_SYSTEM 
@@ -10,6 +11,7 @@ public class PlayerBaseState : State<ThirdPersonController>
     public ThirdPersonController player;
     public CharacterController _controller;
     public StarterAssetsInputs _input;
+    public PlayerStats _stats;
     
  
     protected Vector3 gravityVelocity;
@@ -27,6 +29,7 @@ public class PlayerBaseState : State<ThirdPersonController>
         player = owner;
         _input = owner._input;
         _controller = owner._controller;
+        _stats = owner.GetComponent<PlayerStats>();
     }
 
     public override void Update(ThirdPersonController owner)
@@ -42,8 +45,26 @@ public class PlayerBaseState : State<ThirdPersonController>
         player.CameraRotation();
     }
 
+    public virtual void OnHit(float damage, Vector3 knockback, float scalar)
+    {
+        _stats.Health -= damage;
+        ArrayList data = new ArrayList();
+        data.Add(knockback);
+        data.Add(scalar);
+        if ((knockback * scalar).magnitude > _stats.knockbackThreshold)
+        {
+            player.stateStack.ChangeState(player.KnockbackState, data);
+        }
+        else
+        {
+            player.stateStack.ChangeState(player.HitState, data);
+        }
+    }
+
     public void HandleEndOfCast()
     {
 
     }
+
+    public virtual void Transition(){}
 }

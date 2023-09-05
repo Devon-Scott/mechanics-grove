@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public bool hasAnimator;
     public SphereCollider environmentCheck;
+    private Hitbox _hitbox;
     public Collider target;
 
     public bool knockedBack;
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
         hasAnimator = TryGetComponent(out animator);
         controller = GetComponent<CharacterController>();
         environmentCheck = GetComponent<SphereCollider>();
+        _hitbox = GetComponentInChildren<Hitbox>();
         target = null;
         stats = GetComponent<EntityStats>();
         stateStack.Push(MoveState);
@@ -116,6 +118,16 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Current state was somehow null");
         }
+    }
+
+    private void EnableDamage()
+    {
+        _hitbox.EnableDamage(stats.Damage);
+    }
+
+    private void DisableDamage()
+    {
+        _hitbox.DisableDamage();
     }
 
     // When an enemy is selected in the inspector, draws a red line on all the
