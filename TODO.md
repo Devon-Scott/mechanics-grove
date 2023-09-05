@@ -20,7 +20,7 @@ To-Do list for Mechanic's Grove
     - <s>Linking of models and animation</s>
     - Implementing combat system:
         - Cooldowns on enemy attacks
-        - <s>Hitbox and Hurtbox registration</s> and knockback on affected objects
+        - <s>Hitbox and Hurtbox registration and knockback on affected objects</s>
         - <s>Hitbox has static dictionary so that all hitboxes can quickly reference colliders (hurtboxes) they hit</s>
         - Attacks attack hitboxes, different attacks produce different hitboxes
         - <s>Learn how to use animation events to pass arguments to EnableHitbox()</s>
@@ -142,9 +142,9 @@ To-Do list for Mechanic's Grove
             - Build mode can build blockades on path and towers off of path
             - <s>Carry hammer or other tools to indicate ready to build</s>
             - Combat mode ready for inputs related to attack, defense, and getting hit
-            - Carry sword and shield ready for combat
-            - Add animations and hitboxes for sword attacks and defending states
-            - Add onHit and onKnockback functionality for player, with corresponding states
+            - <s>Carry sword and shield ready for combat
+            - Add animations and hitboxes for sword attacks and defending states</s>
+            - <s>Add onHit and onKnockback functionality for player, with corresponding states</s>
         - Keeping settings object from main menu
             - Render music if music enabled
             - Render sound if sound enabled
