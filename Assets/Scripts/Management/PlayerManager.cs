@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour//, IPlayerObserver
 
     public void VictoryRoutine(System.Object eventData)
     {
-        //PlayerPrefs.SetInt("Score", _playerStats.Score);
+        PlayerPrefs.SetInt("Score", _playerStats.Score);
         SceneManager.LoadSceneAsync("Victory");
     }
 

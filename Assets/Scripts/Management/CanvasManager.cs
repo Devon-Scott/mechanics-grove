@@ -43,10 +43,7 @@ public class CanvasManager : MonoBehaviour, IPlayerObserver, IEnemyObserver
     private PlayerStats _playerStats;
 
     void Awake()
-    {
-        // Set up camera to the perfect height and location
-        CameraInit();
-
+    {      
         // Set up references to relevant game objects
         if (_levelData is null)
         {
@@ -56,7 +53,7 @@ public class CanvasManager : MonoBehaviour, IPlayerObserver, IEnemyObserver
         {
             _eventManager = FindObjectOfType<EventManager>();
         }
-        _miniMapCamera = FindObjectOfType<Initializer>().MiniMapCamera;
+        _miniMapCamera = GameObject.FindWithTag("MiniMapCam");
   
         _healthText = Health.GetComponent<TMP_Text>();
         _livesText = Lives.GetComponent<TMP_Text>();
@@ -68,13 +65,14 @@ public class CanvasManager : MonoBehaviour, IPlayerObserver, IEnemyObserver
 
         _eventManager.NextWave.Subscribe(updateWave);
         _eventManager.FirstPlayerSpawn.Subscribe(CanvasInit);
+        CameraInit();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         // Wave text is updated by Enemy Manager
-        FadeIn();
+        //FadeIn();
     }
 
     // Update is called once per frame
@@ -90,7 +88,10 @@ public class CanvasManager : MonoBehaviour, IPlayerObserver, IEnemyObserver
             Camera camComponent = _miniMapCamera.GetComponent<Camera>();
             Vector3 location = new Vector3((_levelData.minX + _levelData.maxX) / 2, 20, (_levelData.minZ + _levelData.maxZ) / 2);
             _miniMapCamera.transform.position = location;
-            camComponent.orthographicSize = Mathf.Max(Mathf.Abs((_levelData.maxX - _levelData.minX) / 2), Mathf.Abs((_levelData.maxZ - _levelData.minZ) / 2)) / 2;
+            camComponent.orthographic = true;
+            float horizontalSize = Mathf.Abs((_levelData.maxX - _levelData.minX) / 2);
+            float verticalSize = Mathf.Abs((_levelData.maxZ - _levelData.minZ) / 2);
+            camComponent.orthographicSize = Mathf.Max(horizontalSize, verticalSize);
         }
     }
 

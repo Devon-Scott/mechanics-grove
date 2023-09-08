@@ -51,5 +51,6 @@ MonoBehaviour:
   _level: {fileID: 3173464521824087993, guid: bfcbdb072eb289646948e9279c0c8d9d, type: 3}
   _player: {fileID: 8118353837186846822, guid: 1daf2ea00337c8e4fb503427f17d09fe, type: 3}
   _levelData: {fileID: 11400000, guid: f72c959c6ace3124d804e41f120d5911, type: 2}
+  MiniMapCamera: {fileID: 5604410963401732603, guid: 1b8992749ea1bc54fb582849b16e8da2, type: 3}
   InstantiatePlayer: 0
   InstantiateLevel: 0

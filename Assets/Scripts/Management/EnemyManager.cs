@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public GameObject[] Enemies;
     public Level level;
     private int _enemiesSpawned;
-    private int _enemiesKilled;
+    [SerializeField] private int _enemiesKilled;
     private int _enemiesPassed;
     private ColliderManager _colliderManager;
     [HideInInspector]
@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int[] _typesToSpawn;
     private int _enemyCooldown;
     private int _waveCooldown;
-    private int _maxEnemies;
+    [SerializeField] private int _maxEnemies;
 
     public GameObject[] Players;
     //private CanvasManager canvas;
@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemyDeath(Enemy enemy)
     {
         _enemiesKilled++;
-        if (_enemiesKilled > _maxEnemies)
+        if (_enemiesKilled >= _maxEnemies)
         {   
             _eventManager.Victory.RaiseEvent(new LevelStartEvent());
         }

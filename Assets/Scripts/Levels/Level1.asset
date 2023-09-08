@@ -53,5 +53,5 @@ MonoBehaviour:
   Waves: 4
   EnemiesToSpawn: 14000000140000001400000014000000
   TypesToSpawn: 
-  EnemyCooldown: 1
+  EnemyCooldown: 0
   WaveCooldown: 0

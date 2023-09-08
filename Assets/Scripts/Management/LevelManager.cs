@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
     public GameObject SpawnPlate;
     public GameObject Player;
     public GameObject[] Decorations;
+    public GameObject[] BorderObjects;
+    public GameObject[] Trees;
     private GameObject Path;
     private GameObject Ground;
 
@@ -42,12 +44,7 @@ public class LevelManager : MonoBehaviour
         //level.Awake();
         levelNum = level.LevelNum;
         spawnPoint = level.PlayerSpawnPoint;
-    }
 
-    void Start()
-    {
-        
-        // Data  for the size of our map, used for Camera
         foreach (Vector3 point in level.PathPoints)
         {
             minX = (int)Mathf.Min(minX, point.x);
@@ -55,6 +52,13 @@ public class LevelManager : MonoBehaviour
             maxX = (int)Mathf.Max(maxX, point.x);
             maxZ = (int)Mathf.Max(maxZ, point.z);
         }
+    }
+
+    void Start()
+    {
+        
+        // Data  for the size of our map, used for Camera
+
         //Destroy(GameObject.FindWithTag("MainCamera"));
         UnityEngine.Random.InitState(42);
         Path = new GameObject("Path");

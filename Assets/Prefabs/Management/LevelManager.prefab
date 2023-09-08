@@ -61,6 +61,14 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 00363705c56790c459450e44ea1ac637, type: 3}
   - {fileID: 919132149155446097, guid: 727e853cddbd0084c8ba1602fdbfd34a, type: 3}
   - {fileID: 919132149155446097, guid: 047c042e971e1cd4386923268b19c04c, type: 3}
+  BorderObjects:
+  - {fileID: 200864487664385347, guid: 512b72c73a22e904d87662ebca8eb1e1, type: 3}
+  - {fileID: 5752586314121210879, guid: 034023ff02a37fc47aab6bc6c49bf15b, type: 3}
+  Trees:
+  - {fileID: 2636820298107493410, guid: a2bd798ea40c7e341aa61ad124d95342, type: 3}
+  - {fileID: 9154215057541871321, guid: 2554008d6447a2540b44e55f0c0b576e, type: 3}
+  - {fileID: 6846767348704259191, guid: 273b8f4150121d249ac7e2fd11da7005, type: 3}
+  - {fileID: 4032642331417584291, guid: e133dac167ef59c40b7678ba58107c6a, type: 3}
   Canvas: {fileID: 797441228203851462, guid: ed3abac918b9f0a45b9fa15751a40162, type: 3}
   minX: 0
   minZ: 0

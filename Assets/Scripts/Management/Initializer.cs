@@ -16,7 +16,9 @@ public class Initializer : MonoBehaviour
 
     // Assume Level will be added via Unity Editor
     public Level _levelData;
-    public GameObject MiniMapCamera;
+
+    // Camera needs to be added to the scene so Canvas can manipulate it
+    [SerializeField] private GameObject _miniMapCamera;
 
     public bool InstantiatePlayer;
     public bool InstantiateLevel;
@@ -30,9 +32,9 @@ public class Initializer : MonoBehaviour
         GameObject.Instantiate(_collider);
         GameObject.Instantiate(_level);
         GameObject.Instantiate(_enemy);
+        GameObject.Instantiate(_miniMapCamera);
         GameObject.Instantiate(_canvas);
         GameObject.Instantiate(_player);
-        GameObject.Instantiate(MiniMapCamera);
     }
 
     // Start is called before the first frame update
