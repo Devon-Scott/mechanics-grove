@@ -50,7 +50,10 @@ public class ColliderManager : MonoBehaviour, IEnemyObserver, IPlayerObserver
     {
         Hurtbox playerHurtbox = player.GetComponent<Hurtbox>();
         Collider playerCollider = player.GetComponent<Collider>();
-        ColliderDictionary.Add(playerCollider, playerHurtbox);
+        if (!ColliderDictionary.ContainsKey(playerCollider))
+        {
+            ColliderDictionary.Add(playerCollider, playerHurtbox);
+        }
     }
     public void OnPlayerHealth(int health){}
     public void OnPlayerMoney(int money){}

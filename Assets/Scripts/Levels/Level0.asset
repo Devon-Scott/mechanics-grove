@@ -35,7 +35,7 @@ MonoBehaviour:
   Length: 70
   LevelNum: 0
   Waves: 7
-  EnemiesToSpawn: 14000000140000001400000014000000140000001400000014000000
+  EnemiesToSpawn: 02000000020000000200000002000000020000000200000002000000
   TypesToSpawn: 00000000
-  EnemyCooldown: 2
-  WaveCooldown: 2
+  EnemyCooldown: 0
+  WaveCooldown: 1

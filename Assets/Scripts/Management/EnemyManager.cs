@@ -24,6 +24,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     private int[] _typesToSpawn;
     private int _enemyCooldown;
     private int _waveCooldown;
+    private int _maxEnemies;
 
     public GameObject[] Players;
     //private CanvasManager canvas;
@@ -39,6 +40,7 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         _enemiesSpawned = 0;
         _enemiesKilled = 0;
         _enemiesPassed = 0;
+        _maxEnemies = 0;
     }
 
     void Start()
@@ -58,6 +60,11 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         _typesToSpawn = level.TypesToSpawn;
         _enemyCooldown = level.EnemyCooldown;
         _waveCooldown = level.WaveCooldown;
+
+        for (int i = 0; i < waves; i++)
+        {
+            _maxEnemies += _enemiesToSpawn[i];
+        }
 
         _colliderManager = GameObject.FindObjectOfType<ColliderManager>();
         if (Enemy.PlayerList == null)
@@ -89,6 +96,10 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
     public void OnEnemyDeath(Enemy enemy)
     {
         _enemiesKilled++;
+        if (_enemiesKilled > _maxEnemies)
+        {   
+            _eventManager.Victory.RaiseEvent(new LevelStartEvent());
+        }
     }
 
     public void OnEnemyVictory(Enemy enemy)

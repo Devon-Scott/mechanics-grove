@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
             if (_health <= 0)
             {
                 _health = 0;
-                BroadcastMessage("TriggerDeath");
+                BroadcastMessage("OnDeath");
             }
             // Send a message to the health bar to change the health value
             BroadcastMessage("OnHealth", Health);
@@ -38,9 +38,12 @@ public class PlayerStats : MonoBehaviour
             {
                 BroadcastMessage("TriggerGameOver");
             }
-            BroadcastMessage("OnLifeLost", _lives);
+            BroadcastMessage("OnLifeLost", Lives);
         }
     }
+
+    private int _score;
+    public int Score{get; set;}
 
     public int InitialMoney;
     private int _money;
@@ -50,9 +53,10 @@ public class PlayerStats : MonoBehaviour
         set 
         {
             _money = value;
-            BroadcastMessage("OnMoney", _money);
+            BroadcastMessage("OnMoney", Money);
         }
     }
+
     public int knockbackThreshold;
 
     private Animator animator;
@@ -65,29 +69,12 @@ public class PlayerStats : MonoBehaviour
         Money = InitialMoney;
         _player = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
+        Score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void HandleHit(int damage, Vector3 impact)
-    {
-        print("Player hit for " + damage + " damage");
-        Health -= damage;
-        if (damage >= knockbackThreshold){
-            EnterKnockback(impact);
-        }
-        if (Health <= 0)
-        {
-            print("Object has died");
-        }
-    }
-
-    void EnterKnockback(Vector3 impact)
-    {
-        //print(impact.ToString());
     }
 }

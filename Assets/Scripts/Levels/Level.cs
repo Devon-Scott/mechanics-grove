@@ -30,6 +30,7 @@ public class Level : ScriptableObject
 
     public int LevelNum;
     public int Waves;
+    [Tooltip("The number of enemies to spawn in the ith wave, an integer")]
     public int[] EnemiesToSpawn;
     public int[] TypesToSpawn;
     public int EnemyCooldown;

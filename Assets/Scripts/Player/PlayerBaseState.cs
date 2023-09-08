@@ -13,7 +13,6 @@ public class PlayerBaseState : State<ThirdPersonController>
     public StarterAssetsInputs _input;
     public PlayerStats _stats;
     
- 
     protected Vector3 gravityVelocity;
     protected Vector3 velocity;
     protected Vector2 input;
@@ -51,7 +50,7 @@ public class PlayerBaseState : State<ThirdPersonController>
         ArrayList data = new ArrayList();
         data.Add(knockback);
         data.Add(scalar);
-        if ((knockback * scalar).magnitude > _stats.knockbackThreshold)
+        if ((knockback * scalar).magnitude > _stats.knockbackThreshold || _stats.Health <= 0)
         {
             player.stateStack.ChangeState(player.KnockbackState, data);
         }

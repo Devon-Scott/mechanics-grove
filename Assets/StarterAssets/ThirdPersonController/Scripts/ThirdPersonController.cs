@@ -33,6 +33,7 @@ namespace StarterAssets
 
         public PlayerStats stats;
 
+        public EventManager eventManager;
 
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -123,6 +124,7 @@ namespace StarterAssets
         public int _animIDAttack;
         public int _animIDKnockback;
         public int _animIDHit;
+        public int _animIDRevived;
 
         // Item management system
         [HideInInspector]
@@ -164,7 +166,7 @@ namespace StarterAssets
 
         private void Awake()
         {
-            
+            _hasAnimator = TryGetComponent(out _animator);
         }
 
         private void Start()
@@ -176,7 +178,6 @@ namespace StarterAssets
             }
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
-            _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM 
@@ -203,6 +204,8 @@ namespace StarterAssets
 
             _colliderManager = GameObject.FindObjectOfType<ColliderManager>();
             AddObserver(_colliderManager);
+
+            eventManager = FindObjectOfType<EventManager>();
 
             hitbox = _currentWeapon.GetComponentInChildren<Hitbox>();
             if (hitbox == null)
@@ -238,6 +241,7 @@ namespace StarterAssets
             _animIDAttack = Animator.StringToHash("Attack");
             _animIDKnockback = Animator.StringToHash("Knockback");
             _animIDHit = Animator.StringToHash("Hit");
+            _animIDRevived = Animator.StringToHash("Revived");
         }
 
         public void OnHit(float damage, Vector3 knockback, float scalar)
@@ -468,17 +472,9 @@ namespace StarterAssets
             }
         }
 
-        public void TriggerDeath()
-        {
-            // Probably should implement different logic, not sure
-            // stateMachine.changeState(KnockbackState, true)
-
-            // Just use playerstats to send an event
-        }
-
         public void TriggerGameOver()
         {
-
+            eventManager.GameOver.RaiseEvent(new LevelStartEvent());
         }
 
         public void AddObserver(IPlayerObserver observer)
@@ -493,19 +489,23 @@ namespace StarterAssets
         
         public void OnHealth(int health)
         {
+            _animator.SetInteger("Health", health);
             observers.ForEach(observer => observer.OnPlayerHealth(health)); 
         }
 
         public void OnMoney(int money)
         {
             observers.ForEach(observer => observer.OnPlayerMoney(money)); 
+            stats.Score += money;
         }
 
         public void OnDeath()
         {
+            eventManager.PlayerDeath.RaiseEvent();
             observers.ForEach(observer => observer.OnPlayerDeath(this)); 
         }
 
+        // Life lost can be triggered by enemies reaching the end of the path
         public void OnLifeLost(int lives)
         {
             observers.ForEach(observer => observer.OnPlayerLifeLost(lives)); 

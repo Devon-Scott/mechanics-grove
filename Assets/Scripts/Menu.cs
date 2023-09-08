@@ -5,13 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(1);
+        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadSceneAsync("Level 1");
     }
 
     public void OnQuitButton()
     {
         Application.Quit();
+    }
+
+    public void OnPlayAgainButton()
+    {
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 }

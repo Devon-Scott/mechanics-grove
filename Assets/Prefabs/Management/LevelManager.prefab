@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: f72c959c6ace3124d804e41f120d5911, type: 2}
+  eventManager: {fileID: 0}
+  spawnPoint: {x: 0, y: 0, z: 0}
   pathTile: {fileID: 7636358338024919060, guid: 4bd4e37140cde9a419dbc3854554fbb4, type: 3}
   groundTile: {fileID: 2357419356555822539, guid: cf22a2db10f09a34495e9f83913738c8, type: 3}
-  SpawnPlate: {fileID: 0}
+  SpawnPlate: {fileID: 6611424851185418485, guid: 3ebc37679901cad45ae2b12cbd12d46c, type: 3}
   Player: {fileID: 0}
   Decorations:
   - {fileID: 919132149155446097, guid: 35ee73710ebf4c948a5acfe6197d3a93, type: 3}

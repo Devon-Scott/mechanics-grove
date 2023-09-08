@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7517795503279189831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7517795503279189829}
+  - component: {fileID: 7517795503279189828}
+  m_Layer: 0
+  m_Name: Initializer
+  m_TagString: Init
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7517795503279189829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517795503279189831}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4114046, y: 16.585403, z: -1.1562691}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7517795503279189828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517795503279189831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b57d0585ec1954097537354749619c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 797441228203851462, guid: ed3abac918b9f0a45b9fa15751a40162, type: 3}
+  _collider: {fileID: 4096669593822114320, guid: 83fd3fdc033047041977ab22a51cb94b, type: 3}
+  _enemy: {fileID: 9145763562962242997, guid: 26fe86e68ea4bae4c9339a2f543bfa4a, type: 3}
+  _event: {fileID: 1144353056524566886, guid: 920eb17bb545c1644be4d8fccbeb8417, type: 3}
+  _level: {fileID: 3173464521824087993, guid: bfcbdb072eb289646948e9279c0c8d9d, type: 3}
+  _player: {fileID: 8118353837186846822, guid: 1daf2ea00337c8e4fb503427f17d09fe, type: 3}
+  _levelData: {fileID: 11400000, guid: f72c959c6ace3124d804e41f120d5911, type: 2}
+  InstantiatePlayer: 0
+  InstantiateLevel: 0

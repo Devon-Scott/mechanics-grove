@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using MyUtils.Graph;
+
 /*
     Level Maker Class, uses the Level Graph data to instantiate a path,
     then creates decorations, ground, and other objects
@@ -9,6 +11,10 @@ using MyUtils.Graph;
 public class LevelManager : MonoBehaviour
 {
     public Level level;
+    public EventManager eventManager;
+
+    public Vector3 spawnPoint;
+
     public GameObject pathTile;
     public GameObject groundTile;
     public GameObject SpawnPlate;
@@ -19,7 +25,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject Canvas;
 
-    [HideInInspector]
+    
     public int minX = 0, minZ = 0, maxX= 0, maxZ = 0;
     public int levelNum;
 
@@ -28,15 +34,19 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        // Initializer enforces these two are loaded before Level Manager
         Initializer init = FindObjectOfType<Initializer>();
+        eventManager = FindObjectOfType<EventManager>();
+        InstantiateLevel = init.InstantiateLevel;
         level = init._levelData;
         //level.Awake();
         levelNum = level.LevelNum;
+        spawnPoint = level.PlayerSpawnPoint;
     }
 
     void Start()
     {
-
+        
         // Data  for the size of our map, used for Camera
         foreach (Vector3 point in level.PathPoints)
         {
@@ -66,7 +76,7 @@ public class LevelManager : MonoBehaviour
         }
         if (InstantiatePlayer)
         {
-            GameObject.Instantiate(Player, level.PlayerSpawnPoint + (2 * Vector3.up), Quaternion.identity);
+            GameObject.Instantiate(Player, spawnPoint + (2 * Vector3.up), Quaternion.identity);
         }
         // add player observer?
 
@@ -94,10 +104,11 @@ public class LevelManager : MonoBehaviour
 
     void InstantiateGround(int x, int z)
     {
-        float groundHeight = -0.5f ;
+        float groundHeight = -0.95f ;
         Vector3 location = new Vector3(x, groundHeight, z);
         Quaternion rotation = Quaternion.identity;
         GameObject Tile = GameObject.Instantiate(groundTile, location, rotation, Ground.transform);
+        Tile.transform.localScale = new Vector3(1, 0.5f, 1);
         int numOfDecorations = (int)(UnityEngine.Random.value * 75);
         for (int i = 0; i < numOfDecorations; i++){
             float decX = (UnityEngine.Random.value * 20f) - 10f;
