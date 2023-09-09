@@ -180,7 +180,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8183
+    m_Bits: 24567
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2340,7 +2340,7 @@ MonoBehaviour:
   Costs: 
   unallowedTerrain:
     serializedVersion: 2
-    m_Bits: 3840
+    m_Bits: 20224
 --- !u!114 &465709102764913990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2383,7 +2383,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1089
+    m_Bits: 17473
   CinemachineCameraTarget: {fileID: 465709103961249482}
   TopClamp: 70
   BottomClamp: -30
