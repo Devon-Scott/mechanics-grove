@@ -8,14 +8,14 @@ public class Projectile : MonoBehaviour
     public Hitbox hitbox;
     public Rigidbody self;
     private float _destroyTimer;
-    [SerializeField]
-    private GameObject _impactEffect;
-    [SerializeField]
-    private LayerMask _layers;
+    [SerializeField] private GameObject _impactEffect;
+    [SerializeField] private LayerMask _collidableLayers;
+    private MeshRenderer _renderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        _renderer = GetComponent<MeshRenderer>();
         hitbox = gameObject.GetComponent<Hitbox>();
         self = gameObject.GetComponent<Rigidbody>();
         _destroyTimer = 0.25f;
@@ -46,8 +46,9 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if ((_layers.value & 1 << other.gameObject.layer) > 0)
+        if ((_collidableLayers.value & 1 << other.gameObject.layer) > 0)
         {
+            _renderer.enabled = false;
             hitbox.enabled = true;
             hitbox.EnableDamage(20);
             ParticleManager.ParticleManagerInit(transform.position, _impactEffect);

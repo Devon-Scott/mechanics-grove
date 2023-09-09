@@ -154,9 +154,9 @@ MonoBehaviour:
   hitbox: {fileID: 4168939937797049931}
   self: {fileID: 4168939937797049932}
   _impactEffect: {fileID: 5976847776177367894}
-  _layers:
+  _collidableLayers:
     serializedVersion: 2
-    m_Bits: 1345
+    m_Bits: 18241
 --- !u!1001 &5976737535812726940
 PrefabInstance:
   m_ObjectHideFlags: 0
