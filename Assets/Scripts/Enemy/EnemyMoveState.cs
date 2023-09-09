@@ -56,7 +56,9 @@ public class EnemyMoveState : EnemyBaseState
         // Check if we need to target a player
         foreach (Collider other in Enemy.PlayerList)
         {
-            if (Vector3.Distance(owner.transform.position, other.transform.position) < 2.5f)
+            Vector3 thisPosition = owner.transform.position;
+            Vector3 otherPosition = other.transform.position;   
+            if (Vector3.Distance(thisPosition, otherPosition) < 2.5f)
             {
                 owner.target = other;
                 owner.stateStack.Push(owner.AttackState);

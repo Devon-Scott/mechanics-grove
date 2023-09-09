@@ -67,20 +67,22 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
         }
 
         _colliderManager = GameObject.FindObjectOfType<ColliderManager>();
-        if (Enemy.PlayerList == null)
-        {
-            Enemy.PlayerList = new List<Collider>();
-            Players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in Players)
-            {
-                Enemy.PlayerList.Add(player.GetComponent<CharacterController>());
-            }
-        }
+        _eventManager.FirstPlayerSpawn.Subscribe(GetPlayerReference);
         // if (canvas is null)
         // {
         //     canvas = GameObject.FindAnyObjectByType<CanvasManager>();
         // }
         StartCoroutine(SpawnEnemies());
+    }
+
+    public void GetPlayerReference(System.Object eventData)
+    {
+        Enemy.PlayerList = new List<Collider>();
+        Players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in Players)
+        {
+            Enemy.PlayerList.Add(player.GetComponent<CharacterController>());
+        }
     }
 
     void Update()
