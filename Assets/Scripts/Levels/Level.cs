@@ -24,7 +24,6 @@ public class Level : ScriptableObject
     public int StartPointIndex;
     [SerializeField]
     public Edge[] Edges;
-    public Vector3 MapCorner;
     public float Width;
     public float Length;
 
@@ -57,5 +56,4 @@ public class Level : ScriptableObject
         int edgeCount = _graph.edges.Count;
         StartPoint = PathPoints[StartPointIndex];
     }
-    
 }

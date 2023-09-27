@@ -31,11 +31,6 @@ public class EnemyManager : MonoBehaviour, IEnemyObserver
 
     void Awake()
     {
-        // https://docs.unity3d.com/ScriptReference/Object.FindAnyObjectByType.html
-        // Assets\Scripts\Management\EnemyManager.cs(19,39): error CS0117: 'Object' does not contain a definition for 'FindAnyObjectByType'
-        // DOES IT REALLY NOT HAVE A DEFINITION FOR IT???
-        // Unity is shaming me because this method is slow but it won't let me use the faster ones
-        
         currentWave = 1;
         _enemiesSpawned = 0;
         _enemiesKilled = 0;

@@ -9,7 +9,7 @@ using MyUtils.StateMachine;
 
 public class PlayerBuildState : PlayerBaseState
 {
-    private TowerData _towerData;
+    private TowerBuilderData _towerData;
     private float _castCooldown;
     private float _swapCooldown;
 
@@ -21,7 +21,7 @@ public class PlayerBuildState : PlayerBaseState
     // Start is called before the first frame update
     public PlayerBuildState(ThirdPersonController owner) : base(owner)
     {
-        _towerData = owner.GetComponent<TowerData>();
+        _towerData = owner.GetComponent<TowerBuilderData>();
         _towerIndex = 0;
     }
 
