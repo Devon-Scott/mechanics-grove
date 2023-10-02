@@ -151,12 +151,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0
+  DestroyTimer: 0
+  _damage: 0
   hitbox: {fileID: 4168939937797049931}
   self: {fileID: 4168939937797049932}
   _impactEffect: {fileID: 5976847776177367894}
   _collidableLayers:
     serializedVersion: 2
-    m_Bits: 18241
+    m_Bits: 20289
 --- !u!1001 &5976737535812726940
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using MyUtils.Graph;
 
 public class CannonMechanism : Mechanism
 {
-    
 
     public override Quaternion GetAimRotation(Collider target)
     {

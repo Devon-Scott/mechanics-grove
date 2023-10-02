@@ -13,5 +13,4 @@ public class TowerData : ScriptableObject
     public GameObject[] BaseMeshes;
     public GameObject[] WeaponMeshes;
     public Projectile projectile;
-
 }

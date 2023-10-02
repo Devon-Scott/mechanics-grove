@@ -13,6 +13,8 @@ public class Hitbox : MonoBehaviour
 {
     private HashSet<Collider> HitObjects;
     private static Dictionary<Collider, Hurtbox> ColliderDictionary;
+
+    private float AOEcooldown;
     
     public float damage;
     public float KnockbackScaler;
@@ -41,6 +43,7 @@ public class Hitbox : MonoBehaviour
         {
             ColliderDictionary = ColliderManager.ColliderDictionary;
         }
+        AOEcooldown = 0f;
     }
 
     // Update is called once per frame
@@ -56,6 +59,14 @@ public class Hitbox : MonoBehaviour
         }
         if (Active)
         {
+            if (AOEcooldown > 0){
+                AOEcooldown -= Time.deltaTime;
+            } 
+            else 
+            {
+                EnableDamage(this.damage);
+                AOEcooldown = 1f;
+            }
             Collider[] ContactedObjects = Physics.OverlapCapsule(parentPosition, transform.position, SphereCastRadius, TargetableObjects);
             foreach(Collider other in ContactedObjects)
             {
@@ -76,6 +87,7 @@ public class Hitbox : MonoBehaviour
                     // If the collider is completely overlapping the centre of the cast, distance should be 0 to avoid negative values
                     float DistanceFromCentre = Mathf.Max(0, Graph.DistanceToLine(parentPosition, transform.position, other.transform.position));
                     float HitScalar = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
+                    print(damage + " damage was dealt to an enemy");
                     hitTarget.HandleHit(damage, (other.transform.position - parentPosition).normalized * KnockbackScaler, HitScalar);
                 }
             }

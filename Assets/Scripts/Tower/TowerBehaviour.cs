@@ -7,24 +7,16 @@ public class TowerBehaviour : MonoBehaviour
 {
     [Header("Stats")]
     public int Cost;
-    [SerializeField]    
-    private Projectile _projectile;
-    [SerializeField]
-    private float _cooldown;
-    [SerializeField]
-    private float _attackRadius;
-    [SerializeField]
-    private float _rotationalOffset;
-    [SerializeField]
-    private float _launchAngle;
-    [SerializeField]
-    private LayerMask _targetLayers;
-    [SerializeField]
-    private Vector3[] _projectileSpawnPoints;
-    [SerializeField]
-    private float _velocityMagnitude;
-    [SerializeField]
-    private Mechanism _towerMechanism;
+    public int Damage;
+    [SerializeField] private float _projectileTimer;
+    [SerializeField] private Projectile _projectile;
+    [SerializeField] private float _cooldown;
+    [SerializeField] private float _attackRadius;
+    [SerializeField] private float _rotationalOffset;
+    [SerializeField] private float _launchAngle;
+    [SerializeField] private LayerMask _targetLayers;
+    [SerializeField] private Vector3[] _projectileSpawnPoints;
+    [SerializeField] private Mechanism _towerMechanism;
     
     private Vector3[] _spawnPoints;
     private int _numOfSpawnPoints;
@@ -76,7 +68,6 @@ public class TowerBehaviour : MonoBehaviour
                 transform.rotation = _towerMechanism.GetAimRotation(_target);
                 for(int i = 0; i < _numOfSpawnPoints; i++)
                 {
-                    //_spawnPoints[i] = transform.rotation * Quaternion.Euler(0, -_rotationalOffset, 45) * _projectileSpawnPoints[i];
                     _spawnPoints[i] = transform.rotation * Quaternion.Euler(0, -_rotationalOffset, 0) * _projectileSpawnPoints[i];
                 }
                 
@@ -109,13 +100,11 @@ public class TowerBehaviour : MonoBehaviour
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, _attackRadius);
-
-            
             foreach(Vector3 point in _spawnPoints)
             {
                 Gizmos.color = Color.red;
                 Vector3 spawnPoint = transform.position + point;
-                Gizmos.DrawSphere(spawnPoint, 0.25f);
+                Gizmos.DrawSphere(spawnPoint, 0.2f);
                 Gizmos.DrawLine(transform.position, spawnPoint);
 
                 Gizmos.color = Color.blue;
@@ -138,11 +127,21 @@ public class TowerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(_cooldown);
         while (_target != null)
         {
-            Vector3 direction = _towerMechanism.GetFiringVector(_target, _spawnPoints[0]);
+            foreach (Vector3 point in _spawnPoints)
+            {
+                Vector3 direction;
+                if (_target != null){
+                    direction = _towerMechanism.GetFiringVector(_target, point);
+                }
+                else {
+                    break;
+                }
             
-            Instantiate(_projectile, transform.position + _spawnPoints[0], Quaternion.identity).ApplyForce(direction);
-            // Give projectile target position to travel towards
-            yield return new WaitForSeconds(_cooldown);
+                Projectile newProjectile = Instantiate(_projectile, transform.position + point, Quaternion.identity);
+                newProjectile.ApplyForce(direction);
+                newProjectile.Init(this.Damage, this._projectileTimer);
+                yield return new WaitForSeconds(_cooldown);
+            }
         }
         _firing = false;
         StopCoroutine(Fire());

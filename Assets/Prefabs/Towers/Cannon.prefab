@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 300
+  Damage: 20
+  _projectileTimer: 0.3
   _projectile: {fileID: 4168939937797049930, guid: 870924e96a5060445b721e3f1e53cc88, type: 3}
   _cooldown: 1
   _attackRadius: 30.85
