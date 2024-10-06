@@ -87,7 +87,7 @@ public class Hitbox : MonoBehaviour
                     // If the collider is completely overlapping the centre of the cast, distance should be 0 to avoid negative values
                     float DistanceFromCentre = Mathf.Max(0, Graph.DistanceToLine(parentPosition, transform.position, other.transform.position));
                     float HitScalar = Mathf.Abs(1 - (DistanceFromCentre / SphereCastRadius));
-                    print(damage + " damage was dealt to an enemy");
+                    // print(damage + " damage was dealt to an enemy");
                     hitTarget.HandleHit(damage, (other.transform.position - parentPosition).normalized * KnockbackScaler, HitScalar);
                 }
             }
