@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992702749189903931}
   m_LocalRotation: {x: -2.2737367e-15, y: 8.470329e-24, z: -8.470329e-24, w: 1}
-  m_LocalPosition: {x: 0.37455687, y: 3.4971185, z: 0.075751595}
+  m_LocalPosition: {x: -0.325, y: 3.4971185, z: -0.072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,10 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59ede7547997f44ab5e3ce9fd35b3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 0
+  Damage: 0
+  _projectileTimer: 0
   _projectile: {fileID: 0}
   _cooldown: 0
   _attackRadius: 0
   _rotationalOffset: 0
+  _launchAngle: 0
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _projectileSpawnPoints: []
+  _towerMechanism: {fileID: 0}
 --- !u!33 &4615358090486325678
 MeshFilter:
   m_ObjectHideFlags: 0
