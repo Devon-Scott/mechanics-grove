@@ -6,11 +6,14 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     public string towerName;
-    public int damage;
+    public float damage;
     public float range;
     public int cost;
+    public float upgradeScale;
+    public float fireRate;
+
     [Tooltip("The types of bases for each level of the tower")]
-    public GameObject[] BaseMeshes;
-    public GameObject[] WeaponMeshes;
+    public Mesh[] BaseMeshes;
+    public Mesh[] WeaponMeshes;
     public Projectile projectile;
 }

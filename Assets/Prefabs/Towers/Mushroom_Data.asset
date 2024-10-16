@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba11277f3de9a84cb21a6e01579d256, type: 3}
+  m_Name: Mushroom_Data
+  m_EditorClassIdentifier: 
+  towerName: 
+  damage: 0
+  range: 0
+  cost: 0
+  upgradeScale: 0
+  fireRate: 0
+  BaseMeshes:
+  - {fileID: 5764100808226935292, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 2664257600727732186, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -686667319476574080, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 3413862404065588907, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -5882453321210989436, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  WeaponMeshes:
+  - {fileID: 4229816022369706143, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -2118630516130925265, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -7018262245521156539, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 7007524097262729433, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -7243757389330610581, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  projectile: {fileID: 0}

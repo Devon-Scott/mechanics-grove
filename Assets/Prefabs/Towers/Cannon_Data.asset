@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba11277f3de9a84cb21a6e01579d256, type: 3}
+  m_Name: Cannon_Data
+  m_EditorClassIdentifier: 
+  towerName: 
+  damage: 0
+  range: 0
+  cost: 0
+  upgradeScale: 0
+  fireRate: 0
+  BaseMeshes:
+  - {fileID: -4896778225051713310, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 3699584983767723238, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -3036110012138061066, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -1746367645144274879, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 7478752386755446459, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  WeaponMeshes:
+  - {fileID: -1171068084507867203, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -5395242215042019355, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 136558424473425140, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: -4486940636685659976, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  - {fileID: 5884418675588981633, guid: 6a2804b640b654648b47afca42dc2866, type: 3}
+  projectile: {fileID: 0}
